@@ -1,7 +1,6 @@
 bower_components
 node_modules
 .idea/
-dist/
 .DS_Store
 tests/karma_html/
 tests/jstest/
