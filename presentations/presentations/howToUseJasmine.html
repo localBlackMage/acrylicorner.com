@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Testing AngularJS with Jasmine</title>
+
+    <meta name="description" content="Jasmine is a behavior-driven development framework for testing JavaScript code.">
+    <meta name="author" content="Holden Profit">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="../css/reveal.min.css">
+    <link rel="stylesheet" href="../css/theme/default.css" id="theme">
+
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="../lib/css/zenburn.css">
+
+    <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+    <script>
+        if( window.location.search.match( /print-pdf/gi ) ) {
+            var link = document.createElement( 'link' );
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = 'css/print/pdf.css';
+            document.getElementsByTagName( 'head' )[0].appendChild( link );
+        }
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="../lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+    <div class="slides">
+        <!-- Intro -->
+        <section>
+            <h1>AngularJS Testing with Jasmine</h1>
+            <h4>Javascript testing made easy</h4>
+            <p>
+                <small>Created by Holden Profit <br/>( <a href="https://github.com/Acrylico">https://github.com/Acrylico</a> )</small>
+            </p>
+        </section>
+
+        <!-- What is Jasmine? -->
+        <section>
+            <h2>What is Jasmine?</h2>
+            <h3>A BDD framework for testing your Javascript</h3>
+            <p>
+                Completely independent, doesn't require a DOM, and has clean & clear syntax for testing all that JS code you've written.
+                <br/><br/>
+                <small>Documentation on Jasmine can be found at <a href="http://jasmine.github.io/">http://jasmine.github.io</a> !</small>
+            </p>
+        </section>
+
+        <!-- SpecRunner -->
+        <section>
+            <h2>How to View Tests</h2>
+            <p>
+                Everything in Jasmine starts with the SpecRunner.html file.<br/>
+                It's within this file that you:
+            <ul>
+                <li>Tell Jasmine where your source code is</li>
+                <li>Tell Jasmine where your tests are</li>
+                <li>Include any additional dependencies for your code</li>
+            </ul>
+            </p>
+        </section>
+
+        <!-- Ctrl Overview - Naked -->
+        <section>
+            <h2>What to test</h2>
+            <p>
+                An example Angular controller, yet to be implemented:
+
+                        <pre><code data-trim contenteditable>
+                            myApp.controller('myController', function ($scope, $http) {
+                            $scope.person = null;
+
+                            $scope.initPerson = function (name, age, gender) { };
+                            });
+                        </code></pre>
+            </p>
+        </section>
+
+        <!-- Ctrl Spec -->
+        <section>
+            <h2>How to test</h2>
+            <p>
+                And here is our controller Spec file:
+            </p>
+                    <pre><code data-trim contenteditable >
+                        // Describe what this spec file is testing
+                        describe("myController Tests", function () {
+                        var scope, controller;
+
+                        beforeEach(module("myApp")); // Creates the module "myApp"
+
+                        beforeEach(inject(function ($rootScope, $controller) {
+                        scope = $rootScope.$new(); // Creating a new scope for our controller
+                        controller = $controller; // The service that instantiates controllers
+                        controller("myController", {$scope: scope}); // Creates our ctrl object
+                        }));
+                        });
+                    </code></pre>
+        </section>
+
+        <!-- What is TDD? -->
+        <section>
+            <h2>What is <a href="http://en.wikipedia.org/wiki/Test-driven_development">TDD</a>?</h2>
+            <h3>A different way of thinking!</h3>
+            <p>
+                With TDD, you write your test <b>FIRST</b> then write your code to pass the test with minimal code and effort put forth to do so.
+            </p>
+        </section>
+
+        <!-- TDD personInit() - Ctrl -->
+        <!-- TDD personInit() - spec -->
+        <!-- TDD personInit() - fill in -->
+        <section>
+            <!-- TDD personInit() - Ctrl -->
+            <section>
+                <h2>Great, let's try it out!</h2>
+                <p>
+                    Given our controller's initPerson() function, lets write our test first, then complete the function to pass!
+                </p>
+                        <pre><code data-trim contenteditable >
+                            myApp.controller('myController', function ($scope) {
+                            $scope.person = null;
+
+                            $scope.initPerson = function (name, age, gender) { };
+                            });
+                        </code></pre>
+            </section>
+
+            <!-- TDD personInit() - spec -->
+            <section>
+                <h2>Recall our test</h2>
+                <p>
+                    What should this function actually <i>do</i>?
+                </p>
+                        <pre><code data-trim contenteditable >
+                            describe("myController Tests", function () {
+                            . . .
+                            it("should fill the person field when initPerson() is called", function () {
+                            // arrange
+                            var name = "Guy Gardener", age = 30, gender = "male";
+                            // act
+                            scope.initPerson(name, age, gender);
+                            // assert
+                            expect(scope.person).toEqual({
+                            name: name,
+                            age: age,
+                            gender: gender
+                            });
+                            });
+                            });
+                        </code></pre>
+            </section>
+
+            <!-- TDD personInit() - fill in -->
+            <section>
+                <h2>Implement the function</h2>
+                <p>
+                    Now that we know what the function needs to do, let's implement it!
+                </p>
+                        <pre><code data-trim contenteditable >
+                            myApp.controller('myController', function ($scope) {
+                            $scope.person = null;
+                            $scope.initPerson = function (name, age, gender) {
+                            $scope.person = {
+                            name: name,
+                            age: age,
+                            gender: gender
+                            };
+                            };
+                            });
+                        </code></pre>
+            </section>
+        </section>
+
+        <!-- Thanks -->
+        <section>
+            <h1>Thank you!</h1>
+            <h4>Questions? Concerns?</h4>
+            <p>
+                <small>Feel free to contact me at: hprofit@icct.com <br/>
+                    Also look me up on github at <a href="https://github.com/Acrylico">https://github.com/Acrylico</a>!</small>
+            </p>
+        </section>
+    </div>
+
+</div>
+
+<script src="../lib/js/head.min.js"></script>
+<script src="../js/reveal.min.js"></script>
+
+<script>
+
+    // Full list of configuration options available here:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+        // Parallax scrolling
+        // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+        // parallaxBackgroundSize: '2100px 900px',
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+            { src: '../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+            { src: '../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+            { src: '../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+            { src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+            { src: '../plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+            { src: '../plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+        ]
+    });
+
+</script>
+
+</body>
+</html>

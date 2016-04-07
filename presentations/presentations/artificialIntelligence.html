@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Artificial Intelligence</title>
+
+		<meta name="description" content="Jasmine is a behavior-driven development framework for testing JavaScript code.">
+		<meta name="author" content="Holden Profit">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="../css/reveal.min.css">
+		<link rel="stylesheet" href="../css/theme/default.css" id="theme">
+        <link rel="stylesheet" href="../css/custom.css">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="../lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="../lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body class="ai-pres">
+		<div class="reveal">
+			<div class="slides">
+                <!-- Intro -->
+                <section>
+                    <h1>Artificial Intelligence</h1>
+                    <!--<h5>No It's Not Skynet (Yet)</h5>-->
+                    <p>
+                        Holden Profit <br/><small>( <a href="https://github.com/hprofit">https://github.com/hprofit</a> )</small>
+                    </p>
+                </section>
+
+                <!-- What is AI? Funny -->
+                <!--<section>-->
+                    <!--<h2>What is A.I.?</h2>-->
+                    <!--<p>-->
+                        <!--<img src="/image/scott.png" />-->
+                        <!--</br>-->
+                        <!--It's what this guy does.-->
+                    <!--</p>-->
+                <!--</section>-->
+
+                <!-- What is AI? -->
+                <section>
+                    <h2>What is A.I.?</h2>
+                    <!--, Really?</h2>-->
+                    <h3>"The intelligence exhibited by machines or software."</h3>
+                    <p>
+                        A.I. is used in pretty much everything software related.
+                        </br></br>
+                        It can be anything from simple search logic and case selection all the way up
+                        to deep learning, planning, or the movement of machine parts.
+                    </p>
+                </section>
+
+                <!-- Some Examples of Notable AI -->
+                <section>
+                    <h2>A.I. in Your life</h2>
+                    <p>
+                        <dl>
+                            <dt>Deep Blue</dt>
+                                <dd><small>(Chess)</small></dd>
+                                <dd><small>- Defeated World Champion Garry Kasparov in 1997</small></dd>
+                            <dt>Watson</dt>
+                                <dd><small>(Question Answering)</small></dd>
+                                <dd><small>- Defeated former Jeopardy Champions in 2011</small></dd>
+                            <dt>Google Brain</dt>
+                                <dd><small>(Deep Learning)</small></dd>
+                                <dd><small>- Used in Google's Speech Recognition and Photosearch</small></dd>
+                            <dt>Baxter</dt>
+                                <dd><small>(Deep Learning)</small></dd>
+                                <dd><small>- <a href="http://www.rethinkrobotics.com/">Rethink Robotics'</a>
+                                    leading product used as a supplement for factor workers</small></dd>
+                        </dl>
+                        </br></br>
+                        <small>Watson can even be used in your app via it's <a href="https://developer.ibm.com/watson/">public API!</a></small>
+                    </p>
+                </section>
+
+                <!-- Simpler Examples -->
+                <section>
+                    <h2>Example Projects</h2>
+                    <p>
+                        The following are some examples of AI you could make at home with little aside from your own
+                        knowledge and a computer:
+
+                        <ul>
+                            <li><a href="http://pmav.eu/stuff/javascript-game-of-life-v3.1.1/">Game of Life</a></li>
+                            <li><a href="http://lab.cmikavac.net/swarm/">Swarm Intelligence</a></li>
+                            <li><a href="http://bgrins.github.io/javascript-astar/demo/">Pathfinding</a></li>
+                            <li><a href="http://cs.stanford.edu/people/karpathy/svmjs/demo/demonn.html">Machine Learning</a></li>
+                        </ul>
+                    </p>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Deep Learning</h2>
+
+                        <p>
+                            One of the most complex types of AI, deep learning aims to solve the problem of teaching a
+                            machine to do something rather than telling it how.<br>
+                            The implications this has are far reaching but it is a hugely complex task.
+                        </p>
+                    </section>
+                    <section>
+                        <h2>Neural Networks</h2>
+
+                        <p>
+                            One of the common methods of performing machine learning is through the use of neural
+                            networks.<br>
+
+                            <image src="http://www.extremetech.com/wp-content/uploads/2013/09/340.jpg" height="300px" /><br>
+
+                            Neural networks are made to emulate the human brain.
+                        </p>
+                    </section>
+                    <section>
+                        <h2>How does it work?</h2>
+
+                        <p>
+                            A neural net is comprised of layers and neurons.<br>
+
+                            <image src="http://www.texample.net/media/tikz/examples/PNG/neural-network.png" />
+                            <br>
+
+                            Given some input and an expected output,
+                            the network is trained neuron by neuron to give the correct output even in new scenarios.
+                        </p>
+                    </section>
+                </section>
+
+                <!-- Game of Life-->
+                <section>
+                    <section>
+                        <h2>Conway's Game of Life</h2>
+                        <p>
+                            A form of cellular automaton, it's less of a game and more of a living experiment!
+                            <br>
+                            Generally the game is played based off an initial input and from there the player sits
+                            back and watches how the cells act over time.
+                        </p>
+                    </section>
+                    <section>
+                        <h2>How does it work?</h2>
+                        <p>
+                            Simple Rules to follow
+
+                            <ul>
+                                <li>Living cells with < 2 living neighbors die as through from loneliness</li>
+                                <li>Living cells with 2 to 3 living neighbors remain alive</li>
+                                <li>Living cells with > 3 living neighbors die as through from over crowding</li>
+                                <li>Dead cells with 2 living neighbors spawns as through from reproduction</li>
+                            </ul>
+                        </p>
+                    </section>
+                    <section>
+                        <h2>The end result</h2>
+                        <!--<img src="/image/lifeScreen.png" />-->
+                        <img src="/image/gameOfLife.png" style="height:500px;"/>
+                    </section>
+                    <section>
+                        <h1>Code Walkthrough</h1>
+                    </section>
+                </section>
+
+                <!-- Flocking -->
+                <section>
+                    <section>
+                        <h2>Flocking</h2>
+                        <p>
+                            Simulating nature through a set of mathematical rules, flocking AI demonstrates how
+                            a mass of entities would move about in the wild.
+                        </p>
+                    </section>
+                    <section>
+                        <h2>How does it work?</h2>
+                        <p>
+                            Each entity in a flock has a set of goals it tries to reach
+                            <ul>
+                                <li>Stay close to neighbors</li>
+                                <li>Stay out of their neighbors' personal space</li>
+                                <li>Head in the same direction as their neighbors</li>
+                                <li>Avoid walls and obstacles</li>
+                                <li>Avoid predators or enemies</li>
+                            </ul>
+                        </p>
+                    </section>
+                    <section>
+                        <h2>The end result</h2>
+                        <!--<img src="/image/swarmScreen.png" />-->
+                        <img src="/image/flocking.png"/>
+                    </section>
+                    <section>
+                        <h1>Code Walkthrough</h1>
+                    </section>
+                </section>
+
+                <!-- Pathfinding -->
+                <section>
+                    <section>
+                        <h2>Pathfinding via A*</h2>
+                        <p>
+                            Pathfinding using A* is a quick way to find the shortest route from point A to B along a
+                            series of interconnected nodes.
+                            <br><br>
+                            The process involves the use of a min-heap object and a heuristic to help
+                            steer the AI away from paths that are too long.
+                        </p>
+                    </section>
+                    <section>
+                        <h2>How does it work?</h2>
+                        <p>
+                            A min-heap is a binary tree where the parent's value is less than both children.<br>
+                            Utilizing a min-heap, A* begins with a start and goal point in mind and a grid of
+                            connected nodes.
+                            <br><br>
+                            For the current node, it calculates distance between itself and the goal. If the result
+                            is within acceptable parameters, it is added as a viable node to consider later.
+                            <br><br>
+                            This process repeats until the algorithm finds the end node. From there, it reconstructs
+                            the path based off of the viable nodes stored from earlier.
+                        </p>
+                    </section>
+                    <section>
+                        <h2>The end result</h2>
+                        <!--<img src="/image/aStarScreen.png" />-->
+                        <img src="/image/aStar.png" />
+                    </section>
+                    <section>
+                        <h1>Code Walkthrough</h1>
+                    </section>
+                </section>
+
+                <!-- Questions -->
+                <section>
+                    <h2>Questions</h2>
+                    <p>
+                        Holden Profit
+                        <br>
+                        <small>
+                            ( <a href="https://github.com/hprofit">https://github.com/hprofit</a> )
+                        </small>
+                    </p>
+                </section>
+			</div>
+
+		</div>
+
+		<script src="../lib/js/head.min.js"></script>
+		<script src="../js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: '../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: '../plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>

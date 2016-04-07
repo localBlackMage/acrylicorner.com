@@ -1,0 +1,16 @@
+/*body.ai-pres::after {*/
+    /*content: "";*/
+    /*background: url('/image/chipBrain.jpg');*/
+    /*background-size: 100% auto;*/
+    /*opacity: 0.1;*/
+    /*top: -100px;*/
+    /*left: 0;*/
+    /*bottom: 0;*/
+    /*right: 0;*/
+    /*position: absolute;*/
+    /*z-index: -1;*/
+/*}*/
+
+.ai-pres div.backgrounds {
+    opacity: 0.2;
+}

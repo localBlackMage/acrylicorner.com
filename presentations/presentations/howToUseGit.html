@@ -1,0 +1,727 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>How to Use GIT</title>
+
+    <meta name="description" content="Jasmine is a behavior-driven development framework for testing JavaScript code.">
+    <meta name="author" content="Holden Profit">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="../css/reveal.min.css">
+    <link rel="stylesheet" href="../css/theme/sky.css" id="theme">
+
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="../lib/css/zenburn.css">
+
+    <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+    <script>
+        if( window.location.search.match( /print-pdf/gi ) ) {
+            var link = document.createElement( 'link' );
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = 'css/print/pdf.css';
+            document.getElementsByTagName( 'head' )[0].appendChild( link );
+        }
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="../lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+<!--style="-->
+<!--background-image: url(/image/chipBrain.jpg);-->
+<!--background-repeat: no-repeat;-->
+<!--background-attachment: fixed;-->
+<!--background-position: center;-->
+<!--background-size: cover;-->
+<!--">-->
+
+<div class="reveal">
+    <div class="slides">
+        <!-- Intro -->
+        <section>
+            <h1>GIT and GITHUB</h1>
+            <h5>What They Are And How to Use Them</h5>
+            <p>
+                Holden Profit <br/><small>( <a href="https://github.com/hprofit">https://github.com/hprofit</a> )</small>
+            </p>
+        </section>
+
+        <!-- What is GIT? -->
+        <section>
+            <h2>What is GIT?</h2>
+            <p>
+                <img src="/image/Git-Logo.png" style="width:300px; height: 125px;"/>
+                </br>
+                A completely different type of VCS from the ones you're used to.
+            <ul>
+                <li>(Almost) Everything is local</li>
+                <li>Commits are snapshots (not differences)</li>
+            </ul>
+            </p>
+        </section>
+
+        <!-- Why GIT? -->
+        <section>
+            <h2>Why GIT?</h2>
+            <p>
+                Because of how GIT works, creating branches becomes cheap and easy to do.
+                This not only allows developers to create "experiment" branches which are easily reverted,
+                but increases teamwork and collaboration on features.
+            </p>
+        </section>
+
+        <!-- How does GIT work? -->
+        <section>
+            <section>
+                <h2>How does GIT work?</h2>
+                <p>
+                    GIT has 3 states for files to be in:
+
+                <dl>
+                    <dt>Committed</dt>
+                    <dd><small>- Stored in your local DB/Repo</small></dd>
+                    <dt>Modified</dt>
+                    <dd><small>- Changed but not committed yet</small></dd>
+                    <dt>Staged</dt>
+                    <dd><small>- Changed and marked for going into your next commit</small></dd>
+                </dl>
+                </p>
+            </section>
+            <section>
+                <h3>Git has 3 "Areas"</h3>
+                <p>
+                <dl>
+                    <dt>Repository (.git directory)</dt>
+                    <dd><small>- Dir containing GIT metadata, the local DB/Repo for your project</small></dd>
+                    <dd><small>- This is what is copied when you clone from another repository</small></dd>
+                    <dt>Staging Area (or "Index")</dt>
+                    <dd><small>- A file (found in .git dir) that holds info about what files go into the next commit</small></dd>
+                    <dt>Working Directory</dt>
+                    <dd><small>- A checkout version of your repo, decompressed from the repo
+                        and placed on disk for you to work with
+                    </small></dd>
+                </dl>
+                </p>
+            </section>
+            <section>
+                <h3>The "Areas" of GIT</h3>
+                <p>
+                    <a href="/image/git-areas.png">
+                        <img src="/image/git-areas.png" style="width:600px; height: 331px;"/>
+                    </a>
+                </p>
+            </section>
+            <section>
+                <h3>The mythical .git dir revealed!</h3>
+                <p>
+                    <a href="/image/gitDirScreenshot.png">
+                        <img src="/image/gitDirScreenshot.png" style="width:600px; height: 331px;"/>
+                    </a>
+                </p>
+            </section>
+            <section>
+                <h3>An important note about GIT</h3>
+                <p>
+                    GIT uses check-sums for all contents of a repo to track changes.
+                    <br>
+                    This makes it impossible for file contents to change without GIT noticing and
+                    erasing data or making something undoable are very difficult.
+                    <br>
+                    Effectively, it's best to think that GIT simply remembers <i>everything</i> you do and making it
+                    forget is (understandably) hard to do!
+                </p>
+            </section>
+        </section>
+
+        <!-- How to use GIT Intro -->
+        <section>
+            <section>
+                <h2>How to use GIT</h2>
+                <h4>Learn Terminal/CMD Commands</h4>
+                <p>
+                    GUIs are nice, but using the terminal (or <a href="https://msysgit.github.io/">msysgit</a> for Windows)
+                    will allow you to use GIT anywhere with minimal set up as well as better understand how GIT does things.
+                    <br>
+                    GUIs usually only implement a subset of GIT’s functionality and by learning the terminal
+                    you should be able to figure out the GUI while the opposite is not necessarily true.
+                </p>
+            </section>
+            <section>
+                <h3>GIT Commands</h3>
+                <p>
+                    <small>* This is by no means comprehensive, please refer to the
+                        sources slide for more detailed documentation. * </small>
+                <ul>
+                    <li>git config --global user.name <b><i>"[name]"</i></b></li>
+                    <small>
+                        <ul>
+                            <li>This will set the <b><i>[name]</i></b> you want to associate to any commit actions you make</li>
+                        </ul>
+                    </small>
+                    <li>git config --global user.email <b><i>"[email]"</i></b></li>
+                    <small>
+                        <ul>
+                            <li>This will set the <b><i>[email]</i></b> you want to associate to any commit actions you make</li>
+                        </ul>
+                    </small>
+                    <li>git init <i>[project name]</i></li>
+                    <small>
+                        <ul>
+                            <li>Creates a new .git repository</li>
+                            <li><i>[project name]</i> will supply the repo with given name instead of the default</li>
+                        </ul>
+                    </small>
+                </ul>
+                </p>
+            </section>
+            <section>
+                <p>
+                <ul>
+                    <li>git clone <b><i>[repository URL]</i></b></li>
+                    <small>
+                        <ul>
+                            <li>Copies the entire directory from the given <b><i>repository URL</i></b></li>
+                        </ul>
+                    </small>
+                    <li>git status</li>
+                    <small>
+                        <ul>
+                            <li>Provides a summary of what files have been modified, added, or deleted</li>
+                            <li>Files marked in red have not been added while files marked green have</li>
+                        </ul>
+                    </small>
+                    <li>git add <b><i>[-A/--all/. OR file/directory]</i></b></li>
+                    <small>
+                        <ul>
+                            <li>Stages the named file/directory (or all) for commit</li>
+                            <li>This means those files will be go into your next</li>
+                            <li>NOTE: You can use * for regex purposes</li>
+                        </ul>
+                    </small>
+                    <li>git commit <i>[-m "Commit message goes here."]</i></li>
+                    <small>
+                        <ul>
+                            <li>Commits all files that are currently staged to your local repo</li>
+                            <li>NOTE: This does NOT move them to the actual repo online!</li>
+                        </ul>
+                    </small>
+                </ul>
+                </p>
+            </section>
+            <section>
+                <p>
+                <ul>
+                    <li>git pull <b><i>[remote] [branch]</i></b></li>
+                    <small>
+                        <ul>
+                            <li>Pulls the changes from the given <b><i>[remote]'s [branch]</i></b> and auto merges them into the HEAD</li>
+                        </ul>
+                    </small>
+                    <li>git push <b><i>[remote] [branch]</i></b></li>
+                    <small>
+                        <ul>
+                            <li>Pushes your local repo HEAD up to the targeted <b><i>[remote]'s [branch]</i></b></li>
+                        </ul>
+                    </small>
+                    <li>git reset <i>[--soft/--hard]</i><i>[paths]</i></li>
+                    <small>
+                        <ul>
+                            <li>UN-Stages the named file/directory (or all) from the staging area</li>
+                            <li><i>--soft</i> will merely undo any <i>git add</i> commands you have performed</li>
+                            <li><i>--hard</i> will undo <i>git add</i> AND discard all changes you've made</li>
+                        </ul>
+                    </small>
+                </ul>
+                </p>
+            </section>
+            <section>
+                <p>
+                <ul>
+                    <li>git branch <i>[--all/-a/-av]</i></li>
+                    <small>
+                        <ul>
+                            <li>Lists out your branches</li>
+                            <li><i>-a/--all</i> will list local branches and those located within your remotes</li>
+                            <li><i>-av</i> will do the same as -a but also gives the last commit message</li>
+                        </ul>
+                    </small>
+                    <li>git checkout <i>[-b]</i> <b><i>[branchname]</i></b></li>
+                    <small>
+                        <ul>
+                            <li>Switches you to the branch of the given <b><i>[branchname]</i></b></li>
+                            <li><i>-b</i> will create a new branch of <b><i>[branchname]</i></b> and switch you to it</li>
+                        </ul>
+                    </small>
+                    <li>git branch <b><i>[branchname]</i></b> -d</li>
+                    <small>
+                        <ul>
+                            <li>Deletes the branch with the given <b><i>[branchname]</i></b></li>
+                        </ul>
+                    </small>
+                </ul>
+                </p>
+            </section>
+            <section>
+                <p>
+                <ul>
+                    <li>git remote <i>[-v/--verbose]</i></li>
+                    <small>
+                        <ul>
+                            <li>Lists out your remote names</li>
+                            <li><i>-v/--verbose</i> will list out remote names AND the associated URL</li>
+                        </ul>
+                    </small>
+                    <li>git remote add <b><i>[name] [url]</i></b></li>
+                    <small>
+                        <ul>
+                            <li>Adds a new remote with the given <b><i>[name]</i></b> pointing to the given <b><i>[url]</i></b></li>
+                        </ul>
+                    </small>
+                    <li>git remote remove <b><i>[name]</i></b></li>
+                    <small>
+                        <ul>
+                            <li>Deletes the remote with the given <b><i>[name]</i></b></li>
+                        </ul>
+                    </small>
+                    <li>git remote rename <b><i>[oldName] [newName]</i></b></li>
+                    <small>
+                        <ul>
+                            <li>Renames the remote with the given <b><i>[oldName]</i></b> to the given <b><i>[newName]</i></b></li>
+                        </ul>
+                    </small>
+                </ul>
+                </p>
+            </section>
+            <section>
+                <p>
+                    <ul>
+                        <li>git merge <b><i>[branch]</i></b></li>
+                        <small>
+                            <ul>
+                                <li>Attempts to auto-merge changes from the given <b><i>[branch]</i></b> into the current branch</li>
+                                <li>Any files that GIT fails to auto-merge will be marked and will need to be manually merged before being added and committed again</li>
+                                <li>Any merges done this way are entirely local only, no changes will be made to your remotes</li>
+                            </ul>
+                        </small>
+                        <li>git rebase <b><i>[branch]</i></b></li>
+                        <small>
+                            <ul>
+                                <li>A different type of merge, this will rewrite the commit history of your branches</li>
+                                <li>The history rewrite will smooth out your branch history and make it more readable and clean</li>
+                                <li>Any merges done this way are entirely local only, no changes will be made to your remotes</li>
+                                <li><b>DO NOT USE THIS ON PUBLIC BRANCHES!!!</b></li>
+                            </ul>
+                        </small>
+                        <li>git log <i>[-p] [file]</i></li>
+                        <small>
+                            <ul>
+                                <li>Will list the commits starting with the most recent</li>
+                                <li><i>-p [file]</i> will go over the history of a specific file line by line</li>
+                            </ul>
+                        </small>
+                    </ul>
+                </p>
+            </section>
+        </section>
+
+        <!-- Some GIT Tips -->
+        <section>
+            <section>
+                <h2>Useful GIT Tips</h2>
+                <p>
+                    Sometimes you find yourself in a situation that might be a little difficult to get out of.
+                    <br>
+                    The following are some useful commands to solve some fairly common problems.
+                </p>
+            </section>
+            <section>
+                <h3>GIT Commands</h3>
+                <p>
+                    <small>* This is by no means comprehensive, please refer to the
+                        sources slide for more detailed documentation. * </small>
+                <ul>
+                    <li>git rm --cached <i><b>[file]</b></i></li>
+                    <small>
+                        <ul>
+                            <li>This command will remove the given <b><i>[file]</i></b> from your .git repo</li>
+                            <li>The file will show up as deleted from the repo while still existing in your local project</li>
+                        </ul>
+                    </small>
+                    <li>git rm --cached -r <i><b>[directory]</b></i></li>
+                    <small>
+                        <ul>
+                            <li>This command will remove the given <b><i>[directory]</i></b> and all files within from your .git repo</li>
+                            <li>The directory and all files within will show up as deleted from the repo while still existing in your local project</li>
+                        </ul>
+                    </small>
+                    <li>git remote update <i><b>[remote]</b></i> --prune</li>
+                    <small>
+                        <ul>
+                            <li>Will update the branch list for the given <b><i>[remote]</i></b></li>
+                            <li>If another repo's branches have been modified and you don't see them via
+                                "git branch -av" then you can use this command to manually refresh the list</li>
+                        </ul>
+                    </small>
+                </ul>
+                </p>
+            </section>
+        </section>
+
+        <!-- How to use GITHUB Intro -->
+        <section>
+            <section>
+                <h2>How to use GITHUB</h2>
+                <p>
+                    Creating a new Repo on GITHUB is a piece of cake.
+                    <br>
+                    Accessing a Repo on GITHUB can be a bit more challenging for the uninitiated.
+                    <br>
+                    There are multiple ways of doing so, but I'm going to cover SSH keys.
+                </p>
+            </section>
+            <section>
+                <h2>Creating an SSH Key</h2>
+                <p>
+                <ul>
+                    <li>In terminal, you can use "ls -al ~/.ssh" to list out existing ssh key files.</li>
+                    <li>ssh-keygen -t rsa -b 4096 -C "your_email@example.com"</li>
+                    <small>
+                        <ul>
+                            <li>It will prompt you for the location you want to save, the key at
+                                pressing enter will default to ~/.ssh</li>
+                            <li>It will then prompt for a passphrase. Hitting enter will default to none.</li>
+                            <ul>
+                                <li>If you create a passphrase, you will be prompted when using the SSH key for the
+                                    passphrase.</li>
+                            </ul>
+                        </ul>
+                    </small>
+                </ul>
+                </p>
+            </section>
+            <section>
+                <h2>Using the SSH Key</h2>
+                <p>
+                <ul>
+                    <small>
+                        <li>Once you have your SSH key, open the file (id_rsa.pub by default) with TextEditor (or something similar)</li>
+                        <li>Copy the contents to your clipboard.</li>
+                        <li>On GITHUB (either your own or MHE's), go to <b>Settings -> SSH Keys</b></li> and click on <b>Add SSH Key</b>
+                        <li>Give the key a title and paste the copied RSA SSH key from earlier into the Key field</li>
+                    </small>
+                </ul>
+                <a href="/image/my-github-ssh.png">
+                    <img src="/image/my-github-ssh.png" style="width:400px; height: 215px;"/>
+                </a>
+                </p>
+            </section>
+            <section>
+                <h2>Cloning a Repo</h2>
+                <p>
+                <ul>
+                    <small>
+                        <li>Go to your desired Repo and copy the SSH URL at the bottom right (it usually defaults to HTTPS)</li>
+                        <li>In terminal, use <b>git clone <i>[url]</i></b> to pull down a copy of the repo</li>
+                        <li>Congratulations, you've cloned a GIT repo and are now ready to work!</li>
+                    </small>
+                </ul>
+                <a href="/image/my-github-repo.png">
+                    <img src="/image/my-github-repo.png" style="width:400px; height: 215px;"/>
+                </a>
+                </p>
+            </section>
+        </section>
+
+        <!-- Sample GIT workflow -->
+        <section>
+            <section>
+                <h3>So how do I actually <i>use</i> GIT?</h3>
+                <br>
+                <p>
+                    A good question!<br>
+                    GIT projects tend to be set up and operate a little different from their CVS counterparts.<br>
+                    Here is a fairly typical example of how a GIT project would work.
+                </p>
+            </section>
+            <section>
+                <h4>A GIT project model</h4>
+                <a href="/image/git-model@2x.png">
+                    <img src="/image/git-model@2x.png" style="width:40%; height: 40%;"/>
+                </a>
+                <br>
+                <small>Image taken from <a href="http://nvie.com/posts/a-successful-git-branching-model/">Vincent Driessen's article</a></small>
+            </section>
+            <section>
+                <h3>Main (Infinite) Branches</h3>
+                <p>
+                    <ul>
+                        <li>
+                            <b>master</b>
+                            <small>Your production branch, this is what the public sees as the end result of all your hard work!
+                            This branch is not frequently committed to but rather merged into when you're ready for a release.</small>
+                        </li>
+                        <li>
+                            <b>develop</b>
+                            <small>Your working branch, this is what you push your changes to the most. All code here
+                            is available to the team and updated frequently with new features, bug fixes, etc.</small>
+                        </li>
+                    </ul>
+                </p>
+            </section>
+            <section>
+                <h3>Finite Lifetime Branches</h3>
+                <p>
+                <ul>
+                    <li>
+                        <b>release</b>
+                        <small>When the project is ready for a release, the current <b>develop</b> branch is branched off
+                        and this is effectively "frozen code"</small>
+                    </li>
+                    <li>
+                        <b>hotfix</b>
+                        <small>For those times when someone discovers a show stopping bug in production (which would never happen
+                        to you, of course!) hotfix branches can be created to solve the problem</small>
+                    </li>
+                <li>
+                    <b>feature</b>
+                    <small>Generally local branches that you use to section off work on particular items before merging
+                        back into <b>develop</b>
+                        These are common place and will usually be deleted once they've served their purpose.</small>
+                </li>
+                </ul>
+                </p>
+            </section>
+            <section>
+                <h3>Pull Requests</h3>
+                <p>
+                    Instead of simply merging into your team's "central" repo, you may want to have someone review your code before it's committed.
+                    This can be done in the form of pull requests!<br><br>
+                    In their simplest form, a pull request is a notification to the maintainer(s) of a repository that you have
+                    changes you'd like to be reviewed and merged into said repo.<br><br>
+                    You can look up a fully detailed tutorial <a href="https://help.github.com/articles/using-pull-requests/">here!</a>
+                </p>
+            </section>
+        </section>
+
+        <!-- Putting it all together -->
+        <section>
+            <section>
+                <h3>Putting it all together</h3>
+                <br>
+                <p>
+                    Now that you've seen an example, let's go through how a<br>
+                    typical day of development might work.<br><br>
+                    <small>
+                        A small note, this may be specific to where I work,<br>
+                        taylor it to meet your needs if your workflow is different.
+                    </small>
+                </p>
+            </section>
+            <section>
+                <h4>Step One</h4>
+                <p>
+                    First thing you should do in the morning is update your local workspace.<br>
+                    <ul>
+                        <li>
+                            <b>git remote update --prune</b>
+                        </li>
+                        <li>
+                            <b>git branch -av</b> - if your develop branch says "<i>[behind X]</i>" then you need to<br>
+                            update it to match HEAD
+                        </li>
+                        <li>
+                            <b>git checkout develop</b>
+                        </li>
+                        <li>
+                            <b>git pull origin develop</b>
+                        </li>
+                    </ul>
+                </p>
+            </section>
+            <section>
+                <h4>Step Two</h4>
+                <p>
+                    Once develop has been updated, you <i>should</i><br>
+                    (i.e. <b>are strongly encouraged to</b>)<br>
+                    update your working branches, if you have any.<br><br>
+                    <b>NOTE:</b> Do <i>NOT</i> update master or release branches until those show changes from origin.
+                    <ul>
+                        <li>
+                            <b>git checkout {branch}</b>
+                        </li>
+                        <li>
+                            <b>git rebase develop</b> - you <i>might</i> run into merge conflicts,<br>
+                            but these will be rare if you've been diligent about keeping your local workspace up to date.<br>
+                            More on this in the next section.
+                        </li>
+                        <li>
+                            Repeat this for any other working branches you currently<br>
+                            have to keep everything up to date with the HEAD.
+                        </li>
+                    </ul>
+                </p>
+            </section>
+            <section>
+                <h4>Step Three</h4>
+                <p>
+                    Work! Once everything is up to date as it should be, continue or start your work.<br>
+                    Assuming you've already started, simply<br>
+                    <b>git checkout {branch}</b> back to where you were and continue.<br>
+                    If, however, you're just starting something new, then:
+                    <ul>
+                        <li>
+                            <b>git checkout -b {branch}</b> - As discussed previously, this will simultaneously<br>
+                            create and switch you over to the newly created branch.
+                        </li>
+                        <li>
+                            Do your work now! Change files however you see fit.
+                        </li>
+                        <li>
+                            When you feel like your work has reached a good point and you're ready to 'save' it, you
+                            can commit it to your local repo.
+                        </li>
+                    </ul>
+                </p>
+            </section>
+            <section>
+                <h4>Step Four</h4>
+                <p>
+                    Save your work and commit it!
+                    <ul>
+                        <li>
+                            <b>git add .</b> or <b>git add --all</b> - These (there is a difference,
+                            but it's negligible most of the time) will stage your work for commit.
+                            IT HAS NOT been committed yet at this point.
+                        </li>
+                        <li>
+                            <b>git commit -m "{message here}"</b> - Replace the last bit with some short blurb about
+                            what changes you made. IT IS NOT up on github yet at this point.
+                        </li>
+                        <li>
+                            <b>git push {your remote} {branch}</b> - If you've reached a point where your work on the feature
+                            is complete (however you define the word), then push it to your repo on github.
+                            <ul>
+                                <li>
+                                    <i>{your remote}</i> - should point to your personal fork of the origin on github.
+                                </li>
+                                <li>
+                                    <i>{branch}</i> - the name of the branch you working on.
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </p>
+            </section>
+            <section>
+                <h4>Step Five</h4>
+                <p>
+                    Create a Pull Request! Once your feature is fully developed and ready to be integrated into the team's
+                    collective origin repo, go to your forked repo on github and
+                    click on either green button to initiate a pull request.<br>
+
+                    <img src="/image/github_smallbutton.png" style="width:47px; height: 37px;"/><br>
+                    OR<br>
+                    <img src="/image/github_largebutton.png" style="width:800px; height: 49px;"/>
+                    <ul>
+                        <li>
+                            Give your pull request a name and write a short blurb about what you did.<br>
+                        </li>
+                        <li>
+                            <b>DO NOT MERGE IT YOURSELF!!</b><br>
+                            The point of a pull request is <i>code review!</i> Once you have a pull request up, github (should)
+                            notify relevant members of your team to merge it, but don't be shy about notifying them yourself.
+                        </li>
+                    </ul>
+                </p>
+            </section>
+        </section>
+
+        <!-- GIT Merge and Rebase -->
+        <section>
+            <h3>Git Merge and Rebase</h3>
+            <p>
+                One of Git's most powerful features is branches. It comes without saying that you'll have to eventually
+                merge those branches and you have two options: <i>Merging</i> and <i>Rebasing</i>.<br>
+                While they do (esentially) the same thing, they have a vital difference.<br><br>
+
+                <b>Merge</b> will take all the changes on your current branch from where you initially split off and
+                commit them as a single commit object into the branch you're merging into.<br><br>
+
+                <b>Rebase</b> will take your current branch and rewind it to the point of branching then play all
+                of the changes from the rebased branch onto it before re-applying your own on top of those.
+            </p>
+        </section>
+
+        <!-- Sources -->
+        <section>
+            <h2>Sources</h2>
+            <p>
+            <ul>
+                <li><a href="http://git-scm.com/doc">git-scm.com</a></li>
+                <li><a href="https://help.github.com/articles/generating-ssh-keys/">github.com</a></li>
+                <li><a href="http://security.stackexchange.com/questions/5096/rsa-vs-dsa-for-ssh-authentication-keys">stackexchange.com</a></li>
+                <li><a href="http://linux.about.com/library/cmd/blcmdl1_ssh-keygen.htm">linux.about.com</a></li>
+                <li><a href="https://confluence.atlassian.com/display/STASH/Basic+Git+commands">confluence.atlassian.com</a></li>
+                <li><a href="https://training.github.com/kit/downloads/github-git-cheat-sheet.pdf">training.github.com</a></li>
+                <li><a href="http://www.git-tower.com/blog/git-cheat-sheet/">git-tower.com</a></li>
+                <li><a href="http://nvie.com/posts/a-successful-git-branching-model/">nvie.com</a></li>
+            </ul>
+            </p>
+        </section>
+
+        <!-- Questions -->
+        <section>
+            <h2>Questions</h2>
+            <p>
+                Holden Profit <br/><small>( <a href="https://github.com/hprofit">https://github.com/hprofit</a> )</small>
+            </p>
+        </section>
+    </div>
+
+</div>
+
+<script src="../lib/js/head.min.js"></script>
+<script src="../js/reveal.min.js"></script>
+
+<script>
+
+    // Full list of configuration options available here:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+        // Parallax scrolling
+        // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+        // parallaxBackgroundSize: '2100px 900px',
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+            { src: '../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+            { src: '../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+            { src: '../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+            { src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+            { src: '../plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+            { src: '../plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+        ]
+    });
+
+</script>
+
+</body>
+</html>
