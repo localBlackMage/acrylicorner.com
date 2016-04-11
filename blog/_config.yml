@@ -10,7 +10,7 @@ title: Acrylicorner
 email: holdenprofit@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
   The personal blogsite and portfolio of Holden Profit, web developer and game developer!
-baseurl: "/blog" # the subpath of your site, e.g. /blog
+baseurl: "/blog/_site" # the subpath of your site, e.g. /blog
 url: "http://acrylicorner.com" # the base hostname & protocol for your site
 twitter_username: h_profit
 github_username:  hprofit
