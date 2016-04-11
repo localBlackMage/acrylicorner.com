@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>Acrylicorner - Demos</title>
+        <link rel="stylesheet" href="aidemo.min.css"/>
+
+        <style>
+            .no-js-warning {
+                color: white;
+            }
+        </style>
+
+        <script src="libs-all.min.js" defer></script>
+        <script src="aidemo-templates.js" defer></script>
+        <script src="aidemo.min.js" defer></script>
+    </head>
+    <body ng-app="aidemo.app" class="app-container">
+        <header class="app-header" ui-view="header"></header>
+        <div class="app-body" ui-view="main"></div>
+
+        <noscript class="no-js-warning">
+            Please enable Javascript to view content on this website!
+        </noscript>
+    </body>
+</html>
