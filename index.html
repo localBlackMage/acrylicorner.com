@@ -1,26 +1,23 @@
-<!DOCTYPE html>
-<html>
-    <head lang="en">
-        <meta charset="UTF-8">
-        <title>Acrylicorner</title>
-        <link rel="stylesheet" href="css/aidemo.min.css"/>
+---
+layout: default
+---
 
-        <style>
-            .no-js-warning {
-                color: white;
-            }
-        </style>
+<div class="home">
 
-        <script src="scripts/libs-all.min.js" defer></script>
-        <script src="templates/aidemo-templates.js" defer></script>
-        <script src="scripts/aidemo.min.js" defer></script>
-    </head>
-    <body ng-app="aidemo.app" class="app-container">
-        <header class="app-header" ui-view="header"></header>
-        <div class="app-body" ui-view="main"></div>
+  <h1 class="page-heading">Posts</h1>
 
-        <noscript class="no-js-warning">
-            Please enable Javascript to view content on this website!
-        </noscript>
-    </body>
-</html>
+  <ul class="post-list">
+    {% for post in site.posts %}
+      <li>
+        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
+
+        <h2>
+          <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+        </h2>
+      </li>
+    {% endfor %}
+  </ul>
+
+  <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
+
+</div>
