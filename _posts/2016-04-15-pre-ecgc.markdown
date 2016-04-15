@@ -1,0 +1,23 @@
+---
+layout: post
+title: "Before ECGC"
+date:   2016-04-15 11:00:00 -0500
+categories: personal update
+---
+I had my first big interview with a real game company last week! I was super nervous but super excited about it! Unfortunately,
+the news came today that they've decided not to move forward with me at this time but that the door's open for me to 
+try again in the future. 
+
+It's a little saddening, but I've decided not to let it get to me. I got some excellent feedback and insight into how
+I can improve in the future and I plan on putting my nose to the grindstone and really working on it. 
+
+On a happier note! [Wesley Paquette](http://wesleypaquettedesigns.com/) and I have decided to team up (unofficially for now)
+and work on a game of our own! They're super talented and I've been wanting to work with them for awhile, but lacked 
+proper motivation and that was on me. Fortunately, they're awesome and decided to give me another shot! So we're going to 
+spend the summer making a short and sweet game as something to add to both of our portfolios. More info on that to come!
+
+So sort of a shorter post today, but I wanted to get a couple things off my chest before heading to ECGC next week. Also
+starting this weekend, I'll be converting my AI Demos into C++ as the first steps in my practice, so look foward to posts
+covering that! 
+
+-Holden
