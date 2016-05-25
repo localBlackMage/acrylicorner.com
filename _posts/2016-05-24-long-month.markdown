@@ -46,6 +46,29 @@ Last night came button tiles and door tiles and the linking of the two. Next up 
 seem to be more difficult than I first thought. And of course, we'll need the level to actually be able to be started
 and completed, so the implementation of our spawn and exit tiles will follow shortly after. 
 
+Stepping on Toes and Learning
+-----------------------------
+Over the course of the development work so far I've come across a couple instances where Wesley or I simply step on each
+other's toes, albeit unintentionally. 99% of it can be chalked up to communication break downs. It's taught me that I need
+to be more willing to ask about things I don't understand, even if they don't immediately strike me as incorrect. 
+
+For example: our game is modular, built out of tiles so that puzzles can easily be assembled. The sample meshes I created
+in Blender had their pivot points directly in the center of the mesh. It made logical sense to me that it would be like 
+that! However, the meshes Wesley gave me had their pivot in the upper corner of the thing. It didn't occur to me to ask 
+why they were doing this, so instead I simply adjusted their position so that they would be centered as before. 
+
+When we finally discussed it and Wesley brought up that it was off (which came from a different yet related discussion),
+they told me why it was off and why they had them set up like that. So after having it explained to me and seeking
+information of my own from other game developers, it clicked. I apologized for the assumption and set about correcting
+the problem! 
+
+The real moral, however, is that instead of letting something go when you don't understand it, you should instead ask!
+Which can be tough! I don't know where it came from exactly, but there seems to be a deep, innate fear of looking stupid 
+to other people within humans and all it really does is hold us back. It's a problem I had for a long time and am 
+still working through here or there, particularly as I get into the game dev field! 
+
+And lastly...
+
 Some Personal Stuff
 -------------------
 So here a week and a half ago or so I got into a car accident on my way home from work. Fortunately no one was seriously
