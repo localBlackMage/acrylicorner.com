@@ -1,0 +1,169 @@
+---
+layout: post
+comments: true
+title: "Progress!"
+date:   2016-05-24 11:00:00 -0500
+categories: personal update
+---
+Progress! So much progress!
+---------------------------
+Holy smokes, just in the time I last posted to today, a lot has happened.
+ 
+Non-Dev Stuff First
+-------------------
+Got more wedding stuff planned out (finally) and we're looking to start the next few items on our checklist of Things
+to Plan™. My brother moved in with us last week and is settling in nicely. And! Something I'm super duper excited about!
+
+Since my car has been officially totalled, I had to start looking for a new one. My search was, thankfully, short AND sweet!
+I am now the proud owner of a 2014 Hyundai Veloster, a car I've been wanting for a couple years now! When wedding stuff 
+clears up and I have expendable funds again, I plan on tinkering around with it! I've already got my eyes on some relatively
+inexpensive things I can do in the mean time, but it'll be slow for awhile. Nevertheless, I'm tickled pink to even own it!
+
+Dev Stuff!
+----------
+Now for the reason most of you probably come here! Like I said, just between today and my last post, I've been hard at work
+on the game, as I'm sure my fiancé and brother can attest to! Almost every evening after work is spent hammering out a
+new feature implementation, correcting some small bug, or refactoring my approach to my code organization (yes, I still
+have that even while using BluePrints). In my next post I'll be giving a break down of how everything's organized and
+what does what in preparation for the presentation I'll be giving over the same topic.
+
+Demo Levels
+-----------
+I've been cranking out some demo levels for June 17th. It's been a good opportunity to really think of how to best communicate
+game features to the player without resorting to text on screen. I'm a fan of the Game Grumps and Arin Hanson and distinctly 
+recall his Sequelitis episode on [Mega Man Classic vs. Mega Man X](https://www.youtube.com/watch?v=8FpigqfcvlM) in which 
+he cites the use of tutorials in modern games. I think it leads one to really appreciate the level design of earlier games
+in which the player was left to figure something out without some form of Navi following you around shouting instructions
+into your ear. I've done my best to incorporate that sort of idea into the demo levels I've been building both because
+I want that to be how the game goes (i.e. as little hand holding as possible, treating the player as though they are
+intelligent enough to figure something out) and because we don't currently have any form of dialog engine in place!
+
+Game Features!
+--------------
+The basic game features that will be shown in our demo come June 17th include:
+
+1. Press Once Button Tile
+2. Door Tile
+3. Ice Tile
+4. Conveyor Tile
+5. Generator Tile
+6. Sticky Tile
+7. Ball Morpher Tile
+8. Fire Ball Type
+9. Electric Ball Type
+10. Tilt-able Camera Controls
+11. Pushable Blocks
+12. Pushable Battery Blocks
+13. Non-Pushable Ice Blocks
+
+I'm pretty excited to show off the features listed here! Most of them are done and working already and simply waiting
+to be placed in a demo level, but a few still need some work! But to show off what some of these do or look like and 
+give mad props to my friend [Wesley](http://wesleypaquettedesigns.com/) for the art assets so far (despite being super
+busy planning his own wedding come just a day after our demo debut, even!) I'll share some screen shots and gifs of
+the game so far! There really is a world of difference from the crappy little test assets I spat out in Blender compared
+to the real assets Wesley's created for us to use and I'm thrilled to show it all off! Be sure to pop over and say hi to
+that super talented artist!
+
+Starting a Level
+----------------
+
+![Ball Morpher](../../../../../../images/2016_06_09/gameStart.jpg)
+
+Here's a glimpse at the first demo level that will be available to players! There's not a lot to it, but it is meant to
+serve as an introduction to the tilt controls and how buttons and doors work. By blocking the player's path with doors
+and putting a button directly in their line of site immediately before them, it's likely they'll roll over the button
+to see what it does, therefore having an "ah-hah!" moment when they see the doors open!
+
+![See Button](../../../../../../images/2016_06_09/seeButton.png)
+
+![Button Press](../../../../../../images/2016_06_09/buttonPress.png)
+
+Camera Controls
+---------------
+Some feedback that was generated both from my observations in testing and seeing assets as well as Wesley's test plays was
+that the player's ball is obstructed from view at times as are various objects in the level, such as buttons. In order to
+circumvent this, we decided adding some camera movement would be helpful in allowing the player to look around the map
+and see things that might otherwise be blocked from view. 
+
+I'll be real honest though, I'm a tad stumped on how best to non-verbally communicate to the player that this is a feature
+and after watching my brother and fiancé test it out without using it, it only served to further drive the point home that
+it somehow needs shown to the player.
+
+![Ball Morpher](../../../../../../images/2016_06_09/cameraMovement.gif)
+
+Conveyor Belts
+--------------
+One of the first special tile types we created was the Conveyor Belt Tile. Pretty self explanatory in it's function, it 
+will push the ball along the direction it's moving and can have varying speeds. I was pretty proud of myself for figuring 
+out how to hook up both the speed parameter in the conveyor texture *and* getting it to show up in the editor by putting 
+that speed control logic in the BP's constructor function, which I had noticed fires any time you make a change to the BP
+itself or any of it's variables in the editor. 
+
+![Conveyor Belt](../../../../../../images/2016_06_09/conveyors.gif)
+
+Here you can see the sample level showing off conveyors and how they work. Ball rolls onto them and gets pushed in the 
+direction they're going, pretty simple!
+
+Sticky Pads
+-----------
+Still among the earliest implemented features was the sticky pad, meant to slow the player down a great deal. There are
+varied uses for this such as trapping the player long enough for an enemy (yes, a few of those are planned!) to get them,
+catching the player from a high velocity movement, or simply slowing the player down when they must do something quickly.
+
+![Sticky Pad](../../../../../../images/2016_06_09/stickyPad.gif)
+
+While the sticky value of the tile itself is still being tweaked so we feel it's useful but not overly annoying, the basic
+functionality is all in place!
+
+![Conveyor and Sticky Pad](../../../../../../images/2016_06_09/conveyorAndSticky.gif)
+
+Ball Morphing
+-------------
+One of the, in my opinion, cooler aspects of the overall game is the inclusion of different ball types! We've got four
+types planned beyond the base: Fire, Ice, Electric, and Metal (alternatively known as Armor). While the ball types
+have all been implemented in their most basic form (the ball's glowy stripe changes color to match), the interactions with
+the world are the challenging part! 
+
+Without further ado, here is the Fire Ball Morpher in game (NOTE: Like many things, this art asset is far from final - it's 
+just a recolored wall tile at the moment)!
+
+![Ball Morpher](../../../../../../images/2016_06_09/ballMorpher.png)
+
+And just beyond the Fire Ball Morpher you are quickly introduced to the effects it has on the Ice Tiles beneath you. You
+can watch as they melt away!
+
+![Ball Morpher](../../../../../../images/2016_06_09/fireMeltingIce.png)
+
+More to Come Next Week
+----------------------
+Quite a bit just in a couple weeks! I'm proud of the work both of us have accomplished thus far despite all the busy stuff
+going on in our lives! With the demo deadline approaching next Friday, I've got even more work ahead that'll need to be done
+ASAP, but I'm excited to do it and get some real feedback from players outside either of our homes!
+
+Until then, see you around!
+-Holden
+
+{% if page.comments %}
+<div id="disqus_thread"></div>
+<script>
+/**
+* RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+* LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+
+s.src = '//acrylicorner.disqus.com/embed.js';
+
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+{% endif %}

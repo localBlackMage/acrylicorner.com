@@ -6,8 +6,8 @@ date:   2016-05-24 11:00:00 -0500
 categories: personal update
 ---
 May has proven to be quite something. Attended [Stir Trek](http://stirtrek.com/) early on in the month and saw 
-Captain America: Civil War, so that was a fun way to start! Started really cracking at the game, still tentatively named
-"Tiltaball Z" until we hit a pretty major snag. Started wedding arrangements as well! Then had a car accident. Needless
+Captain America: Civil War, so that was a fun way to start! I started really cracking at the game, still tentatively named
+"Tiltaball Z", until we hit a pretty major snag. Started wedding arrangements as well! Then had a car accident. Needless
 to say, it's been a lot of ups and downs this month.
 
 Stir Trek
