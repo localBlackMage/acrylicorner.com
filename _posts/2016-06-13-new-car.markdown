@@ -1,0 +1,69 @@
+---
+layout: post
+comments: true
+title: "Vroom Vroom"
+date:   2016-06-13 09:00:00 -0500
+categories: personal car
+---
+Out with the Old, In with the New
+---------------------------------
+So as you know by now, I had an auto accident in early May. My Nissan ended up being totaled out in the end after a long
+delay from the Insurance company. This, of course, kind of sucked. I was without a car now that they had decided to 
+pay out the value of my Nissan and had to return the rental. That was when the rental company informed me that they
+sell their rental cars! Better yet, the person on the phone even said they had a car that I'd long desired: the 
+Hyundai Veloster! I was thrilled! I test drove it that weekend and loved it! 
+
+Of course, this was just the base model. It lacked a **lot** of the power that the Turbo series has. A good 63 horsies
+to be precise. I couldn't readily tell you the difference until the very next weekend in which I got to test drive
+a '14 Veloster Turbo R-Spec. Not only that but I got to learn how to drive stick for the first time in my life. Having
+long wanted to but lacking anything suitable to practice on (or anything, really), I simply never got the chance to 
+experience it. Fortunately the person at the dealership was happy to teach me how to drive and let me stall repeatedly
+because **boy**, did I mention I'd never driven stick before?
+
+I fell in love with it. It's a sleek, deep blue with black and red leather interior (probably my only nitpick about it),
+6-speed manual with 201 HP coming out of that little 1.6L I4. Taking off with it (when I manage to do it correctly) 
+feels absolutely amazing! 
+
+![front](../../../../../../images/2016_06_13/front.jpg)
+
+![frontLeft](../../../../../../images/2016_06_13/frontLeft.jpg)
+
+![frontRight](../../../../../../images/2016_06_13/frontRight.jpg)
+
+![back](../../../../../../images/2016_06_13/back.jpg)
+
+![backLeft](../../../../../../images/2016_06_13/backLeft.jpg)
+
+![backRight](../../../../../../images/2016_06_13/backRight.jpg)
+
+Just a small update for me to gush! I'm super excited to drive it and work on it! 
+I actually feel like a kid again with his first car and everything, it's crazy!
+
+See you around!
+
+-Holden
+
+{% if page.comments %}
+<div id="disqus_thread"></div>
+<script>
+/**
+* RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+* LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+
+s.src = '//acrylicorner.disqus.com/embed.js';
+
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+{% endif %}
