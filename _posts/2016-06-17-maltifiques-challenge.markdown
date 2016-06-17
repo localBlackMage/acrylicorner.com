@@ -10,7 +10,7 @@ Introducing: *Maltifique's Challenge!*
 Tilt-A-Ball Z no more, the official name of our game is *Maltifique's Challenge!* 
 
 
-**You can download it** [**here**](https://acrylicorner.com/TiltABall.zip)!
+**You can download it** [**here**](http://acrylicorner.com/TiltABall.zip)!
 ---------------------------------------------------------------------------
 
 While art is still being worked on (Wesley's getting married tomorrow, so he's a tad preoccupied!), a lot of basic game 
