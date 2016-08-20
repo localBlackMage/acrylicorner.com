@@ -27,6 +27,8 @@ technically see no change, normal and battery type blocks will no longer overlap
 and will fall once pushed off of a floor! I am personally excited to present this as it took some time to get right and
 adds some interesting future puzzle elements!
 
+![Push Blocks](../../../../../../images/2016_08_19/push_block.gif)
+
 Map Controls
 --------------------------------------
 Among the more common feedback given to us regarding the game was the controls. They felt sluggish and difficult to maneuver. 
@@ -39,7 +41,9 @@ Morphers
 Wesley, now that they're married and moved out to California, has had time to really dive into work on the art assets and
 in just a short time has already cranked out some great stuff! One of the first items they did was the Morphers. Before
 we were using a stand in mesh with a texture that I used because I enjoy the look of hexagons far too much! Now they've been
-replaced with a very slick hologram that the ball rolls through to change into the different elemental power ups!
+replaced with a very slick hologram that the ball rolls through to change into the different elemental power ups! Behold!
+
+![Morphers](../../../../../../images/2016_08_19/morphers.gif)
 
 The Elements
 --------------------------------------
@@ -48,12 +52,15 @@ foremost, the ball itself!
 
 It's an actual rolled up Robo Armadillo! Our heroine has finally taken form!
 
+![Ball 1](../../../../../../images/2016_08_19/ball_1.png)
+![Ball 2](../../../../../../images/2016_08_19/ball_2.png)
+
 The rest of the elements have received a visual upgrade as well!
 
-[FIRE]
-[ICE]
-[LIGHTNING]
-[METAL]
+![Ice](../../../../../../images/2016_08_19/ice_morpher.gif)
+![Fire](../../../../../../images/2016_08_19/fire_morpher.gif)
+![Electric](../../../../../../images/2016_08_19/electric_morpher.gif)
+![Armor and Normal](../../../../../../images/2016_08_19/normal_morpher.gif)
 
 Ice Ball
 --------------------------------------
@@ -64,30 +71,37 @@ Regarding one of the newer entries, we have the Ice Ball! The Freezing Carapace 
  
 Water Spout Tiles
 --------------------------------------
-A brand new tile type! The Water Spout tile interacts with the player in different ways depending on which power up they
+A brand new tile type! 
+
+![Water Spout](../../../../../../images/2016_08_19/water_spout.gif)
+
+The Water Spout tile interacts with the player in different ways depending on which power up they
 currently have! For instance, if the player is the Ice Ball...
 
-[IMAGE]
+![Ice Ball on Water](../../../../../../images/2016_08_19/ice_water_spouts.gif)
 
-They'll freeze the water solid into an ice tile! Or perhaps the player is using the Fire Ball:
+They'll freeze the water solid into an ice tile! 
 
-[IMAGE]
+Or perhaps the player is using the Fire Ball:
 
-Poof! Water douses those flames lickity split! One has to be careful, however, when playing with electricity. Common
-sense says water and our Electfic Ball won't mix and, well, they sure don't!
+![Fire Ball on Water](../../../../../../images/2016_08_19/douse_fire_on_water.gif)
 
-[IMAGE]
+Poof! Water douses those flames lickity split! 
+
+One has to be careful, however, when playing with electricity. Common
+sense says water and our Electric Ball won't mix and, well, they sure don't!
+![Electric Ball on Water](../../../../../../images/2016_08_19/kill_electric_on_water.gif)
  
 Generators
 --------------------------------------
 The generator tile has received a visual improvement since it's introduction!
 
-[IMAGE]
+![Generator](../../../../../../images/2016_08_19/generator.png)
 
 The glowing bit itself even indicates how much charge is left in it (as batteries are the only way to permanently charge
 a generator)!
 
-[IMAGE]
+![Generator Discharge](../../../../../../images/2016_08_19/discharge_generator.gif)
 
 And that leads us right into:
 
@@ -98,6 +112,8 @@ instances where they'd rapidly charge a generator below when stuck up against a 
 succession. I even believe that this happened any time the Electric Ball hit the battery as well. The batteries also
  failed to charge the generator below if they were sitting on top of it and became charged via touch of the Electric Ball.
  So I'm proud to present a fully functional battery element with all aforementioned bugs stamped out!
+ 
+![Battery](../../../../../../images/2016_08_19/battery.png)
 
 Last but certainly not least for this update, another brand new tile (or wall, rather) type!
 
@@ -106,11 +122,11 @@ Tesla Wall
 While the mesh and such is currently stand in, these deadly walls will shock the player right into a game over screen if
 they're not careful! 
 
-[IMAGE]
+![Tesla Kill](../../../../../../images/2016_08_19/kill_ball_on_tesla.gif)
 
 However, they don't affect the player at all when using the Electric Ball power up!
 
-[IMAGE]
+![Tesla Ignore](../../../../../../images/2016_08_19/tesla_electric.gif)
 
 Hopefully by next update, we'll have something prettier to look at than my shoddily textured wall mesh!
 
