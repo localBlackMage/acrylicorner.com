@@ -1,14 +1,12 @@
 ---
 layout: post
 comments: true
-title: "Maltifique's Challenge"
+title: "Demo Release!"
 date:   2016-06-17 09:00:00 -0500
-categories: personal update
+categories: game update
 ---
-Introducing: *Maltifique's Challenge!*
+Introducing: *Tilt-A-Ball* Demo!
 --------------------------------------
-Tilt-A-Ball Z no more, the official name of our game is *Maltifique's Challenge!* 
-
 
 **You can download it** [**here**](http://acrylicorner.com/TiltABall.zip)!
 ---------------------------------------------------------------------------

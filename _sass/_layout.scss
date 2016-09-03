@@ -194,6 +194,13 @@
     font-size: 24px;
 }
 
+.home {
+    display: flex;
+
+    .post-column {
+        flex: 1 1;
+    }
+}
 
 
 /**

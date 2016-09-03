@@ -7,7 +7,6 @@ categories: game update
 ---
 Post Alpha Progress
 --------------------------------------
-
 So! We released our alpha build almost two months ago today! We've received some great feedback from those of you that 
 played and have taken action to improve upon bugs and suggestions given to us! So first and foremost, the changes made
 due to feedback:
