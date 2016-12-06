@@ -1,0 +1,209 @@
+---
+layout: post
+comments: true
+title: "Javascript Pros & Cons"
+date:   2018-10-05 00:00:00 -0500
+categories: programming javascript
+---
+What I Like, What I Don't
+-------------------------------------
+Recently I was asked what it was about Javascript that I liked and didn't like. It was a question I was oddly unprepared
+to answer despite my having used it pretty extensively over the last few years! So I've decided to take it upon myself
+to compile a list of five or more things I like about Javascript as well as five or more that I dislike. I plan to do 
+this for other languages in the future (looking at you, Ruby), but for now I'll start with what I'm currently most 
+familiar with! Keep in mind that I'm going off of EcmaScript 5 Javascript for this article.
+
+Perhaps it's best if I start off with the negatives about Javascript so I can end on a good note! I feel a lot of 
+animosity for the language in general from most that aren't already avid users of it and those that don't like JS 
+sometimes have good reason not to!
+
+The Bad Stuff
+-------------
+
+### Callbacks
+When I was first starting out learning Javascript, this was perhaps the single most difficult concept to get my head 
+around. Coming from a background of C#, Python, and Java, I had never before come across such a mystifying feature. 
+Confusion aside, however, callbacks are just a weak point in a lot of javascript code bases and can often lead to what
+so many refer to, lovingly, as "callback hell." This happens when you have a chain of nested callbacks that seem to 
+spiral off into the nether and make tracing code feel like going down a rabbit hole. 
+
+```javascript
+var someFunction = function(func) {
+    ...do stuff...
+    func();
+};
+
+someFunction(function(){});
+```
+
+Shown here is the basic premise for how callbacks are executed. A function ends up calling another function that you 
+supply to it in one way or another. Perhaps the most common pattern you'll see is something like the following:
+
+```javascript
+var anotherFunction = function() {
+    ...do stuff...
+    return {
+        then: function(callback){
+            callback();
+        }
+    };
+};
+
+var callbackHandler = function() {
+    ...do stuff...
+};
+
+anotherFunction().then(callbackHandler);
+```
+
+This `.then()` pattern is incredibly common in any form of promise resolution and REST calls as neither are blocking
+items, meaning Javascript will continue on it's happy way after the `anotherFunction` code has sent off the REST call 
+or what-have-you. The real problem stems from nested callbacks, large chains of `.then()` type blocks where you're 
+required to sift through several functions just to find out what happens at the end of a given 
+non-blocking item's life span. 
+
+### Class-Like Objects
+Javascript has no concept of class! **AHHH!**
+
+Okay no, it's not *that* bad, but it's definitely weird. Weirder still is that it *does* have classes, just not in the way
+one would think it does! Given that everything in Javascript is an object, including functions, you can use this to create
+instantiatable objects, ergo, a class. It even allows you to use `new` syntax!
+
+```javascript
+var MyClass = function(param1, param2) {
+    this.param1 = param1;
+    this.param2 = param2;
+};
+
+var newObject = new MyClass('First', 'Second');
+```
+
+The real problem with this is that it's just not very intuitive for a beginner. Someone coming from a non-JS language
+doesn't equate function with objects or classes. What gets stranger still is how you add functionality to said class:
+
+```javascript
+MyClass.prototype.someNewFunction = function() {
+    ...do stuff...
+};
+```
+
+What is this prototype thing? What does it do? Since when did I add *that* to my MyClass object?! Even better is that...
+
+```javascript
+MyClass.anotherNewFunction = function() {
+    ...do stuff...
+};
+```
+
+...does something completely different! Anything added to the prototype will have a copy added to `new` instances of
+the object where-as items added directly to the MyClass function will not be inherited.
+
+### Inheritance
+Javascript's idea of how to perform object inheritance is certainly a bit more involved than your normal 
+`class MyClass extends SomeOtherClass` sort of syntax. It deals with a hidden object called the Prototype, which all
+objects in JS have. 
+
+```javascript
+var ParentClass = function(param1, param2) {
+    this.param1 = param1;
+    this.param2 = param2;
+}
+
+var ChildClass = function(param1, param2, param3) {
+    ParentClass.call(this, param1, param2);
+    this.param3 = param3;
+}
+
+ChildClass.prototype = Object.create(ParentClass.prototype);
+
+ChildClass.prototype.constructor = ChildClass;
+```
+
+As you can see, it's fairly wordy and not completely obvious what's going on to someone new to JS. It makes use of 
+several advanced JS techniques and knowledge bits including function scope, prototype, and the constructor. 
+The ChildClass constructor function binds the inner going-ons of ParentClass to itself via the `.call()` method before
+continuing on with the rest of it's own construction. The ChildClass' prototype is overridden by a copy of the ParentClass',
+giving the ChildClass access to a copy of any and all methods and fields on the ParentClass prototype object. Finally,
+in order to make the ChildClass *not* a straight up copy of ParentClass when one goes to create a new instance of it,
+the copied prototype object's constructor is set *back* to the ChildClass function. 
+
+It all makes sense if you know Javascript well, but it still manages to be somewhat cumbersome and involves a lot of 
+steps.
+
+### ===, ==, undefined, and null
+In my years using Javascript, I learned that using `===` is basically *the* way to go in Javascript. Unlike `==`, which 
+only checks value, `===` checks both type *and* value of the two objects you're comparing. Kind of like, y'know, most 
+languages do by default with `==`. Really it leads me to ponder what the point of the `==` really is in most cases. 
+If you wanted to do a value comparison, there's ways of doing so without having to change a basic piece of common
+functionality to match it. Maybe even flip flop the double and triple's purpose?
+
+Not wanting to spread these out into their own categories as they're pretty minor nitpicks: undefined and null.
+
+
+The Good Stuff!
+---------------
+So now I get a chance to talk about the things I really like about Javascript! After all, it can't be all bad!
+
+### Maps/Hashes
+Since everything in Javascript is an object and objects in Javascript can always have properties added and removed, 
+this essentially makes *everything* a Map or Hash object. While many languages do have this concept, it's never been
+so astoundingly simple and intuitive to the language itself. 
+
+### Promises
+Due to the asynchronous nature of Javascript, the need for callbacks arise. As 
+
+### Concatenative Inheritance
+
+
+### Ease of Use
+
+
+### JSON
+From the early days of Javascript, back in Echma Script 262 3rd Edition came the fantastically simple way to represent 
+data: JavaScript Object Notation, or JSON. 
+
+Cons
+Class and Inheritance
+== and ===
+Callbacks
+Bind/Apply/Call - Scopes
+.1 + .2
+Different Versions
+Date
+
+Pros
+Everything is a map/hash
+Promises
+Concatenative inheritance
+Ease of Use
+JSON
+
+
+See you around!
+
+-Holden
+
+{% if page.comments %}
+<div id="disqus_thread"></div>
+<script>
+/**
+* RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+* LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+
+s.src = '//acrylicorner.disqus.com/embed.js';
+
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+{% endif %}
