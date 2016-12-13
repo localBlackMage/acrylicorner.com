@@ -2,20 +2,19 @@
 layout: post
 comments: true
 title: "Javascript Pros & Cons"
-date:   2018-10-05 00:00:00 -0500
+date:   2016-12-12 00:00:00 -0500
 categories: programming javascript
 ---
 What I Like, What I Don't
 -------------------------------------
 Recently I was asked what it was about Javascript that I liked and didn't like. It was a question I was oddly unprepared
-to answer despite my having used it pretty extensively over the last few years! So I've decided to take it upon myself
+to answer despite my having used it pretty extensively over the last few years. So, I've decided to take it upon myself
 to compile a list of five or more things I like about Javascript as well as five or more that I dislike. I plan to do 
 this for other languages in the future (looking at you, Ruby), but for now I'll start with what I'm currently most 
-familiar with! Keep in mind that I'm going off of EcmaScript 5 Javascript for this article.
+familiar with. Keep in mind that I'm going off of EcmaScript 5 Javascript for this article.
 
 Perhaps it's best if I start off with the negatives about Javascript so I can end on a good note! I feel a lot of 
-animosity for the language in general from most that aren't already avid users of it and those that don't like JS 
-sometimes have good reason not to!
+animosity for the language in general from those that aren't already avid users of it and they sometimes have good reason not to!
 
 The Bad Stuff
 -------------
@@ -66,8 +65,8 @@ non-blocking item's life span.
 Javascript has no concept of class! **AHHH!**
 
 Okay no, it's not *that* bad, but it's definitely weird. Weirder still is that it *does* have classes, just not in the way
-one would think it does! Given that everything in Javascript is an object, including functions, you can use this to create
-instantiatable objects, ergo, a class. It even allows you to use `new` syntax!
+one would think it does. Given that everything in Javascript is an object, including functions, you can use this to create
+instantiatable objects, ergo, a class. It even allows you to use `new` syntax.
 
 ```javascript
 var MyClass = function(param1, param2) {
@@ -87,7 +86,7 @@ MyClass.prototype.someNewFunction = function() {
 };
 ```
 
-What is this prototype thing? What does it do? Since when did I add *that* to my MyClass object?! Even better is that...
+What is this prototype thing? What does it do? Since when did I add *that* to my MyClass object? Even better is that...
 
 ```javascript
 MyClass.anotherNewFunction = function() {
@@ -95,7 +94,7 @@ MyClass.anotherNewFunction = function() {
 };
 ```
 
-...does something completely different! Anything added to the prototype will have a copy added to `new` instances of
+...does something completely different. Anything added to the prototype will have a copy added to `new` instances of
 the object where-as items added directly to the MyClass function will not be inherited.
 
 ### Inheritance
@@ -128,16 +127,91 @@ in order to make the ChildClass *not* a straight up copy of ParentClass when one
 the copied prototype object's constructor is set *back* to the ChildClass function. 
 
 It all makes sense if you know Javascript well, but it still manages to be somewhat cumbersome and involves a lot of 
-steps.
+steps. And speaking of `.call()`...
 
-### ===, ==, undefined, and null
+### Call, Apply, Bind
+Three powerful pieces of functionality built right into Javascript, but what do they do? 
+
+```javascript
+var someFunction = function() {
+    console.log(this.message);
+}
+```
+Normally, this code will simply log `undefined` to your console, as `this` refers to the current scope (our function) and
+our function has no `message` property. That's where call, apply, and bind come in. These three functions can change and
+even store context for a function, though each operates slightly differently.
+
+```javascript
+var someFunction = function() {
+    console.log(this.message);
+}
+
+var myContextObject = {
+    message: 'Hello there!'
+}
+
+someFunction.call(myContextObject, null);
+someFunction.apply(myContextObject, null);
+```
+This will now print 'Hello there!' to your console as `this` within the function is effectively replaced with `myContextObject`.
+You'll notice both call and apply are being called here. For all intents and purposes, they do the exact same thing. The difference
+lies in the function you're calling or applying to. 
+
+```javascript
+var anotherFunction = function(param1, param2) {
+    console.log(param1, param2);
+}
+
+anotherFunction.call(null, 'Hello', 'world!');
+anotherFunction.apply(null, ['Hello', 'world!']);
+```
+Literally the only difference here is in how you pass parameters to your function. Call takes them one at a time, apply
+takes them all as an array. Personally I find it a matter of personal preference as to which you use. 
+
+So what about bind? How does that differ?
+
+```javascript
+var finalFunction = function(param) {
+    console.log(this.message, param);
+}
+
+var myContextObject = {
+    message: 'Hello there!'
+}
+
+var boundFunction = finalFunction.bind(myContextObject, 'A bound parameter!');
+
+boundFunction();
+```
+The arguments are the same as call, it takes a context for `this` and each parameter one at a time. However, unlike call and 
+apply, bind does not immediately call the function. It instead, well, *binds* the function's context to the object you pass it
+and returns the bound function for later calling.
+
+So the question you might be left with is: why do you dislike this, Holden? 
+
+The answer lies in the use of `this`. Javascript can be cumbersome enough for beginners trying to understanding how `this` 
+changes based on where it's at within a set of braces, hell it trips me up once in awhile still. 
+Now you introduce additional confusion by substituting what should be intuitive `this` with some arbitrary object. 
+To be perfectly honest, the three functions feel like they're meant purely to fix existing problems with how Javascript 
+operates in general. 
+
+### ===, ==
 In my years using Javascript, I learned that using `===` is basically *the* way to go in Javascript. Unlike `==`, which 
 only checks value, `===` checks both type *and* value of the two objects you're comparing. Kind of like, y'know, most 
 languages do by default with `==`. Really it leads me to ponder what the point of the `==` really is in most cases. 
 If you wanted to do a value comparison, there's ways of doing so without having to change a basic piece of common
 functionality to match it. Maybe even flip flop the double and triple's purpose?
 
-Not wanting to spread these out into their own categories as they're pretty minor nitpicks: undefined and null.
+### Date
+Javascript Date object just plain old sucks in my humble opinion. Why? Because you have a date in milliseconds or as a
+string or even a year, month, day, etc. You want this to become a Date object, right? You'd think this would operate
+the same all the time, but that'd be where you're wrong. Date will parse out the parameters you give it differently
+*based on the timezone of the machine running the code*. This is completely arbitrary and asinine. If it instead parsed
+out to a time-zoneless date and stored info that would denote what timezone it's in, I could get behind that. 
+
+What you're left with is a hassle of converting back and forth between UTC dates and local times. It's such a huge pain
+that there's an [entire library](http://momentjs.com/) devoted to making dealing with Dates easier by taking care of all
+the timezone crud for you.
 
 
 The Good Stuff!
@@ -160,7 +234,7 @@ Due to the asynchronous nature of Javascript, the need for callbacks arise. As
 
 ### JSON
 From the early days of Javascript, back in Echma Script 262 3rd Edition came the fantastically simple way to represent 
-data: JavaScript Object Notation, or JSON. 
+data: JavaScript Object Notation, or JSON. JSON has done a lot to
 
 Cons
 Class and Inheritance
