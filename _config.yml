@@ -8,12 +8,51 @@
 # Site settings
 title: Acrylicorner
 email: holdenprofit at gmail.com
-description: > # this means to ignore newlines until "baseurl:"
-  The personal blogsite and portfolio of Holden Profit, web developer, game developer, and aspiring car enthusiast!
+description: The personal blogsite and portfolio of Holden Profit, game developer, web developer, hobby artist, and aspiring car enthusiast!
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "http://acrylicorner.com" # the base hostname & protocol for your site
+url: "http://localhost:4000" #local dev only
+#url: "http://acrylicorner.com" # the base hostname & protocol for your site
+
+share:
+  facebook: true
+  twitter: true
+  gplus: true
+  linkedin: true
+  pinterest: true
+  email: true
+
+social:
+  github: hprofit
+  twitter: h_profit
+  linkedin: holden-profit-a2363442
+  rss: feed.xml
+
 twitter_username: h_profit
-github_username:  hprofit
+
+# Google Analytics key, leave blank to ignore
+google_analytics_key:
+# Yandex metrica (https://metrica.yandex.com/) leave blank to ignore or put true to use
+yandex_metrica:
+
+# Set this to your disqus shortname to enable comments. Note that the 'comments'
+# setting below must also be true. Individual posts can override 'comments' to
+# disable on a post-by-post basis
+disqus: holdenprofit
+comments: true
+
+permalink: /:year/:month/:title
 
 # Build settings
 markdown: kramdown
+kramdown:
+  input: GFM # Enable GitHub Flavored Markdown (fenced code blocks)
+  hard_wrap: true
+
+exclude: ['README.md', 'LICENSE']
+
+presentations: [
+  ['swarmIntelligence.html', 'Swarm Intelligence'],
+  ['artificialIntelligence.html', 'A. I. Overview/Intro'],
+  ['howToUseGit.html', 'How to Use Git'],
+  ['howToUseJasmine.html', 'How to Use Jasmine'],
+]
