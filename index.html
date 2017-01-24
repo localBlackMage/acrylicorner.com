@@ -1,63 +1,36 @@
 ---
-layout: default
+layout: page
 ---
 
-<div class="home">
+{% for post in site.posts limit:10 %}
+  <h2 class="post-title">
+    <a href="{{post.url | prepend:site.baseurl | prepend:site.url}}">
+      {{ post.title }}
+    </a>
+  </h2>
 
-  <div class="post-column">
-
-    <h1 class="page-heading">Game Updates</h1>
-
-    <ul class="post-list">
-      {% for post in site.categories.game %}
-      <li>
-        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
-
-        <h2>
-          <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-        </h2>
-      </li>
-      {% endfor %}
-    </ul>
-
+  <div class="post-meta">
+  <div class="post-time">
+    <i class="fa fa-calendar"></i>
+    <time datetime='{{ post.date | date: "%Y-%m-%d" }}'>{{ post.date | date_to_string }}</time>
   </div>
-
-  <div class="post-column">
-
-    <h1 class="page-heading">Code Talk</h1>
-
-    <ul class="post-list">
-      {% for post in site.categories.programming %}
-      <li>
-        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
-
-        <h2>
-          <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-        </h2>
-      </li>
-      {% endfor %}
-    </ul>
-
-  </div>
-
-  <div class="post-column">
-
-    <h1 class="page-heading">Personal Updates</h1>
-
-    <ul class="post-list">
-      {% for post in site.categories.personal %}
-        <li>
-          <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
-
-          <h2>
-            <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-          </h2>
-        </li>
-      {% endfor %}
-    </ul>
-
-  </div>
-
+  <ul>
+    {% for tag in post.tags %}
+    <li><a href="{{site.baseurl | prepend:site.url}}/tag/{{ tag }}">{{ tag }}</a></li>
+    {% endfor %}
+  </ul>
 </div>
 
-<p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
+  <div class="post-descr">
+    <p>
+      {{ post.description }}
+    </p>
+  </div>
+  {% endfor %}
+
+
+<div class="post-footer">
+  <div class="column-full">
+    <h3><a href="{{ '/archive.html' | prepend: site.baseurl | prepend: site.url }}">Blog archive</a></h3>
+  </div>
+</div>
