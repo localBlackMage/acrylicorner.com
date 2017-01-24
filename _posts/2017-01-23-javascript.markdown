@@ -189,34 +189,106 @@ From the early days of Javascript, back in Echma Script 262 3rd Edition came the
 }
 ```
 
-No matter how you slice it, that's a pretty easy to read data container at a glance. Objects can be nested as deep as you like and everything's either a string or a number. Simple JS objects are basically glorified JSON as well, just with the added ability to contain functions for the most part.
+No matter how you slice it, that's a pretty easy to read data container at a glance. Objects can be nested as deep as you like and everything's either a string or a number. Simple JS objects are basically glorified JSON as well, just with the added ability to contain functions for the most part. This actually leads to the next thing regarding JS that I enjoy:
 
 ### Maps/Hashes
 Since everything in Javascript is an object and objects in Javascript can always have properties added and removed, this essentially makes *everything* a Map or Hash object. While many languages do have this concept, it's never been so astoundingly simple and intuitive to the language itself.
 
+```javascript
+var dict = {};
+var values = ['One', 'Two', 'Three'];
+
+values.forEach(function(val, index){
+  dict[index] = val;
+});
+
+console.log(dict['2']); // logs 'Two'
+```
+
+This is a brief example of how this can be used. The key is either a direct property of the object or, if the key contains numbers or symbols, a string. The value can be anything you want. I find this to be a powerful tool both in how lenient JS is with key-value pairs and in the speed capabilities it gives you for storing data needed for other operations.
+
 ### Promises
-Due to the asynchronous nature of Javascript, the need for callbacks arise. As
+In a way, the callbacks and promises share a similar idea. A callback is a function that is executed at a later time and a promise is an ambiguous blob of data that resolves to something more concrete at a later time. Promises and callbacks are very closely entwined in practice.
 
-### Concatenative Inheritance
+I know, I know, I already said I don't like callbacks!
 
+However! That's not entirely true, to be honest! I do like the concept of callbacks and the power they provide to you, I just don't like the big nasty chains they can easily lead to if you're not careful!
+
+In web development, you'll frequently find yourself requesting data from a server and then acting upon that data once it's loaded. Normally this would mean callbacks, but the extent to which you use them can be mitigated through the use of promises. [One of the most used and well know promise libraries can be found here.](https://github.com/kriskowal/q) The basic idea is something like this:
+
+```javascript
+var getDataFromServer = function(params) {
+  var deferred = Q.defer();
+
+  getData(params)
+    .then(function(result) {
+      deferred.resolve(result);
+    })
+    .catch(function(error) {
+      deferred.reject(new Error('Something went wrong!'));
+    });
+
+  return deferred.promise;
+}
+```
+
+You create a deferred object, call your function body to do what you need, and return the deferred object's internal promise object. At this point the object that has been returned is an object with certain promise specific methods on it for doing various things I won't cover here (they can be found in the Q documentation). The magic happens when that function body you called earlier finally finishes it's work. In my example I've set up a pass through to some AJAX calling method that makes a call. Once the call finishes, it will call `.then()` or `.catch()` accordingly and you can resolve or reject your promise. This essentially replaces the promise instance with whatever you resolve your promise to. Viola, your callbacks are contained to a simple few and your data will be there once they've finished.
+
+This can be useful when you *need* certain data to be available before moving on to the next portion of your code. Say, for example, I have a website that registers teams of users. For an individual user to view a page with their teammates on it, I need to retrieve that data from the server. That could easily be done in a callback, sure, but what if I needed data from the team register to make *another* call to, say, get individual team member statistics? That'd need a callback chained onto your first callback. What if I needed data from *that* callback to make another call? Another callback.
+
+You can see how this might lead to callback hell. The solution is promises and dependencies.
 
 ### Ease of Use
+Honestly one of the most appealing things about Javascript to me is just how easy it is to get started. All you need is a text editor of some sort and a web browser, bare minimum. It's far less of a hassle or a headache than numerous other languages that require whole build processes and advanced IDEs just to get *started*. With JS you can make an index.html file, slap a `<script>` tag in there, load it up into your browser and **bam** you're rolling.
 
-Cons
-Class and Inheritance
-== and ===
-Callbacks
-Bind/Apply/Call - Scopes
-.1 + .2
-Different Versions
-Date
+Obviously JS can be as complicated as you want it to be (see: frameworks, build tools, configurations, etc.) but at it's heart it's a simple langue that doesn't take much to get something showing on the screen.
 
-Pros
-Everything is a map/hash
-Promises
-Concatenative inheritance
-Ease of Use
-JSON
+## Looking Ahead
+So my article has covered ES5 up to this point, but I've been doing some dabbling in ES6 as of late and have come to find it solves a lot of my smaller gripes with JS in general. Here I'll list some of the things I'm excited to see in ES6, starting with `class` syntax.
+
+```javascript
+class ParentClass {
+  constructor(x, y) {
+    this.x = x
+    this.y = y
+  }
+
+  printPosition() {
+    console.log(`${this.x} ${this.y}`)
+  }
+}
+
+class ChildClass extends ParentClass {
+  constructor (x, y, z) {
+    super(x, y)
+    this.z = z
+  }
+
+  printPosition() {
+    console.log(`${this.x} ${this.y} ${this.z}`)
+  }
+}
+```
+
+Not only is this far more clear and concise as to what's going on, it gets rid of dealing with `prototype` entirely. Note that `prototype` is still there, but it's not something you need to deal with on a regular basis now. There's talk of doing more advanced things with it in the future, like implementing multiple class inheritance, so we'll see where that goes!
+
+Also shown briefly above is new string interpolation. Rather than having to write the cumbersome `this.x + ' ' + this.y` it can easily be wrapped in \` and variables can be accessed via `${varName}` resulting in:
+```javascript
+`${this.x} ${this.y}`
+```
+
+Lastly I'll mention computed property names. While objects can have funky names with numbers, spaces, and characters in them, they need to be added after the fact. Meaning that the following would result in an error:
+```javascript
+let item = {
+  [ "foo" + bar() ]: 123
+}
+```
+But that's perfectly valid syntax in ES6, making your code more concise!
+
+## In Conclusion
+There's a lot to love about Javascript and there's a lot to love... not quite so much! Really though, every language has it's pros and cons and which one you end up using is ultimately up to personal preference (or job demand if you're unlucky). JS is a fun language that can also be powerful when it comes to delivering on user experiences in the modern web or servers in the form of nodejs.
+
+I'm always interested in hearing any thoughts people might have regarding Javascript ES5 or beyond!
 
 
 See you around!
