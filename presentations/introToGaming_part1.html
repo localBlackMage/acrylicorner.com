@@ -146,7 +146,7 @@
                   </section>
                 </section>
 
-                <!-- The core concepts -->
+                <!-- Core Game Architecture -->
                 <section>
                   <section>
                     <h2>where do we start?</h2>
@@ -158,49 +158,121 @@
                   </section>
 
                   <section>
-                    <!-- TODO: Main body of our game - Game Loop with Processing Inputs, Updating Entities and Rendering -->
                     <h2>Game Lifecycle</h2>
-
-                    <ul>
-                      <li>Start Up</li>
-                      <li>Game Loop</li>
-                      <ul>
-                        <li>Process Inputs</li>
-                        <li>Update Entities</li>
-                        <li>Render</li>
-                      </ul>
-                      <li>Tear Down</li>
-                    </ul>
+                    <br>
+                    <pre style="width: 350px;"><code data-trim>
+let gameIsPlaying = true;
+let player = new Player();
+startup();
+while (gameIsPlaying) {
+  processInput(player);
+  updateEntities(player);
+  render(player);
+}
+tearDown();
+                    </code></pre>
                   </section>
 
                   <section>
-                    TODO: Process Input
-                  </section>
-
-                  <section>
-                    TODO: Update Entities
-                  </section>
-
-                  <section>
-                    TODO: Render
+                    <h2>That's all?</h2>
+                    <p>
+                      Well, no, it's up to you to fill out the rest! <br>
+                      There are also tons and <i>tons</i> of game frameworks and SDKs out there
+                      that will help you get set up quicker by taking care of
+                      boiler plate code for you.
+                      <br><br>
+                      It's best to learn what that boiler plate <i>is</i>
+                      before using it.
+                    </p>
                   </section>
                 </section>
 
+                <!-- Update Entities -->
                 <section>
                   <section>
-                    TODO: Rendering
+                    <h3>Start by Rendering!</h3>
+                    <p>
+                      While it's the last step in the process, it is equally as
+                      important as the others and perhaps the most satisfying
+                      when getting started.
+                    </p>
                   </section>
 
                   <section>
-                    TODO: Z-Index
+                    <h3>Z-Index</h3>
+                    <p>
+                      Chances are you know about this intuitively or from practice.
+                      The gist is, even though we're drawing a 2D game, everything
+                      in our game world has a Z-Index.
+                    </p>
                   </section>
 
                   <section>
-                    TODO: Render order - BGs, FGs, Entities, HUD
+                    <h2>Render Order - Background</h2>
+                    <img src="./image/introToGame_1/render/background.png" />
                   </section>
 
                   <section>
+                    <h2>Render Order - Foreground</h2>
+                    <img src="./image/introToGame_1/render/foreground.png" />
+                  </section>
+
+                  <section>
+                    <h2>Render Order - Entities</h2>
+                    <img src="./image/introToGame_1/render/entities.png" />
+                  </section>
+
+                  <section>
+                    <h2>Render Order - HUD Elements</h2>
+                    <img src="./image/introToGame_1/render/hud.png" />
+                  </section>
+
+                  <!-- <section>
                     TODO: Entities - Enemies, Player(s), Items, Particles
+                  </section> -->
+                </section>
+
+                <!-- Processing Input -->
+                <section>
+                  <section>
+                    <h2>Processing Input</h2>
+                    <br>
+                    <pre style="width: 500px;"><code data-trim>
+class Player {
+  ...
+  handleInput(keys) {
+    ...
+  }
+}
+
+let processInput = function(player) {
+  let pressedKeys = keyboard.createCursorKeys();
+  player.handleInput(pressedKeys);
+};
+                    </code></pre>
+                  </section>
+
+                  <section>
+                    <h2>Processing Input</h2>
+                    <br>
+                    <pre style="width: 550px;"><code data-trim>
+class Player {
+  ...
+  handleInput(keys) {
+    //  Reset the players velocity (movement)
+    this.velocity.x = 0;
+
+    if (keys.left.isDown) {
+        //  Move to the left
+        this.velocity.x = -150;
+    }
+    else if (keys.right.isDown) {
+        //  Move to the right
+        this.velocity.x = 150;
+    }
+  }
+}
+                    </code></pre>
                   </section>
                 </section>
 
