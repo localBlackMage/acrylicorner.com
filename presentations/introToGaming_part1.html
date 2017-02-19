@@ -91,21 +91,21 @@
             </section>
 
             <section>
-                <img src="./image/introToGame_1/uncharted4.jpg"/>
+                <img src="image/introToGame_1/gameExamples/uncharted4.jpg"/>
                 <p>
                     <small><i>Uncharted 4: A Thief's End - Naughty Dog</i></small>
                 </p>
             </section>
 
             <section>
-                <img src="./image/introToGame_1/overwatch.png"/>
+                <img src="image/introToGame_1/gameExamples/overwatch.png"/>
                 <p>
                     <small><i>Overwatch - Blizzard</i></small>
                 </p>
             </section>
 
             <section>
-                <img src="./image/introToGame_1/darkSouls3.jpg"/>
+                <img src="image/introToGame_1/gameExamples/darkSouls3.jpg"/>
                 <p>
                     <small><i>Dark Souls 3 - From Software</i></small>
                 </p>
@@ -130,21 +130,21 @@
             </section>
 
             <section>
-                <img src="./image/introToGame_1/marioBros.png"/>
+                <img src="image/introToGame_1/gameExamples/marioBros.png"/>
                 <p>
                     <small><i>Mario Bros. - Nintendo</i></small>
                 </p>
             </section>
 
             <section>
-                <img src="./image/introToGame_1/megaman.jpg"/>
+                <img src="image/introToGame_1/gameExamples/megaman.jpg"/>
                 <p>
                     <small><i>Megaman - Capcom</i></small>
                 </p>
             </section>
 
             <section>
-                <img src="./image/introToGame_1/contra.jpg" style="height: 550px;"/>
+                <img src="image/introToGame_1/gameExamples/contra.jpg" style="height: 550px;"/>
                 <p>
                     <small><i>Contra - Konami</i></small>
                 </p>
@@ -208,47 +208,72 @@ tearDown();
             <section>
                 <h3>2-Dimensional Coordinates</h3>
                 <p>
-                    For brevity's sake, my guide to basic vector principals can be found <a href="http://localhost:4000/presentations/swarmIntelligence.html#/4" target="_blank">here.</a>
+                    <!-- TODO: REPLACE THIS LINK -->
+                    My guide to basic vector principals can be found <a href="http://acrylicorner.com/presentations/swarmIntelligence.html#/4" target="_blank">here.</a>
+                    <br>
+                    Vectors are a way to represent direction and velocity while Points represent a location in space.
+                    <br>
+                    For all intents and purposes, Vectors can almost always be used to represent a Point.
+                </p>
+            </section>
 
+            <section>
+                <h3>2-Dimensional Coordinates</h3>
+                <p>
+                    We use these Vectors to represent where an entity is within the world.<br>
+                    Computer screen y coordinates almost always go in the opposite direction of your
+                    typical graph.<br>
+
+                    <img src="image/introToGame_1/grid/grid.png" style="height:400px"/>
+                </p>
+            </section>
+
+            <section>
+                <h3>2-Dimensional Coordinates</h3>
+                <p>
+                    If I want to render my sprite in the lower-middle of the screen, it'd look something like this:<br>
+
+                    <img src="image/introToGame_1/grid/grid_spriteAtBottom.png" style="height:500px"/>
                 </p>
             </section>
 
             <section>
                 <h3>Z-Index</h3>
                 <p>
-                    Despite being a 2D game, entities will still have a z coordinate known as a Z-Index.
+                    Despite being a 2D game, entities will also have a z coordinate known as a Z-Index.
                     The closer the Z-Index to the camera, the less likely it is to be drawn over by another entity.
                     <br>
                     This can also effectively split your 2D games into layers:
+                    <br><br>
                     <ul>
                         <li>Background</li>
                         <li>Foreground</li>
                         <li>Entities</li>
                         <li>HUD</li>
                     </ul>
-                    <br>
+                    <br><br>
                     These layers can be rearranged or have layers added for visual effects as needed.
                 </p>
             </section>
 
             <section>
-                <h2>Render Order - Background</h2>
-                <img src="./image/introToGame_1/render/background.png"/>
+                <h3>Render Order - Background</h3>
+                <img src="./image/introToGame_1/render/background.png"  style="height:500px" />
             </section>
 
             <section>
-                <h2>Render Order - Foreground</h2>
-                <img src="./image/introToGame_1/render/foreground.png"/>
+                <h3>Render Order - Foreground</h3>
+                <img src="./image/introToGame_1/render/foreground.png"  style="height:500px" />
             </section>
 
             <section>
-                <h2>Render Order - Entities</h2>
-                <img src="./image/introToGame_1/render/entities.png"/>
+                <h3>Render Order - Entities</h3>
+                <img src="./image/introToGame_1/render/entities.png"  style="height:500px" />
             </section>
 
             <section>
-                <h2>Render Order - HUD Elements</h2>
-                <img src="./image/introToGame_1/render/hud.png"/>
+                <h3>Render Order - HUD Elements</h3>
+                <img src="./image/introToGame_1/render/hud.png"  style="height:500px" />
             </section>
         </section>
 

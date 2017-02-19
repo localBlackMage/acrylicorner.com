@@ -52,7 +52,6 @@ exclude: ['README.md', 'LICENSE']
 
 presentations: [
   ['swarmIntelligence.html', 'Swarm Intelligence'],
-  ['artificialIntelligence.html', 'A. I. Overview/Intro'],
   ['howToUseGit.html', 'How to Use Git'],
   ['howToUseJasmine.html', 'How to Use Jasmine'],
   ['introToGaming_part1.html', 'Introduction to Game Development Part 1']
