@@ -164,7 +164,7 @@
                 <h2>where do we start?</h2>
                 <p>
                     What actually <i>makes</i> a game?
-                    </br>
+                    <br>
                     What are the core ideas?
                 </p>
             </section>
@@ -208,7 +208,6 @@ tearDown();
             <section>
                 <h3>2-Dimensional Coordinates</h3>
                 <p>
-                    <!-- TODO: REPLACE THIS LINK -->
                     My guide to basic vector principals can be found <a href="http://acrylicorner.com/presentations/swarmIntelligence.html#/4" target="_blank">here.</a>
                     <br>
                     Vectors are a way to represent direction and velocity while Points represent a location in space.
@@ -238,12 +237,39 @@ tearDown();
             </section>
 
             <section>
-                <h3>Z-Index</h3>
+                <h3>2-Dimensional Coordinates</h3>
+                <p>
+                    In addition to location, sprites will also have a rotatation and scale associated with them.
+                    <br>
+                    <img src="image/introToGame_1/grid/grid_spriteRotAndScale.png" style="height:500px"/>
+                </p>
+            </section>
+        </section>
+
+        <section>
+            <section>
+                <h2>Z-Index</h2>
                 <p>
                     Despite being a 2D game, entities will also have a z coordinate known as a Z-Index.
+                    <br><br>
                     The closer the Z-Index to the camera, the less likely it is to be drawn over by another entity.
+                </p>
+            </section>
+
+            <section>
+                <h3>Z-Index</h3>
+                <p>
+                    Z-Index allows us to create some neat effects, including psuedo 3D rendering:
                     <br>
-                    This can also effectively split your 2D games into layers:
+                    <img src="image/introToGame_1/grid/rotatingSprite.gif" style="height: 500px"/>
+                </p>
+            </section>
+
+            <section>
+                <h3>Z-Index</h3>
+                <p>
+                    <br>
+                    Z-Indexing can be used to easily split a 2D game into layers:
                     <br><br>
                     <ul>
                         <li>Background</li>
@@ -257,22 +283,22 @@ tearDown();
             </section>
 
             <section>
-                <h3>Render Order - Background</h3>
+                <h3>Layer - Background</h3>
                 <img src="./image/introToGame_1/render/background.png"  style="height:500px" />
             </section>
 
             <section>
-                <h3>Render Order - Foreground</h3>
+                <h3>Layer - Foreground</h3>
                 <img src="./image/introToGame_1/render/foreground.png"  style="height:500px" />
             </section>
 
             <section>
-                <h3>Render Order - Entities</h3>
+                <h3>Layer - Entities</h3>
                 <img src="./image/introToGame_1/render/entities.png"  style="height:500px" />
             </section>
 
             <section>
-                <h3>Render Order - HUD Elements</h3>
+                <h3>Layer - HUD Elements</h3>
                 <img src="./image/introToGame_1/render/hud.png"  style="height:500px" />
             </section>
         </section>
@@ -306,7 +332,35 @@ let processInput = function(player) {
 class Player {
     ...
     handleInput(keys) {
-        // Reset the players velocity (movement)
+        if (keys.left.isDown) {
+            // Move to the left
+            this.x -= 10;
+        }
+        else if (keys.right.isDown) {
+            // Move to the right
+            this.x += 10;
+        }
+    }
+}
+                    </code></pre>
+            </section>
+
+            <section>
+                <h3>Processing Input</h3>
+                <br>
+                The previous approach will move the player, but is at the mercy of the frame rate of the game.
+                <br>
+                A better method is to use velocity, which is the entity's rate of movement per update
+            </section>
+
+            <section>
+                <h3>Processing Input</h3>
+                <br>
+                    <pre style="width: 550px;"><code data-trim>
+class Player {
+    ...
+    handleInput(keys) {
+        // Reset player velocity
         this.velocity.x = 0;
 
         if (keys.left.isDown) {
@@ -317,30 +371,52 @@ class Player {
             // Move to the right
             this.velocity.x = 150;
         }
-        if (keys.up.isDown) {
-            this.velocity.y = -350
+    }
+}
+                    </code></pre>
+            </section>
+
+            <section>
+                <h3>Processing Input</h3>
+                <br>
+                    <pre style="width: 700px;"><code data-trim>
+class Player {
+    ...
+    update(deltaTime) {
+        // Increment x pos by x velocity multiplied
+        // by time since last update
+        this.x += this.velocity.x * deltaTime;
+    }
+}
+                    </code></pre>
+            </section>
+
+            <section>
+                <h3>Processing Input</h3>
+                <br>
+                    <pre style="width: 700px;"><code data-trim>
+class Player {
+    handleInput(keys) {
+        if (keys.up.isDown && touchingFloor) {
+            this.velocity.y = -150;
         }
+    }
+
+    update(deltaTime) {
+        // If the current y velocity is less than our gravity,
+        // slowly move it to y gravity
+        if (this.velocity.y < this.gravity.y) {
+            this.velocity.y += this.gravity.y * deltaTime;
+        }
+        // Repeat for y what we did for x
+        this.y += this.velocity.y * deltaTime;
     }
 }
                     </code></pre>
             </section>
         </section>
 
-        <section>
-            <section>
-                TODO: Update Entities
-            </section>
 
-            <section>
-                TODO: Player has likely been updated already as part of the Process Input phase
-            </section>
-
-            <section>
-                Enemies should make decisions if applicable
-                Items should update accordingly
-                Particles should update accordingly
-            </section>
-        </section>
 
         <!-- Questions -->
         <section>
