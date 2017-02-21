@@ -194,7 +194,7 @@ tearDown();
             </section>
         </section>
 
-        <!-- Update Entities -->
+        <!-- Rendering -->
         <section>
             <section>
                 <h3>Start by Rendering</h3>
@@ -306,7 +306,24 @@ tearDown();
         <!-- Processing Input -->
         <section>
             <section>
-                <h2>Processing Input</h2>
+                <h3>Processing Input</h3>
+                <p>
+                    There are many different control devices available out there and how you build your game depends
+                    heavily on which methods you support.
+                    <br><br>
+                    <ul>
+                        <li>Mouse + Keyboard (Can be used separately)</li>
+                        <li>Game Pad (XBox, PS controller)</li>
+                        <li>Motion Controls (Vive, WiiMote)</li>
+                        <li>Touch (iPad, phones)</li>
+                    </ul>
+                    <br><br>
+                    We'll be sticking to mouse and keyboard for this class as you most likely already have those.
+                </p>
+            </section>
+
+            <section>
+                <h3>Processing Input</h3>
                 <br>
                     <pre style="width: 600px;"><code data-trim>
 class Player {
@@ -326,7 +343,7 @@ let processInput = function(player) {
             </section>
 
             <section>
-                <h2>Processing Input</h2>
+                <h3>Processing Input</h3>
                 <br>
                     <pre style="width: 550px;"><code data-trim>
 class Player {
@@ -343,6 +360,8 @@ class Player {
     }
 }
                     </code></pre>
+                <br>
+                Why might this be a bad idea?
             </section>
 
             <section>
@@ -365,11 +384,11 @@ class Player {
 
         if (keys.left.isDown) {
             // Move to the left
-            this.velocity.x = -150;
+            this.velocity.x = -100;
         }
         else if (keys.right.isDown) {
             // Move to the right
-            this.velocity.x = 150;
+            this.velocity.x = 100;
         }
     }
 }
@@ -390,33 +409,110 @@ class Player {
 }
                     </code></pre>
             </section>
+        </section>
+
+        <!-- Enforcing Game Rules -->
+        <section>
+            <section>
+                <h3>Enforcing Game Rules</h3>
+                <p>
+                    So now that we have basic player input, what do we do with it?
+                    <br>
+                    Enforcing our game rules is what actually <i>makes</i> the game!
+                </p>
+            </section>
 
             <section>
-                <h3>Processing Input</h3>
-                <br>
-                    <pre style="width: 700px;"><code data-trim>
-class Player {
-    handleInput(keys) {
-        if (keys.up.isDown && touchingFloor) {
-            this.velocity.y = -150;
-        }
-    }
+                <h3>Enforcing Game Rules</h3>
+                <p>
+                    What sort of rules might we have?
+                    <ul>
+                        <li>Limitations on character action</li>
+                        <li>Enemies that antagonize the player</li>
+                        <li>Friendly NPCs that help the player</li>
+                        <li>Physical interactions with the world</li>
+                    </ul>
+                    <br><br>
+                    There can be more or less depending on the type of game you're building!
+                </p>
+            </section>
 
-    update(deltaTime) {
-        // If the current y velocity is less than our gravity,
-        // slowly move it to y gravity
-        if (this.velocity.y < this.gravity.y) {
-            this.velocity.y += this.gravity.y * deltaTime;
-        }
-        // Repeat for y what we did for x
-        this.y += this.velocity.y * deltaTime;
-    }
-}
-                    </code></pre>
+            <section>
+                <h3>Enforcing Game Rules</h3>
+                <p>
+                    Perhaps the most immediately obvious rule to enforce is physics.
+                    <br>
+                    <br>
+                    While not all games necessarily need physics, a good deal of games need at least simple physics to run.
+                    <br>
+                    <br>
+                    Physics can range from simple circle-to-circle collision and gravity to more complex 3D object collisions and force calculations.
+                </p>
             </section>
         </section>
 
+        <!-- Basic Gravity -->
+        <section>
+            <section>
+                <h3>Gravity</h3>
+                <p>
+                    Earlier we made our player move left and right, but didn't implement any sort of jump ability. This
+                    is because we didn't yet have any form of gravity!
+                </p>
+            </section>
 
+            <section>
+                <h3>Gravity</h3>
+                <pre style="width: 700px;"><code data-trim>
+let applyGravity = function(deltaTime, entity) {
+    // If the entity's velocity is less than the constant
+    // gravity velocity, increment it until it is equal to
+    if (entity.velocity.y < CONST_GRAVITY) {
+        entity.velocity.y += CONST_GRAVITY * deltaTime;
+    }
+    else {
+        entity.velocity.y = CONST_GRAVITY;
+    }
+    // Increment y pos by y velocity multiplied
+    // by time since last update
+    entity.y += entity.velocity.y * deltaTime;
+}
+                </code></pre>
+            </section>
+        </section>
+
+        <section>
+            <section>
+                <h3>Collisions</h3>
+                <p>
+                    How <i>does</i> the computer know all these objects are colliding? Math.
+                    <br><br>
+                    Lots and lots of math.
+                    <br><br>
+                    Let's start with the easiest form of collision...
+                </p>
+            </section>
+
+            <section>
+                <h3>Circle on Circle</h3>
+                <!--TODO: Put Circle on Circle collision image-->
+            </section>
+
+            <section>
+                <h3>Circle on Circle</h3>
+<pre style="width: 700px;"><code data-trim>
+// circleA and circleB both have a Vector2 position
+// object and a radius
+let collideCircles = function(circleA, circleB) {
+    let currentDistance = (circleA.position - circleB.position).length;
+    let collisionDistance = circleA.radius + circleB.radius;
+    return currentDistance <= collisionDistance;
+}
+</code></pre>
+            </section>
+
+
+        </section>
 
         <!-- Questions -->
         <section>
@@ -431,12 +527,12 @@ class Player {
         </section>
 
         <!-- Sources -->
-        <section>
-            <h2>Sources</h2>
-            <p>
+        <!--<section>-->
+            <!--<h2>Sources</h2>-->
+            <!--<p>-->
 
-            </p>
-        </section>
+            <!--</p>-->
+        <!--</section>-->
     </div>
 </div>
 
