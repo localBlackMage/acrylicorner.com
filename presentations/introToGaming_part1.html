@@ -495,22 +495,66 @@ let applyGravity = function(deltaTime, entity) {
 
             <section>
                 <h3>Circle on Circle</h3>
-                <!--TODO: Put Circle on Circle collision image-->
+                <img src="./image/introToGame_1/physics/circle_circle.png"  style="height:500px" />
             </section>
 
             <section>
                 <h3>Circle on Circle</h3>
-<pre style="width: 700px;"><code data-trim>
+<pre style="width: 1000px; font-size: 26px;"><code data-trim>
 // circleA and circleB both have a Vector2 position
 // object and a radius
 let collideCircles = function(circleA, circleB) {
-    let currentDistance = (circleA.position - circleB.position).length;
+    let currentDistance = circleA.position - circleB.position;
+    currentDistance = currentDistance.length();
     let collisionDistance = circleA.radius + circleB.radius;
     return currentDistance <= collisionDistance;
 }
 </code></pre>
             </section>
 
+
+            <section>
+                <h3>AABB on AABB</h3>
+                AABB: Axis Aligned Bounding Box
+                <br><br>
+                <!--TODO: PUT IMAGE HERE-->
+                <!--<img src="./image/introToGame_1/physics/circle_circle.png"  style="height:500px" />-->
+            </section>
+
+            <section>
+                <h3>AABB on AABB</h3>
+<pre style="width: 1000px; font-size: 26px;"><code data-trim>
+// rectA and rectB both have an X, Y, width, and height
+let collideAABB = function(rectA, rectB) {
+    return (rectA.x < rectB.x + rectB.width &&
+    rectA.x + rectA.width > rectB.x &&
+    rectA.y < rectB.y + rectB.height &&
+    rectA.height + rectA.y > rectB.y);
+}
+</code></pre>
+            </section>
+
+
+            <section>
+                <h3>Circle on AABB</h3>
+                This is a bit more involved than the previous two forms of collision.
+                <br><br>
+                It can be broken up into three parts, the first two serving as a sort of
+                "definitely inside/outside the AABB" for the circle.
+            </section>
+
+            <section>
+                <h3>Circle on AABB</h3>
+                <!--TODO: PUT IMAGE HERE-->
+                <!--<img src="./image/introToGame_1/physics/circle_circle.png"  style="height:500px" />-->
+            </section>
+
+            <section>
+                <h3>Circle on AABB</h3>
+<pre style="width: 1000px; font-size: 26px;"><code data-trim>
+
+</code></pre>
+            </section>
 
         </section>
 
