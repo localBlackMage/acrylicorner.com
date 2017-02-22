@@ -481,6 +481,7 @@ let applyGravity = function(deltaTime, entity) {
             </section>
         </section>
 
+        <!-- Collisions -->
         <section>
             <section>
                 <h3>Collisions</h3>
@@ -492,10 +493,12 @@ let applyGravity = function(deltaTime, entity) {
                     Let's start with the easiest form of collision...
                 </p>
             </section>
+        </section>
 
+        <section>
             <section>
                 <h3>Circle on Circle</h3>
-                <img src="./image/introToGame_1/physics/circle_circle.png"  style="height:500px" />
+                <img src="image/introToGame_1/physics/circle_circle/circle_circle.png" style="height:500px" />
             </section>
 
             <section>
@@ -511,14 +514,39 @@ let collideCircles = function(circleA, circleB) {
 }
 </code></pre>
             </section>
+        </section>
 
-
+        <section>
             <section>
                 <h3>AABB on AABB</h3>
                 AABB: Axis Aligned Bounding Box
-                <br><br>
-                <!--TODO: PUT IMAGE HERE-->
-                <!--<img src="./image/introToGame_1/physics/circle_circle.png"  style="height:500px" />-->
+                <br>
+                <img src="image/introToGame_1/physics/aabb_aabb/aabb.png" style="height:500px" />
+            </section>
+
+            <section>
+                <h3>AABB on AABB</h3>
+                <img src="image/introToGame_1/physics/aabb_aabb/aabb_aabb.png" style="height:500px" />
+            </section>
+
+            <section>
+                <h3>AABB on AABB</h3>
+                <img src="image/introToGame_1/physics/aabb_aabb/aabb_aabb_1.png" style="height:500px" />
+            </section>
+
+            <section>
+                <h3>AABB on AABB</h3>
+                <img src="image/introToGame_1/physics/aabb_aabb/aabb_aabb_2.png" style="height:500px" />
+            </section>
+
+            <section>
+                <h3>AABB on AABB</h3>
+                <img src="image/introToGame_1/physics/aabb_aabb/aabb_aabb_3.png" style="height:500px" />
+            </section>
+
+            <section>
+                <h3>AABB on AABB</h3>
+                <img src="image/introToGame_1/physics/aabb_aabb/aabb_aabb_4.png" style="height:500px" />
             </section>
 
             <section>
@@ -533,8 +561,9 @@ let collideAABB = function(rectA, rectB) {
 }
 </code></pre>
             </section>
+        </section>
 
-
+        <section>
             <section>
                 <h3>Circle on AABB</h3>
                 This is a bit more involved than the previous two forms of collision.
@@ -545,14 +574,126 @@ let collideAABB = function(rectA, rectB) {
 
             <section>
                 <h3>Circle on AABB</h3>
-                <!--TODO: PUT IMAGE HERE-->
-                <!--<img src="./image/introToGame_1/physics/circle_circle.png"  style="height:500px" />-->
+                Define the circles of the AABB<br>
+                <img src="image/introToGame_1/physics/circle_aabb/circle_aabb_intro.png" style="height:500px" />
             </section>
 
             <section>
                 <h3>Circle on AABB</h3>
-<pre style="width: 1000px; font-size: 26px;"><code data-trim>
+                Pre-calculate the outer circle of the AABB<br>
+                <img src="image/introToGame_1/physics/circle_aabb/aabb_circles/circle_aabb_outer_circle.png" style="height:500px" />
+            </section>
 
+            <section>
+                <h3>Circle on AABB</h3>
+                Pre-calculate the inner circle of the AABB<br>
+                <img src="image/introToGame_1/physics/circle_aabb/aabb_circles/circle_aabb_inner_circle.png" style="height:500px" />
+            </section>
+
+
+            <section>
+                <h3>Circle on AABB</h3>
+                Test against outer circle of AABB<br>
+                <img src="image/introToGame_1/physics/circle_aabb/circle_col/circle_aabb_outer_col.png" style="height:500px" />
+            </section>
+
+            <section>
+                <h3>Circle on AABB</h3>
+                Test against outer circle of AABB<br>
+                <img src="image/introToGame_1/physics/circle_aabb/circle_col/circle_aabb_outer_col_hit.png" style="height:500px" />
+            </section>
+
+
+            <section>
+                <h3>Circle on AABB</h3>
+                Test against inner circle of AABB<br>
+                <img src="image/introToGame_1/physics/circle_aabb/circle_col/circle_aabb_inner_col.png" style="height:500px" />
+            </section>
+
+            <section>
+                <h3>Circle on AABB</h3>
+                Test against inner circle of AABB<br>
+                <img src="image/introToGame_1/physics/circle_aabb/circle_col/circle_aabb_inner_col_hit.png" style="height:500px" />
+            </section>
+
+
+            <section>
+                <h3>Circle on AABB</h3>
+                What if...<br>
+                <img src="image/introToGame_1/physics/circle_aabb/circle_col/circle_aabb_more_adv.png" style="height:500px" />
+            </section>
+
+            <section>
+                <h3>Circle on AABB</h3>
+                Get both center vectors<br>
+                <img src="image/introToGame_1/physics/circle_aabb/edge/circle_aabb_edge_1.png" style="height:500px" />
+            </section>
+
+            <section>
+                <h3>Circle on AABB</h3>
+                aabb.center - circle.center<br>
+                <img src="image/introToGame_1/physics/circle_aabb/edge/circle_aabb_edge_2.png" style="height:500px" />
+            </section>
+
+            <section>
+                <h3>Circle on AABB</h3>
+                Normalize the result<br>
+                <img src="image/introToGame_1/physics/circle_aabb/edge/circle_aabb_edge_3.png" style="height:500px" />
+            </section>
+
+            <section>
+                <h3>Circle on AABB</h3>
+                Multiply by circle.radius<br>
+                <img src="image/introToGame_1/physics/circle_aabb/edge/circle_aabb_edge_4.png" style="height:500px" />
+            </section>
+
+            <section>
+                <h3>Circle on AABB</h3>
+                Add to circle.center for circle's edge point<br>
+                <img src="image/introToGame_1/physics/circle_aabb/edge/circle_aabb_edge_5.png" style="height:500px" />
+            </section>
+
+
+            <section>
+                <h3>Circle on AABB</h3>
+<pre style="width: 1000px; font-size: 22px;"><code data-trim>
+let collideCircleAndAABB = function(circle, aabb) {
+    let distance = (circle.center - aabb.center).length();
+    
+    if (distance > (circle.radius + aabb.outerRadius)) {
+        return false;
+    }
+    else if (distance < (circle.radius + aabb.innerRadius)) {
+        return true;
+    }
+    else
+        return pointInAABB(getEdgePoint(circle, aabb), aabb);
+    }
+}
+</code></pre>
+            </section>
+
+            <section>
+                <h3>Circle on AABB</h3>
+<pre style="width: 1000px; font-size: 22px;"><code data-trim>
+let getEdgePoint = function(circle, aabb) {
+    let direction = circle.center - aabb.center;
+    direction.normalize();
+    direction *= circle.radius;
+    return direction + circle.center;
+}
+</code></pre>
+            </section>
+            
+            <section>
+                <h3>Circle on AABB</h3>
+<pre style="width: 1000px; font-size: 22px;"><code data-trim>
+let pointInAABB = function(point, aabb) {
+    return (point.x > aabb.x &&
+    point.x < aabb.x + aabb.width &&
+    point.y > aabb.y &&
+    point.y < aabb.y + aabb.height);
+}
 </code></pre>
             </section>
 
