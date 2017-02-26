@@ -48,55 +48,24 @@
             </p>
         </section>
 
-        <section>
-            <h2>Course Overview</h2>
-            <p>
-                Over the next few weeks, you'll learn the fundamentals of game development.
-                We'll cover the anatomy of a game, basic physics, and even some artificial intelligence.
-                <br><br>
-                At the end of the class you'll be able to build your own 2D game
-                which will be demonstrated as the class capstone project. Primary
-                technology used will be Javascript ES6 and <a href="https://phaser.io/">Phaser</a>.
-            </p>
-        </section>
-
-        <!-- Course Outline -->
-        <section>
-          <h3>Part 1 Outline</h3>
-          <p>
-            <ul>
-              <li>
-                  Core Structure of a Game
-                  <ul>
-                      <li>Game Loop</li>
-                      <li>Player Input</li>
-                      <li>Rendering Order</li>
-                  </ul>
-              </li>
-                <li>
-                    Physics
-                    <ul>
-                        <li>Circle on Circle</li>
-                        <li>AABB on AABB</li>
-                        <li>Circle on AABB</li>
-                    </ul>
-                </li>
-            </ul>
-          </p>
-        </section>
-
         <!-- What is a Game? -->
         <section>
             <section>
-                <h2>So what is a game?</h2>
+                <h2>What is a game?</h2>
                 <p>
-                    Games are media just like movies and books, but what separates them from these things?
+                    <span class="fragment fade-in">
+                        Games are media just like movies and books, but what separates them from these things?
+                    </span>
                     <br><br>
-                    They're <i>interactive</i> media! This makes it a powerful way to tell stories and enjoy
-                    all kinds of experiences!
+                    <span class="fragment fade-in">
+                        They're <i>interactive</i> media! This makes it a powerful way to tell stories and enjoy
+                        all kinds of experiences!
+                    </span>
                 </p>
             </section>
+        </section>
 
+        <section>
             <section>
                 <h2>Modern AAA Games</h2>
                 <p>Amazing Games with tons of developers and huge budgets!</p>
@@ -127,17 +96,15 @@
                 <h2>Those look cool!</h2>
                 <p>
                     When can I make games like those?!
-                </p>
-            </section>
-        </section>
-
-        <!-- Smaller Games -->
-        <section>
-            <section>
-                <h2>Hold on a second!</h2>
-                <p>
-                    We need to understand the basics of a game first! And that's
-                    most easily done with simpler (probably 2D) games!
+                    <br>
+                    <br>
+                    <span class="fragment fade-in">
+                        Well, first...
+                    </span>
+                    <span class="fragment fade-in">
+                        We need to understand the basics of a game, and that's
+                        most easily done with simpler (probably 2D) games.
+                    </span>
                 </p>
             </section>
 
@@ -161,11 +128,43 @@
                     <small><i>Contra - Konami</i></small>
                 </p>
             </section>
+        </section>
+
+        <!-- Course Outline -->
+        <section>
+            <section>
+                <h2>Course Overview</h2>
+                <p>
+                    You'll learn the fundamentals of game development:
+                    The anatomy of a game, basic physics, and even some artificial intelligence.
+                    <br><br>
+                    By the end, you'll be able to build your own 2D game
+                    which will be demonstrated as the class capstone project. Primary
+                    technology used will be Javascript ES6, Webpack, and <a href="https://phaser.io/">Phaser</a>.
+                </p>
+            </section>
 
             <section>
-                <h2>Okay, so how do I make that?</h2>
+                <h3>Part 1 Outline</h3>
                 <p>
-                    I'm glad you asked!
+                    <span class="fragment fade-in">
+                        Core Structure of a Game
+                        <ul>
+                            <li class="fragment fade-in">Game Loop</li>
+                            <ul>
+                                <li class="fragment fade-in">Player Input</li>
+                                <li class="fragment fade-in">Rendering Order</li>
+                                <li class="fragment fade-in">
+                                    Physics
+                                    <ul>
+                                        <li class="fragment fade-in">Circle on Circle</li>
+                                        <li class="fragment fade-in">AABB on AABB</li>
+                                        <li class="fragment fade-in">Circle on AABB</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </ul>
+                    </span>
                 </p>
             </section>
         </section>
@@ -173,17 +172,8 @@
         <!-- Core Game Architecture -->
         <section>
             <section>
-                <h2>where do we start?</h2>
-                <p>
-                    What actually <i>makes</i> a game?
-                    <br>
-                    What are the core ideas?
-                </p>
-            </section>
-
-            <section>
                 <h2>What Does a Game Actually Do?</h2>
-                <ul>
+                <ul class="fragment fade-in">
                     <li>Respond to player input</li>
                     <li>Render graphics to the screen</li>
                     <li>Enforce game rules on entities</li>
@@ -191,9 +181,14 @@
             </section>
 
             <section>
+                <img src="image/introToGame_1/boardGame.jpg" style="height:600px"/>
+            </section>
+
+            <section>
                 <h2>Basic Game Lifecycle</h2>
                 <br>
-                    <pre style="width: 700px; font-size: 36px;"><code data-trim>
+                    <pre style="width: 700px; font-size: 32px;"><code data-trim>
+// We'll be referencing this a lot!
 let gameIsPlaying = true;
 startup();
 while (gameIsPlaying) {
@@ -205,6 +200,7 @@ tearDown();
                     </code></pre>
             </section>
         </section>
+
 
         <!-- Rendering -->
         <section>
@@ -222,27 +218,32 @@ tearDown();
                 <p>
                     My guide to basic vector principals can be found <a href="http://acrylicorner.com/presentations/swarmIntelligence.html#/4" target="_blank">here.</a>
                     <br>
-                    Vectors are a way to represent direction and velocity while Points represent a location in space.
+                    <span class="fragment fade-in">
+                        Vectors are a way to represent direction and velocity while Points represent a location in space.
+                        <br>
+                        For all intents and purposes, Vectors can almost always be used to represent a Point as well.
+                    </span>
+                </p>
+            </section>
+
+            <section>
+                <h3>2-Dimensional Coordinates</h3>
+                <p>
+                    We use these Vectors to represent where an entity is within the world.
                     <br>
-                    For all intents and purposes, Vectors can almost always be used to represent a Point.
-                </p>
-            </section>
-
-            <section>
-                <h3>2-Dimensional Coordinates</h3>
-                <p>
-                    We use these Vectors to represent where an entity is within the world.<br>
-                    Computer screen y coordinates almost always go in the opposite direction of your
+                    Computer screen y coordinates go in the opposite direction of your
                     typical graph.<br>
-
-                    <img src="image/introToGame_1/grid/grid.png" style="height:400px"/>
                 </p>
+            </section>
+
+            <section>
+                <img src="image/introToGame_1/grid/grid.png" style="height:600px"/>
             </section>
 
             <section>
                 <h3>2-Dimensional Coordinates</h3>
                 <p>
-                    If I want to render my sprite in the lower-middle of the screen, it'd look something like this:<br>
+                    If I want to render the square in the lower-middle of the screen, it'd look something like this:<br>
 
                     <img src="image/introToGame_1/grid/grid_spriteAtBottom.png" style="height:500px"/>
                 </p>
@@ -251,7 +252,7 @@ tearDown();
             <section>
                 <h3>2-Dimensional Coordinates</h3>
                 <p>
-                    In addition to location, sprites will also have a rotatation and scale associated with them.
+                    In addition to location, the square will also have a rotation and scale associated with it.
                     <br>
                     <img src="image/introToGame_1/grid/grid_spriteRotAndScale.png" style="height:500px"/>
                 </p>
@@ -280,18 +281,25 @@ tearDown();
             <section>
                 <h3>Z-Index</h3>
                 <p>
-                    <br>
                     Z-Indexing can be used to easily split a 2D game into layers:
-                    <br><br>
+                    <br>
                     <ul>
                         <li>Background</li>
                         <li>Foreground</li>
                         <li>Entities</li>
                         <li>HUD</li>
                     </ul>
-                    <br><br>
+                    <br>
                     These layers can be rearranged or have layers added for visual effects as needed.
+                    <br>
+                    Much like an old animation technique known as a "multiplane camera", these layers can be used
+                    to give the illusion of depth and distance.
                 </p>
+            </section>
+
+            <section>
+                <h3>Layers</h3>
+                <img src="./image/introToGame_1/render/multiplaneCamera.jpg"  style="height:500px" />
             </section>
 
             <section>
@@ -313,7 +321,120 @@ tearDown();
                 <h3>Layer - HUD Elements</h3>
                 <img src="./image/introToGame_1/render/hud.png"  style="height:500px" />
             </section>
+
+            <section>
+                <h3>Layers - Parallax Scrolling</h3>
+                <img src="./image/introToGame_1/render/parallax.gif"  style="height:500px" />
+            </section>
         </section>
+
+
+        <!-- Sprites -->
+        <section>
+            <section>
+                <h3>Sprites</h3>
+                <p>
+                    Most games don't just use standard shapes to represent game entities, they use sprites!
+                    <br>
+                    <br>
+                    Sprites are 2D Bitmap data that are rendered to a screen.
+                </p>
+            </section>
+
+            <section>
+                <h3>Sprites</h3>
+                <img src="./image/introToGame_1/sprites/mario.gif"  style="height:500px" />
+            </section>
+
+            <section>
+                <h3>Sprites - Animating</h3>
+                <p>
+                    A single sprite is cool, but some games might call for a bit more motion than a single still frame
+                    of your character. They need to run, jump, throw, etc.!
+                    <br><br>
+                    <span class="fragment fade-in">
+                        Your character might have many still frames, each depicting a different moment in time.
+                        These are combined onto a single image called a "sprite sheet."
+                    </span>
+                </p>
+            </section>
+
+            <section>
+                <h3>Sprite Sheet</h3>
+                <img src="./image/introToGame_1/sprites/marioSpriteSheet.gif"  style="height:500px" />
+            </section>
+
+            <section>
+                <h3>Sprites - Animating</h3>
+                <p>
+                    How does animating work?
+                    <br>
+                    <span class="fragment fade-in">
+                        By rapidly swapping which portion of a sprite sheet is drawn to the screen, you create the
+                        illusion of movement.
+                    </span>
+                    <br><br>
+                    <span class="fragment fade-in">
+                        Think of it as viewing the overall sprite sheet through a small window, we only see a small
+                        portion of the overall image at any given time.
+                    </span>
+                </p>
+            </section>
+
+            <section>
+                <h3>Sprites - Animating</h3>
+                <img src="./image/introToGame_1/sprites/spriteAnimation.png"  style="height:500px; background-color: white;" />
+            </section>
+
+            <section>
+                <h3>Rendering</h3>
+                <p>
+                    Recall our game loop from before:
+                    <br>
+<pre style="width: 700px; font-size: 32px;"><code data-trim>
+while (gameIsPlaying) {
+    processInput();
+    updateEntities();
+    render();
+}
+</code></pre>
+                <br>
+                Let's fill out the render function.
+                </p>
+            </section>
+
+            <section>
+                <h3>Rendering</h3>
+<pre style="width: 700px; font-size: 32px;"><code data-trim>
+let render = function() {
+    background.render();
+    for(let entity of entities) {
+        entity.render();
+    }
+    player.render();
+    hud.render();
+}
+</code></pre>
+            </section>
+
+            <section>
+                <h3>Rendering</h3>
+<pre style="width: 1000px; font-size: 20px;"><code data-trim>
+class Player {
+    ...
+    render () {
+        var canvasContext = document.getElementById('#myCanvas').getContext('2D');
+        canvasContext.drawImage(this.spriteSheet,
+            this.currentFrame.x, this.currentFrame.y,
+            this.frame.width, this.frame.height,
+            this.x, this.y, this.width, this.height
+        );
+    }
+};
+</code></pre>
+            </section>
+        </section>
+
 
         <!-- Processing Input -->
         <section>
@@ -336,13 +457,28 @@ tearDown();
 
             <section>
                 <h3>Processing Input</h3>
+                <p>
+                    Recall our game loop from before:
+                    <br>
+<pre style="width: 700px; font-size: 32px;"><code data-trim>
+while (gameIsPlaying) {
+    processInput();
+    updateEntities();
+    render();
+}
+</code></pre>
+                    <br>
+                    Now let's fill out the processInput function.
+                </p>
+            </section>
+
+            <section>
+                <h3>Processing Input</h3>
                 <br>
-                    <pre style="width: 600px;"><code data-trim>
+                    <pre style="width: 1000px; font-size: 28px;"><code data-trim>
 class Player {
     ...
-    handleInput(keys) {
-        ...
-    }
+    handleInput(keys) { ... }
 }
 
 let processInput = function(player) {
@@ -373,15 +509,21 @@ class Player {
 }
                     </code></pre>
                 <br>
-                Why might this be a bad idea?
+                <span class="fragment fade-in">
+                    Why might this be a bad idea?
+                </span>
             </section>
 
             <section>
                 <h3>Processing Input</h3>
-                <br>
                 The previous approach will move the player, but is at the mercy of the frame rate of the game.
                 <br>
-                A better method is to use velocity, which is the entity's rate of movement per update
+                <br>
+                Frame rate is the rate at which new frames are rendered to your display. More graphically intense games
+                can cause this to be lower as the computer spends more time calculating what needs to be drawn.
+                <br>
+                <br>
+                We can fix this by instead setting our player's velocity and updating using delta time - the amount of time between frames.
             </section>
 
             <section>
@@ -407,20 +549,20 @@ class Player {
                     </code></pre>
             </section>
 
-            <section>
-                <h3>Processing Input</h3>
-                <br>
-                    <pre style="width: 700px;"><code data-trim>
-class Player {
-    ...
-    update(deltaTime) {
-        // Increment x pos by x velocity multiplied
-        // by time since last update
-        this.x += this.velocity.x * deltaTime;
-    }
-}
-                    </code></pre>
-            </section>
+            <!--<section>-->
+                <!--<h3>Processing Input</h3>-->
+                <!--<br>-->
+                    <!--<pre style="width: 700px;"><code data-trim>-->
+<!--class Player {-->
+    <!--...-->
+    <!--update(deltaTime) {-->
+        <!--// Increment x pos by velocity in the x-->
+        <!--// direction multiplied by time since last update-->
+        <!--this.x += this.velocity.x * deltaTime;-->
+    <!--}-->
+<!--}-->
+                    <!--</code></pre>-->
+            <!--</section>-->
         </section>
 
         <!-- Enforcing Game Rules -->
@@ -493,6 +635,7 @@ let applyGravity = function(deltaTime, entity) {
             </section>
         </section>
 
+
         <!-- Collisions -->
         <section>
             <section>
@@ -507,6 +650,7 @@ let applyGravity = function(deltaTime, entity) {
             </section>
         </section>
 
+        <!-- Circle on Circle -->
         <section>
             <section>
                 <h3>Circle on Circle</h3>
@@ -538,6 +682,7 @@ let collideCircles = function(circleA, circleB) {
             </section>
         </section>
 
+        <!-- AABB on AABB -->
         <section>
             <section>
                 <h3>AABB on AABB</h3>
@@ -585,6 +730,7 @@ let collideAABB = function(rectA, rectB) {
             </section>
         </section>
 
+        <!-- Circle on AABB -->
         <section>
             <section>
                 <h3>Circle on AABB</h3>
