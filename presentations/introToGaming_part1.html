@@ -157,6 +157,7 @@
                                 <li class="fragment fade-in">
                                     Physics
                                     <ul>
+                                        <li class="fragment fade-in">Point on Circle/AABB</li>
                                         <li class="fragment fade-in">Circle on Circle</li>
                                         <li class="fragment fade-in">AABB on AABB</li>
                                         <li class="fragment fade-in">Circle on AABB</li>
@@ -645,10 +646,57 @@ let applyGravity = function(deltaTime, entity) {
                     <br><br>
                     Lots and lots of math.
                     <br><br>
-                    Let's start with the easiest form of collision...
+                    Let's start with a simple but useful form of collision.
                 </p>
             </section>
         </section>
+
+        <!-- Point on Circle/AABB -->
+        <section>
+            <section>
+                <h3>Point on Circle</h3>
+                <img src="image/introToGame_1/physics/point_circle_aabb/point_circle.png" style="height:500px" />
+            </section>
+
+            <section>
+                <h3>Point on Circle</h3>
+                <img src="image/introToGame_1/physics/point_circle_aabb/point_circle_col.png" style="height:500px" />
+            </section>
+
+            <section>
+                <h3>Point on Circle</h3>
+<pre style="width: 1000px; font-size: 26px;"><code data-trim>
+let pointInCircle = function(point, circle) {
+    let distance = point - circle.center;
+    distance = distance.length();
+    return distance <= circle.radius;
+}
+</code></pre>
+            </section>
+
+            <section>
+                <h3>Point on AABB</h3>
+                <img src="image/introToGame_1/physics/point_circle_aabb/point_aabb.png" style="height:500px" />
+            </section>
+
+            <section>
+                <h3>Point on Circle</h3>
+                <img src="image/introToGame_1/physics/point_circle_aabb/point_aabb_col.png" style="height:500px" />
+            </section>
+
+            <section>
+                <h3>Point on Circle</h3>
+<pre style="width: 1000px; font-size: 26px;"><code data-trim>
+let pointInAABB = function(point, aabb) {
+    return (point.x > aabb.x &&
+    point.x < aabb.x + aabb.width &&
+    point.y > aabb.y &&
+    point.y < aabb.y + aabb.height);
+}
+</code></pre>
+            </section>
+        </section>
+
 
         <!-- Circle on Circle -->
         <section>
@@ -852,18 +900,6 @@ let getEdgePoint = function(circle, aabb) {
 }
 </code></pre>
             </section>
-            
-            <section>
-                <h3>Circle on AABB</h3>
-<pre style="width: 1000px; font-size: 22px;"><code data-trim>
-let pointInAABB = function(point, aabb) {
-    return (point.x > aabb.x &&
-    point.x < aabb.x + aabb.width &&
-    point.y > aabb.y &&
-    point.y < aabb.y + aabb.height);
-}
-</code></pre>
-            </section>
 
         </section>
 
@@ -878,14 +914,6 @@ let pointInAABB = function(point, aabb) {
                 <a href="https://github.com/hprofit">GitHub</a>
             </p>
         </section>
-
-        <!-- Sources -->
-        <!--<section>-->
-            <!--<h2>Sources</h2>-->
-            <!--<p>-->
-
-            <!--</p>-->
-        <!--</section>-->
     </div>
 </div>
 
