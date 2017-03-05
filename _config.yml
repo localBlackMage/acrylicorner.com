@@ -54,5 +54,6 @@ presentations: [
   ['swarmIntelligence.html', 'Swarm Intelligence'],
   ['howToUseGit.html', 'How to Use Git'],
   ['howToUseJasmine.html', 'How to Use Jasmine'],
-  ['introToGaming_part1.html', 'Introduction to Game Development Part 1']
+  ['introToGaming_part1.html', 'Introduction to Game Development Part 1'],
+  ['introToGaming_part2.html', 'Introduction to Game Development Part 2']
 ]
