@@ -388,6 +388,34 @@ class Player extends Phaser.Sprite {
             </section>
         </section>
 
+        <!-- Phaser Animation -->
+        <section>
+            <section>
+                <h3>Phaser Animations</h3>
+                <p>
+                    We learned last time how animations are made, now let's put them to use!
+                    <br>
+                    Recall that each portion of your sprite sheet is a 'frame' that represents
+                    the entity at a given point in time.
+                </p>
+            </section>
+
+            <section>
+                <h3>Phaser Animations</h3>
+<pre style="width: 1000px; font-size: 22px;"><code data-trim>
+// Using our Player class from earlier
+this.jumpFrame = 4;
+// anim name, array of frames, FPS, loops
+this.animations.add('idle', [0, 1], 5, true);
+this.animations.add('walk', [2, 3], 10, true);
+
+this.animations.play('idle');
+// OR, for single frames
+this.frame = this.jumpFrame;
+</code></pre>
+            </section>
+        </section>
+
         <!-- Phaser.Group -->
         <section>
             <section>
