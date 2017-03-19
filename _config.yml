@@ -10,8 +10,8 @@ title: Acrylicorner
 email: holdenprofit at gmail.com
 description: The personal blogsite and portfolio of Holden Profit, game developer, web developer, hobby artist, and aspiring car enthusiast!
 baseurl: "" # the subpath of your site, e.g. /blog
-url: http://acrylicorner.com # the base hostname & protocol for your site
-#url: http://localhost:4000 #local dev only
+#url: http://acrylicorner.com # the base hostname & protocol for your site
+url: http://localhost:4000 #local dev only
 
 share:
   facebook: true
