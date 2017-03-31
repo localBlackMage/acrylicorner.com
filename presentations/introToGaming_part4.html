@@ -107,12 +107,79 @@
                 </p>
             </section>
 
-            <!--<section>-->
-                <!--<h3>Finite State Machines - Code Example</h3>-->
-                <!--<p>-->
-                    <!--TODO: PUT LINK HERE-->
-                <!--</p>-->
-            <!--</section>-->
+            <section>
+                <h3>Finite State Machines - Code Example</h3>
+                <p>
+    <pre style="width: 1000px; font-size: 16px;"><code data-trim>
+class State {
+    enterState() {
+        throw new Error('enterState is a virtual function and must be defined.');
+    }
+    execute() {
+        throw new Error('execute is a virtual function and must be defined.');
+    }
+    exitState() {
+        throw new Error('exitState is a virtual function and must be defined.');
+    }
+}
+
+class ChaseState extends State {
+    enterState(entity) {
+        // Do stuff
+    }
+    execute(entity) {
+        if (entity.isStrongerThanEnemy()) {
+            // Move toward enemy
+        }
+        else {
+            entity.changeState(new RunAwayState());
+        }
+    }
+    exitState(entity) {
+        // Do stuff
+    }
+}
+
+class RunAwayState extends State {
+    enterState(entity) {
+        // Do stuff
+    }
+    execute(entity) {
+        if (entity.isSafe()) {
+            // Move toward enemy
+        }
+        else {
+            entity.changeState(new ChaseState());
+        }
+    }
+    exitState(entity) {
+        // Do stuff
+    }
+}
+
+class Entity {
+    constructor() {
+        this.state = null;
+    }
+
+    update() {
+        if (this.state) {
+            this.state.execute(this);
+        }
+    }
+
+    changeState(newState) {
+        this.state.exitState(this);
+        this.state = newState;
+        this.state.enterState(this);
+    }
+
+    isStrongerThanEnemy() { return true; }
+    isSafe() { return true; }
+}
+</code></pre>
+                </p>
+            </section>
         </section>
 
         <!-- Autonomous Movement -->
@@ -412,9 +479,9 @@ const breadthFirstSearch = function(graph, root, goal) {
     queue.push(root);
 
     while (queue.length !== 0) {
-        let current = q.pop();
+        let current = queue.pop();
         if (current.id === goal.id) {
-            return current.id;
+            return current;
         }
         for (let node in current.neighbors) {
             if (!set[node.id]) {
@@ -439,20 +506,23 @@ const breadthFirstSearch = function(graph, root, goal) {
                 <h3>Path Finder - Depth First Search</h3>
                 <br>
 <pre style="width: 1000px; font-size: 20px;"><code data-trim>
-const depthFirstSearch = function(graph, node, goal) {
+const depthFirstSearch = function(graph, node, cameFrom, goal) {
+    node.parent = cameFrom;
     if (node.id === goal.id) {
         return node;
+    }
+    if (node.visited === true) {
+        return null;
     }
     node.visited = true
     for(let neighbor of node.neighbors) {
         if (!neighbor.visited) {
-            let found = depthFirstSearch(graph, neighbor);
+            let found = depthFirstSearch(graph, neighbor, node, graph);
             if (found) {
                 return found;
             }
         }
     }
-    return null;
 }
 </code></pre>
             </section>
