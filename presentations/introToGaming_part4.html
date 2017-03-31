@@ -1,0 +1,614 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <title>Intro to Game Dev Part 4</title>
+
+    <meta name="description" content="Introduction to Game Development: Part 4">
+    <meta name="author" content="Holden Profit">
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="./css/reveal.min.css">
+    <link rel="stylesheet" href="./css/theme/default.css" id="theme">
+    <link rel="stylesheet" href="./css/custom.css">
+
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="./lib/css/zenburn.css">
+
+    <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+    <script>
+        if (window.location.search.match(/print-pdf/gi)) {
+            var link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = 'css/print/pdf.css';
+            document.getElementsByTagName('head')[0].appendChild(link);
+        }
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="./lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body class="intro-to-gaming">
+<div class="reveal">
+    <div class="slides">
+        <!-- Intro -->
+        <section>
+            <h1>Intro to Game Development</h1>
+            <h2>Part 4</h2>
+            <p>
+                Holden Profit <br>
+            </p>
+        </section>
+
+        <!-- Finite State Machines -->
+        <section>
+            <section>
+                <h3>Finite State Machines</h3>
+                <p>
+                    What is a Finite State Machine (FSM)?
+                    <br>
+                    <br>
+                    An object that can be in only one state of a given number of predetermined states at a time.
+                    <br>
+                    <br>
+                    It is a tried and true method to make code more organized, readable, scalable, and maintainable.
+                </p>
+            </section>
+
+            <section>
+                <h3>Finite State Machines</h3>
+                <p>
+                    A basic approach to FSM would be the standard
+                    <br>
+                    "if this <i>then do that</i> else if this <i>then do that</i>"
+                    <br>
+                    or even a
+                    <br>
+                    "switch <i>expression</i> case <i>A</i> case <i>B</i> ..."
+                    <br>
+                    that you learned early on as a programmer. This approach, however, doesn't scale well and
+                    can quickly lead to a huge mess of spaghetti code.
+                </p>
+            </section>
+
+            <section>
+                <h3>Finite State Machines</h3>
+                <p>
+                    <b>State Transition Tables</b> and <b>Embedded Rules</b> are a few ways to help implement your FSM that will save
+                    you headaches down the line.
+                </p>
+            </section>
+
+            <section>
+                <h3>Finite State Machines - State Transition Table</h3>
+                <p>
+                    To borrow a metaphor from
+                    <a href="https://www.amazon.com/Programming-Example-Wordware-Developers-Library/dp/1556220782/ref=sr_1_1?ie=UTF8&qid=1489798942&sr=8-1&keywords=programming+game+ai+by+example" target="_blank">Programming Game AI By Example</a>,
+                    imagine a robotic cat:
+                    <br>
+                    By default all it can do is sit. However, there are slots on the robo-kitty that accept state cartridges and
+                    in the kitty's head is a chip with rules that determine when the kitty should change from one cartridge to another.
+                </p>
+            </section>
+
+            <section>
+                <h3>Finite State Machines - Embedded Rules</h3>
+                <p>
+                    Keeping with the robo-kitty example from before, now instead of a chip in the kitty's head that determines
+                    what state should be changed to and from, such rules are now embedded on the cartridges themselves.
+                </p>
+            </section>
+
+            <section>
+                <h3>Finite State Machines - Code Example</h3>
+                <p>
+    <pre style="width: 1000px; font-size: 16px;"><code data-trim>
+class State {
+    enterState() {
+        throw new Error('enterState is a virtual function and must be defined.');
+    }
+    execute() {
+        throw new Error('execute is a virtual function and must be defined.');
+    }
+    exitState() {
+        throw new Error('exitState is a virtual function and must be defined.');
+    }
+}
+
+class ChaseState extends State {
+    enterState(entity) {
+        // Do stuff
+    }
+    execute(entity) {
+        if (entity.isStrongerThanEnemy()) {
+            // Move toward enemy
+        }
+        else {
+            entity.changeState(new RunAwayState());
+        }
+    }
+    exitState(entity) {
+        // Do stuff
+    }
+}
+
+class RunAwayState extends State {
+    enterState(entity) {
+        // Do stuff
+    }
+    execute(entity) {
+        if (entity.isSafe()) {
+            // Move toward enemy
+        }
+        else {
+            entity.changeState(new ChaseState());
+        }
+    }
+    exitState(entity) {
+        // Do stuff
+    }
+}
+
+class Entity {
+    constructor() {
+        this.state = null;
+    }
+
+    update() {
+        if (this.state) {
+            this.state.execute(this);
+        }
+    }
+
+    changeState(newState) {
+        this.state.exitState(this);
+        this.state = newState;
+        this.state.enterState(this);
+    }
+
+    isStrongerThanEnemy() { return true; }
+    isSafe() { return true; }
+}
+</code></pre>
+                </p>
+            </section>
+        </section>
+
+        <!-- Autonomous Movement -->
+        <section>
+            <section>
+                <h3>Autonomous Movement</h3>
+                <p>
+                    Autonomous behavior and movement is basically what makes up Swarm Intelligence. Individual entities
+                    are able to determine where they want to move to next based on the world around them. Several factors
+                    influence <i>how</i> an entity will move.
+                    <br>
+                    <br>
+                    <ul>
+                        <li>Cohesion</li>
+                        <li>Separation</li>
+                        <li>Alignment</li>
+                        <li>Wandering</li>
+                    </ul>
+                </p>
+            </section>
+        </section>
+
+        <!-- Autonomous Movement - Cohesion -->
+        <section>
+            <section>
+                <h3>Autonomous Movement - Cohesion</h3>
+                <p>
+                    <img src="./image/swarm/cohesion/cohesionSimplified.jpg" style="height:500px" />
+                    <br>
+                    <small><a href="https://www.evl.uic.edu/aej/527/lecture08.html">Image Source</a></small>
+                </p>
+            </section>
+            <section>
+                <h3>Autonomous Movement - Cohesion</h3>
+                <p>
+                    Take the position of all nearby entities
+                    <br>
+                    <img src="./image/swarm/cohesion/cohesionTakePos.jpg" style="height:500px" />
+                </p>
+            </section>
+            <section>
+                <h3>Autonomous Movement - Cohesion</h3>
+                <p>
+                    Add the positions of the nearby entities together
+                    <br>
+                    <img src="./image/swarm/cohesion/cohesionAdd.png" style="height:500px" />
+                </p>
+            </section>
+            <section>
+                <p>
+                    <img src="./image/swarm/cohesion/cohesionTotal.png" style="height:500px" />
+                </p>
+            </section>
+            <section>
+                <h3>Autonomous Movement - Cohesion</h3>
+                <p>
+                    Divide the total by the number of nearby entities
+                    <img src="./image/swarm/cohesion/cohesionDiv.jpg" style="height:500px" />
+                </p>
+            </section>
+            <section>
+                <h3>Autonomous Movement - Cohesion</h3>
+                <p>
+                    Subtract the result from the current entity's position
+                    <img src="./image/swarm/cohesion/cohesionSteerForce.jpg" style="height:500px" />
+                </p>
+            </section>
+            <section>
+                <h3>Autonomous Movement - Cohesion</h3>
+                <br>
+<pre style="width: 1000px; font-size: 20px;"><code data-trim>
+let cohesion = function(currentEntity, otherEntities) {
+    let cohesionForce = new Vector(0, 0);
+    let numberOfEntities = otherEntities.length;
+    for (let entity of otherEntities) {
+        if (currentEntity != entity) {
+            // entity.position is a Vector in this case
+            cohesionForce = cohesionForce.add(entity.position);
+        }
+        else {
+            numberOfEntities--;
+        }
+    }
+    cohesionForce = cohesionForce.divide(numberOfEntities);
+    return cohesionForce.normalize();
+}
+</code></pre>
+            </section>
+        </section>
+
+        <!-- Autonomous Movement - Separation -->
+        <section>
+            <section>
+                <h3>Autonomous Movement - Separation</h3>
+                <br>
+                <p>
+                    <img src="./image/swarm/separation/seperationSimplified.jpg" style="height:500px;"/>
+                    <br>
+                    <small><a href="https://www.evl.uic.edu/aej/527/lecture08.html">Image Source</a></small>
+                </p>
+            </section>
+            <section>
+                <h3>Autonomous Movement - Separation</h3>
+                <p>
+                    For a given neighbor, subtract the neighbor's position from this entity's position and reverse it
+                    <br>
+                    <img src="./image/swarm/separation/separationSubOne.jpg" style="height:500px;"/>
+                </p>
+            </section>
+            <section>
+                <h3>Autonomous Movement - Separation</h3>
+                <p>
+                    Repeat this process for each neighbor, keeping the resulting vectors
+                    <br>
+                    <img src="./image/swarm/separation/separationSubAll.jpg" style="height:500px;"/>
+                </p>
+            </section>
+            <section>
+                <p>
+                    Normalize each of the resulting vectors
+                    <br>
+                    <img src="./image/swarm/separation/separationNormalizeEach.jpg" style="height:500px;"/>
+                </p>
+            </section>
+            <section>
+                <h3>Autonomous Movement - Separation</h3>
+                <p>
+                    Add the resulting vectors together
+                    <br>
+                    <img src="./image/swarm/separation/separationAddAll.jpg" style="height:500px;"/>
+                </p>
+            </section>
+            <section>
+                <h3>Autonomous Movement - Separation</h3>
+                <p>
+                    Normalize the total for the separation force
+                    <br>
+                    <img src="./image/swarm/separation/separationNormalizeResult.jpg" style="height:500px;"/>
+                </p>
+            </section>
+            <section>
+                <h3>Autonomous Movement - Separation</h3>
+                <br>
+<pre style="width: 1000px; font-size: 20px;"><code data-trim>
+let separation = function(currentEntity, otherEntities) {
+    let separationForce = new Vector(0, 0);
+    for (let entity of otherEntities) {
+        if (currentEntity != entity) {
+            let distBetween = currentEntity.position.subtract(entity.position);
+            distBetween = distBetween.normalize();
+            separationForce = separationForce.add(distBetween);
+        }
+    }
+    return separationForce.normalize();
+}
+</code></pre>
+            </section>
+        </section>
+
+        <!-- Autonomous Movement - Alignment-->
+        <section>
+            <section>
+                <h3>Autonomous Movement - Alignment</h3>
+                <br>
+                <p>
+                    <img src="./image/swarm/alignment/alignmentSimplified.jpg" style="height:500px;"/>
+                    <br>
+                    <small><a href="https://www.evl.uic.edu/aej/527/lecture08.html">Image Source</a></small>
+                </p>
+            </section>
+            <section>
+                <h3>Autonomous Movement - Alignment</h3>
+                <p>
+                    For a given neighbor, store it's velocity
+                    <br>
+                    <img src="./image/swarm/alignment/alignmentAddOne.jpg" style="height:500px;"/>
+                </p>
+            </section>
+            <section>
+                <h3>Autonomous Movement - Alignment</h3>
+                <p>
+                    Repeat this for each neighbor
+                    <br>
+                    <img src="./image/swarm/alignment/alignmentAddAll.jpg" style="height:500px;"/>
+                </p>
+            </section>
+            <section>
+                <h3>Autonomous Movement - Alignment</h3>
+                <p>
+                    Add the stored velocities together
+                    <br>
+                    <img src="./image/swarm/alignment/alignmentAddResults.png" style="height:500px;"/>
+                </p>
+            </section>
+            <section>
+                <h3>Autonomous Movement - Alignment</h3>
+                <p>
+                    Normalize the result
+                    <br>
+                    <img src="./image/swarm/alignment/alignmentNormaizeResult.jpg" style="height:500px;"/>
+                </p>
+            </section>
+            <section>
+                <h3>Autonomous Movement - Alignment</h3>
+                <br>
+<pre style="width: 1000px; font-size: 20px;"><code data-trim>
+let alignment = function(currentEntity, otherEntities) {
+    let alignmentForce = new Vector(0, 0);
+    for (let entity of otherEntities) {
+        if (currentEntity != entity) {
+            alignmentForce = alignmentForce.add(entity.velocity);
+        }
+    }
+    return alignmentForce.normalize();
+}
+</code></pre>
+            </section>
+        </section>
+
+        <!-- Autonomous Movement - Wander-->
+        <section>
+            <section>
+                <h3>Autonomous Movement - Wander</h3>
+                <br>
+                <p>
+                    <img src="./image/introToGame_4/wander.png" style="height:500px;"/>
+                </p>
+            </section>
+            <section>
+                <h3>Autonomous Movement - Wander</h3>
+                <br>
+<pre style="width: 1000px; font-size: 20px;"><code data-trim>
+const randomClamped = function() {
+    return Math.random() * 2 + -1;
+}
+const wanderRadius = 10;
+const wanderDistance = 20;
+const wanderJitter = .25;
+const wander = function(entity) {
+    const toAdd = new Vector(   randomClamped() * wanderJitter,
+                                randomClamped() * wanderJitter);
+
+    entity.wanderTarget = entity.wanderTarget.add(toAdd);
+    entity.wanderTarget = entity.wanderTarget.normalize();
+
+    let endPoint = entity.position.add(entity.velocity.normalize() * wanderDistance);
+    endPoint = endPoint.add(entity.wanderTarget);
+
+    const distBetween = endPoint.subtract(entity.position);
+    return distBetween.normalize();
+}
+</code></pre>
+            </section>
+        </section>
+
+        <!-- Path Finding -->
+        <section>
+            <section>
+                <h3>Path Finding</h3>
+                <p>
+                    A useful tool for any game, path finding will allow your game entities to find routes to travel on
+                    that will get them where they're going the fastest.
+                </p>
+            </section>
+
+            <section>
+                <h3>Path Finding</h3>
+                <p>
+                    There are many different pathfinding algorithms and variances on some of those still that are adapted
+                    for more precise situations. Some methods include:
+                    <ul>
+                        <li>Breadth First Search</li>
+                        <li>Depth First Search</li>
+                        <li>Best First Search</li>
+                        <li>Djikstra's Method</li>
+                        <li>A*</li>
+                    </ul>
+                </p>
+            </section>
+
+            <section>
+                <h3>Path Finder - Breadth First Search</h3>
+                <p>
+                    <img src="./image/introToGame_4/pathFinding/Animated_BFS.gif"  style="height:500px; background-color: white;" />
+                </p>
+            </section>
+
+            <section>
+                <h3>Path Finder - Breadth First Search</h3>
+                <br>
+<pre style="width: 1000px; font-size: 20px;"><code data-trim>
+const breadthFirstSearch = function(graph, root, goal) {
+    let set = {};
+    let queue = [];
+    root.parent = null;
+    set[root.id] = root;
+    queue.push(root);
+
+    while (queue.length !== 0) {
+        let current = queue.pop();
+        if (current.id === goal.id) {
+            return current;
+        }
+        for (let node in current.neighbors) {
+            if (!set[node.id]) {
+                set[node.id] = node;
+                node.parent = current;
+                queue.push(node);
+            }
+        }
+    }
+}
+</code></pre>
+            </section>
+
+            <section>
+                <h3>Path Finder - Depth First Search</h3>
+                <p>
+                    <img src="./image/introToGame_4/pathFinding/Depth-First-Search.gif"  style="height:500px; background-color: white;" />
+                </p>
+            </section>
+
+            <section>
+                <h3>Path Finder - Depth First Search</h3>
+                <br>
+<pre style="width: 1000px; font-size: 20px;"><code data-trim>
+const depthFirstSearch = function(graph, node, cameFrom, goal) {
+    node.parent = cameFrom;
+    if (node.id === goal.id) {
+        return node;
+    }
+    if (node.visited === true) {
+        return null;
+    }
+    node.visited = true
+    for(let neighbor of node.neighbors) {
+        if (!neighbor.visited) {
+            let found = depthFirstSearch(graph, neighbor, node, graph);
+            if (found) {
+                return found;
+            }
+        }
+    }
+}
+</code></pre>
+            </section>
+
+            <section>
+                <h3>Path Finder - A*</h3>
+                <p>
+                    <img src="./image/introToGame_4/pathFinding/Astar_progress_animation.gif"  style="height:500px; background-color: white;" />
+                </p>
+            </section>
+
+            <section>
+                <h3>Path Finder - A*</h3>
+                <p>
+                    <a href="https://en.wikipedia.org/wiki/A*_search_algorithm#Pseudocode" target="_blank">Pseudo Code</a>
+                    <br>
+                    <br>
+                    <a href="http://acrylicorner.com/demos/#/astar" target="_blank">See it in action!</a>
+                </p>
+            </section>
+        </section>
+
+        <!-- Questions -->
+        <section>
+            <h2>Questions</h2>
+            <p>
+                <a href="https://www.linkedin.com/pub/holden-profit/42/634/a23">Holden Profit</a>
+                <br>
+                <a href="mailto:holdenprofit@gmail.com?Subject=Reaching%20Out">holdenprofit@gmail.com</a>
+                <br>
+                <a href="https://github.com/hprofit">GitHub</a>
+            </p>
+        </section>
+    </div>
+</div>
+
+<script src="./lib/js/head.min.js"></script>
+<script src="./js/reveal.min.js"></script>
+<script>
+
+    // Full list of configuration options available here:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'concave', // default/cube/page/concave/zoom/linear/fade/none
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+            {
+                src: './lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: './plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: './plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: './plugin/highlight/highlight.js', async: true, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            {
+                src: './plugin/zoom-js/zoom.js', async: true, condition: function () {
+                return !!document.body.classList;
+            }
+            },
+            {
+                src: './plugin/notes/notes.js', async: true, condition: function () {
+                return !!document.body.classList;
+            }
+            }
+        ]
+    });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,972 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <title>Intro to Game Dev Part 1</title>
+
+    <meta name="description" content="Introduction to Game Development: Part 1">
+    <meta name="author" content="Holden Profit">
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="./css/reveal.min.css">
+    <link rel="stylesheet" href="./css/theme/default.css" id="theme">
+    <link rel="stylesheet" href="./css/custom.css">
+
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="./lib/css/zenburn.css">
+
+    <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+    <script>
+        if (window.location.search.match(/print-pdf/gi)) {
+            var link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = 'css/print/pdf.css';
+            document.getElementsByTagName('head')[0].appendChild(link);
+        }
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="./lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body class="intro-to-gaming">
+<div class="reveal">
+    <div class="slides">
+        <!-- Intro -->
+        <section>
+            <h1>Intro to Game Development</h1>
+            <h2>Part 1</h2>
+            <p>
+                Holden Profit <br>
+            </p>
+        </section>
+
+        <!-- What is a Game? -->
+        <section>
+            <section>
+                <h2>What is a game?</h2>
+                <p>
+                    <span class="fragment fade-in">
+                        Games are media just like movies and books, but what separates them from these things?
+                    </span>
+                    <br><br>
+                    <span class="fragment fade-in">
+                        They're <i>interactive</i> media! This makes it a powerful way to tell stories and enjoy
+                        all kinds of experiences!
+                    </span>
+                </p>
+            </section>
+        </section>
+
+        <section>
+            <section>
+                <h2>Modern AAA Games</h2>
+                <p>Amazing Games with tons of developers and huge budgets!</p>
+            </section>
+
+            <section>
+                <img src="image/introToGame_1/gameExamples/uncharted4.jpg"/>
+                <p>
+                    <small><i>Uncharted 4: A Thief's End - Naughty Dog</i></small>
+                </p>
+            </section>
+
+            <section>
+                <img src="image/introToGame_1/gameExamples/overwatch.png"/>
+                <p>
+                    <small><i>Overwatch - Blizzard</i></small>
+                </p>
+            </section>
+
+            <section>
+                <img src="image/introToGame_1/gameExamples/darkSouls3.jpg"/>
+                <p>
+                    <small><i>Dark Souls 3 - From Software</i></small>
+                </p>
+            </section>
+
+            <section>
+                <h2>Those look cool!</h2>
+                <p>
+                    When can I make games like those?!
+                    <br>
+                    <br>
+                    <span class="fragment fade-in">
+                        Well, first...
+                    </span>
+                    <span class="fragment fade-in">
+                        We need to understand the basics of a game, and that's
+                        most easily done with simpler (probably 2D) games.
+                    </span>
+                </p>
+            </section>
+
+            <section>
+                <img src="image/introToGame_1/gameExamples/marioBros.png"/>
+                <p>
+                    <small><i>Mario Bros. - Nintendo</i></small>
+                </p>
+            </section>
+
+            <section>
+                <img src="image/introToGame_1/gameExamples/megaman.jpg"/>
+                <p>
+                    <small><i>Megaman - Capcom</i></small>
+                </p>
+            </section>
+
+            <section>
+                <img src="image/introToGame_1/gameExamples/contra.jpg" style="height: 550px;"/>
+                <p>
+                    <small><i>Contra - Konami</i></small>
+                </p>
+            </section>
+        </section>
+
+        <!-- Course Outline -->
+        <section>
+            <section>
+                <h2>Course Overview</h2>
+                <p>
+                    You'll learn the fundamentals of game development:
+                    The anatomy of a game, basic physics, and even some artificial intelligence.
+                    <br><br>
+                    By the end, you'll be able to build your own 2D game
+                    which will be demonstrated as the class capstone project. Primary
+                    technology used will be Javascript ES6, Webpack, and <a href="https://phaser.io/">Phaser</a>.
+                </p>
+            </section>
+
+            <section>
+                <h3>Part 1 Outline</h3>
+                <p>
+                    <span class="fragment fade-in">
+                        Core Structure of a Game
+                        <ul>
+                            <li class="fragment fade-in">Game Loop</li>
+                            <ul>
+                                <li class="fragment fade-in">Player Input</li>
+                                <li class="fragment fade-in">Rendering Order</li>
+                                <li class="fragment fade-in">
+                                    Physics
+                                    <ul>
+                                        <li class="fragment fade-in">Point on Circle/AABB</li>
+                                        <li class="fragment fade-in">Circle on Circle</li>
+                                        <li class="fragment fade-in">AABB on AABB</li>
+                                        <li class="fragment fade-in">Circle on AABB</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </ul>
+                    </span>
+                </p>
+            </section>
+        </section>
+
+        <!-- Core Game Architecture -->
+        <section>
+            <section>
+                <h2>What Does a Game Actually Do?</h2>
+                <ul class="fragment fade-in">
+                    <li>Respond to player input</li>
+                    <li>Render graphics to the screen</li>
+                    <li>Enforce game rules on entities</li>
+                </ul>
+            </section>
+
+            <section>
+                <img src="image/introToGame_1/boardGame.jpg" style="height:600px"/>
+            </section>
+
+            <section>
+                <h2>Basic Game Lifecycle</h2>
+                <br>
+                    <pre style="width: 700px; font-size: 32px;"><code data-trim>
+// We'll be referencing this a lot!
+let gameIsPlaying = true;
+startup();
+while (gameIsPlaying) {
+    processInput();
+    updateEntities();
+    render();
+}
+tearDown();
+                    </code></pre>
+            </section>
+        </section>
+
+
+        <!-- Rendering -->
+        <section>
+            <section>
+                <h3>Start by Rendering</h3>
+                <p>
+                    While it's the last step in the game loop process, it's the best
+                    starting point because from there you can see your entity updates
+                    and responses to input represented visually on the screen.
+                </p>
+            </section>
+
+            <section>
+                <h3>2-Dimensional Coordinates</h3>
+                <p>
+                    My guide to basic vector principals can be found <a href="http://acrylicorner.com/presentations/swarmIntelligence.html#/4" target="_blank">here.</a>
+                    <br>
+                    <span class="fragment fade-in">
+                        Vectors are a way to represent direction and velocity while Points represent a location in space.
+                        <br>
+                        For all intents and purposes, Vectors can almost always be used to represent a Point as well.
+                    </span>
+                </p>
+            </section>
+
+            <section>
+                <h3>2-Dimensional Coordinates</h3>
+                <p>
+                    We use these Vectors to represent where an entity is within the world.
+                    <br>
+                    Computer screen y coordinates go in the opposite direction of your
+                    typical graph.<br>
+                </p>
+            </section>
+
+            <section>
+                <img src="image/introToGame_1/grid/grid.png" style="height:600px"/>
+            </section>
+
+            <section>
+                <h3>2-Dimensional Coordinates</h3>
+                <p>
+                    If I want to render the square in the lower-middle of the screen, it'd look something like this:<br>
+
+                    <img src="image/introToGame_1/grid/grid_spriteAtBottom.png" style="height:500px"/>
+                </p>
+            </section>
+
+            <section>
+                <h3>2-Dimensional Coordinates</h3>
+                <p>
+                    In addition to location, the square will also have a rotation and scale associated with it.
+                    <br>
+                    <img src="image/introToGame_1/grid/grid_spriteRotAndScale.png" style="height:500px"/>
+                </p>
+            </section>
+        </section>
+
+        <section>
+            <section>
+                <h2>Z-Index</h2>
+                <p>
+                    Despite being a 2D game, entities will also have a z coordinate known as a Z-Index.
+                    <br><br>
+                    The closer the Z-Index to the camera, the less likely it is to be drawn over by another entity.
+                </p>
+            </section>
+
+            <section>
+                <h3>Z-Index</h3>
+                <p>
+                    Z-Index allows us to create some neat effects, including psuedo 3D rendering:
+                    <br>
+                    <img src="image/introToGame_1/grid/rotatingSprite.gif" style="height: 500px"/>
+                </p>
+            </section>
+
+            <section>
+                <h3>Z-Index</h3>
+                <p>
+                    Z-Indexing can be used to easily split a 2D game into layers:
+                    <br>
+                    <ul>
+                        <li>Background</li>
+                        <li>Foreground</li>
+                        <li>Entities</li>
+                        <li>HUD</li>
+                    </ul>
+                    <br>
+                    These layers can be rearranged or have layers added for visual effects as needed.
+                    <br>
+                    Much like an old animation technique known as a "multiplane camera", these layers can be used
+                    to give the illusion of depth and distance.
+                </p>
+            </section>
+
+            <section>
+                <h3>Layers</h3>
+                <img src="./image/introToGame_1/render/multiplaneCamera.jpg"  style="height:500px" />
+            </section>
+
+            <section>
+                <h3>Layer - Background</h3>
+                <img src="./image/introToGame_1/render/background.png"  style="height:500px" />
+            </section>
+
+            <section>
+                <h3>Layer - Foreground</h3>
+                <img src="./image/introToGame_1/render/foreground.png"  style="height:500px" />
+            </section>
+
+            <section>
+                <h3>Layer - Entities</h3>
+                <img src="./image/introToGame_1/render/entities.png"  style="height:500px" />
+            </section>
+
+            <section>
+                <h3>Layer - HUD Elements</h3>
+                <img src="./image/introToGame_1/render/hud.png"  style="height:500px" />
+            </section>
+
+            <section>
+                <h3>Layers - Parallax Scrolling</h3>
+                <img src="./image/introToGame_1/render/parallax.gif"  style="height:500px" />
+            </section>
+        </section>
+
+
+        <!-- Sprites -->
+        <section>
+            <section>
+                <h3>Sprites</h3>
+                <p>
+                    Most games don't just use standard shapes to represent game entities, they use sprites!
+                    <br>
+                    <br>
+                    Sprites are 2D Bitmap data that are rendered to a screen.
+                </p>
+            </section>
+
+            <section>
+                <h3>Sprites</h3>
+                <img src="./image/introToGame_1/sprites/mario.gif"  style="height:500px" />
+            </section>
+
+            <section>
+                <h3>Sprites - Animating</h3>
+                <p>
+                    A single sprite is cool, but some games might call for a bit more motion than a single still frame
+                    of your character. They need to run, jump, throw, etc.!
+                    <br><br>
+                    <span class="fragment fade-in">
+                        Your character might have many still frames, each depicting a different moment in time.
+                        These are combined onto a single image called a "sprite sheet."
+                    </span>
+                </p>
+            </section>
+
+            <section>
+                <h3>Sprite Sheet</h3>
+                <img src="./image/introToGame_1/sprites/marioSpriteSheet.gif"  style="height:500px" />
+            </section>
+
+            <section>
+                <h3>Sprites - Animating</h3>
+                <p>
+                    How does animating work?
+                    <br>
+                    <span class="fragment fade-in">
+                        By rapidly swapping which portion of a sprite sheet is drawn to the screen, you create the
+                        illusion of movement.
+                    </span>
+                    <br><br>
+                    <span class="fragment fade-in">
+                        Think of it as viewing the overall sprite sheet through a small window, we only see a small
+                        portion of the overall image at any given time.
+                    </span>
+                </p>
+            </section>
+
+            <section>
+                <h3>Sprites - Animating</h3>
+                <img src="./image/introToGame_1/sprites/spriteAnimation.png"  style="height:500px; background-color: white;" />
+            </section>
+
+            <section>
+                <h3>Rendering</h3>
+                <p>
+                    Recall our game loop from before:
+                    <br>
+<pre style="width: 700px; font-size: 32px;"><code data-trim>
+while (gameIsPlaying) {
+    processInput();
+    updateEntities();
+    render();
+}
+</code></pre>
+                <br>
+                Let's fill out the render function.
+                </p>
+            </section>
+
+            <section>
+                <h3>Rendering</h3>
+<pre style="width: 700px; font-size: 32px;"><code data-trim>
+let render = function() {
+    background.render();
+    for(let entity of entities) {
+        entity.render();
+    }
+    player.render();
+    hud.render();
+}
+</code></pre>
+            </section>
+
+            <section>
+                <h3>Rendering</h3>
+<pre style="width: 1000px; font-size: 20px;"><code data-trim>
+class Player {
+    ...
+    render () {
+        var canvasContext = document.getElementById('#myCanvas').getContext('2D');
+        canvasContext.drawImage(this.spriteSheet,
+            this.currentFrame.x, this.currentFrame.y,
+            this.frame.width, this.frame.height,
+            this.x, this.y, this.width, this.height
+        );
+    }
+};
+</code></pre>
+            </section>
+        </section>
+
+
+        <!-- Processing Input -->
+        <section>
+            <section>
+                <h3>Processing Input</h3>
+                <p>
+                    There are many different control devices available out there and how you build your game depends
+                    heavily on which methods you support.
+                    <br><br>
+                    <ul>
+                        <li>Mouse + Keyboard (Can be used separately)</li>
+                        <li>Game Pad (XBox, PS controller)</li>
+                        <li>Motion Controls (Vive, WiiMote)</li>
+                        <li>Touch (iPad, phones)</li>
+                    </ul>
+                    <br><br>
+                    We'll be sticking to mouse and keyboard for this class as you most likely already have those.
+                </p>
+            </section>
+
+            <section>
+                <h3>Processing Input</h3>
+                <p>
+                    Recall our game loop from before:
+                    <br>
+<pre style="width: 700px; font-size: 32px;"><code data-trim>
+while (gameIsPlaying) {
+    processInput();
+    updateEntities();
+    render();
+}
+</code></pre>
+                    <br>
+                    Now let's fill out the processInput function.
+                </p>
+            </section>
+
+            <section>
+                <h3>Processing Input</h3>
+                <br>
+                    <pre style="width: 1000px; font-size: 28px;"><code data-trim>
+class Player {
+    ...
+    handleInput(keys) { ... }
+}
+
+let processInput = function(player) {
+    // Grab the directional keys and
+    // pass them to the player
+    let pressedKeys = keyboard.createCursorKeys();
+    player.handleInput(pressedKeys);
+};
+                    </code></pre>
+            </section>
+
+            <section>
+                <h3>Processing Input</h3>
+                <br>
+                    <pre style="width: 550px;"><code data-trim>
+class Player {
+    ...
+    handleInput(keys) {
+        if (keys.left.isDown) {
+            // Move to the left
+            this.x -= 10;
+        }
+        else if (keys.right.isDown) {
+            // Move to the right
+            this.x += 10;
+        }
+    }
+}
+                    </code></pre>
+                <br>
+                <span class="fragment fade-in">
+                    Why might this be a bad idea?
+                </span>
+            </section>
+
+            <section>
+                <h3>Processing Input</h3>
+                The previous approach will move the player, but is at the mercy of the frame rate of the game.
+                <br>
+                <br>
+                Frame rate is the rate at which new frames are rendered to your display. More graphically intense games
+                can cause this to be lower as the computer spends more time calculating what needs to be drawn.
+                <br>
+                <br>
+                We can fix this by instead setting our player's velocity and updating using delta time - the amount of time between frames.
+            </section>
+
+            <section>
+                <h3>Processing Input</h3>
+                <br>
+                    <pre style="width: 550px;"><code data-trim>
+class Player {
+    ...
+    handleInput(keys) {
+        // Reset player velocity
+        this.velocity.x = 0;
+
+        if (keys.left.isDown) {
+            // Move to the left
+            this.velocity.x = -100;
+        }
+        else if (keys.right.isDown) {
+            // Move to the right
+            this.velocity.x = 100;
+        }
+    }
+}
+                    </code></pre>
+            </section>
+
+            <!--<section>-->
+                <!--<h3>Processing Input</h3>-->
+                <!--<br>-->
+                    <!--<pre style="width: 700px;"><code data-trim>-->
+<!--class Player {-->
+    <!--...-->
+    <!--update(deltaTime) {-->
+        <!--// Increment x pos by velocity in the x-->
+        <!--// direction multiplied by time since last update-->
+        <!--this.x += this.velocity.x * deltaTime;-->
+    <!--}-->
+<!--}-->
+                    <!--</code></pre>-->
+            <!--</section>-->
+        </section>
+
+        <!-- Enforcing Game Rules -->
+        <section>
+            <section>
+                <h3>Enforcing Game Rules</h3>
+                <p>
+                    So now that we have basic player input, what do we do with it?
+                    <br>
+                    Enforcing our game rules is what actually <i>makes</i> the game!
+                </p>
+            </section>
+
+            <section>
+                <h3>Enforcing Game Rules</h3>
+                <p>
+                    What sort of rules might we have?
+                    <ul>
+                        <li>Limitations on character action</li>
+                        <li>Enemies that antagonize the player</li>
+                        <li>Friendly NPCs that help the player</li>
+                        <li>Physical interactions with the world</li>
+                    </ul>
+                    <br><br>
+                    There can be more or less depending on the type of game you're building!
+                </p>
+            </section>
+
+            <section>
+                <h3>Enforcing Game Rules</h3>
+                <p>
+                    Perhaps the most immediately obvious rule to enforce is physics.
+                    <br>
+                    <br>
+                    While not all games necessarily need physics, a good deal of games need at least simple physics to run.
+                    <br>
+                    <br>
+                    Physics can range from simple circle-to-circle collision and gravity to more complex 3D object collisions and force calculations.
+                </p>
+            </section>
+        </section>
+
+        <!-- Basic Gravity -->
+        <section>
+            <section>
+                <h3>Gravity</h3>
+                <p>
+                    Earlier we made our player move left and right, but didn't implement any sort of jump ability. This
+                    is because we didn't yet have any form of gravity!
+                </p>
+            </section>
+
+            <section>
+                <h3>Gravity</h3>
+                <pre style="width: 700px;"><code data-trim>
+let applyGravity = function(deltaTime, entity) {
+    // If the entity's velocity is less than the constant
+    // gravity velocity, increment it until it is equal to
+    if (entity.velocity.y < CONST_GRAVITY) {
+        entity.velocity.y += CONST_GRAVITY * deltaTime;
+    }
+    else {
+        entity.velocity.y = CONST_GRAVITY;
+    }
+    // Increment y pos by y velocity multiplied
+    // by time since last update
+    entity.y += entity.velocity.y * deltaTime;
+}
+                </code></pre>
+            </section>
+        </section>
+
+
+        <!-- Collisions -->
+        <section>
+            <section>
+                <h3>Collisions</h3>
+                <p>
+                    How <i>does</i> the computer know all these objects are colliding? Math.
+                    <br><br>
+                    Lots and lots of math.
+                    <br><br>
+                    Let's start with a simple but useful form of collision.
+                </p>
+            </section>
+        </section>
+
+        <!-- Point on Circle/AABB -->
+        <section>
+            <section>
+                <h3>Point on Circle</h3>
+                <img src="image/introToGame_1/physics/point_circle_aabb/point_circle.png" style="height:500px" />
+            </section>
+
+            <section>
+                <h3>Point on Circle</h3>
+                <img src="image/introToGame_1/physics/point_circle_aabb/point_circle_col.png" style="height:500px" />
+            </section>
+
+            <section>
+                <h3>Point on Circle</h3>
+<pre style="width: 1000px; font-size: 26px;"><code data-trim>
+let pointInCircle = function(point, circle) {
+    let distance = point - circle.center;
+    distance = distance.length();
+    return distance <= circle.radius;
+}
+</code></pre>
+            </section>
+
+            <section>
+                <h3>Point on AABB</h3>
+                <img src="image/introToGame_1/physics/point_circle_aabb/point_aabb.png" style="height:500px" />
+            </section>
+
+            <section>
+                <h3>Point on Circle</h3>
+                <img src="image/introToGame_1/physics/point_circle_aabb/point_aabb_col.png" style="height:500px" />
+            </section>
+
+            <section>
+                <h3>Point on Circle</h3>
+<pre style="width: 1000px; font-size: 26px;"><code data-trim>
+let pointInAABB = function(point, aabb) {
+    return (point.x > aabb.x &&
+    point.x < aabb.x + aabb.width &&
+    point.y > aabb.y &&
+    point.y < aabb.y + aabb.height);
+}
+</code></pre>
+            </section>
+        </section>
+
+
+        <!-- Circle on Circle -->
+        <section>
+            <section>
+                <h3>Circle on Circle</h3>
+                <img src="image/introToGame_1/physics/circle_circle/circle.png" style="height:500px" />
+            </section>
+
+            <section>
+                <h3>Circle on Circle</h3>
+                <img src="image/introToGame_1/physics/circle_circle/circle_no_hit.png" style="height:500px" />
+            </section>
+
+            <section>
+                <h3>Circle on Circle</h3>
+                <img src="image/introToGame_1/physics/circle_circle/circle_hit.png" style="height:500px" />
+            </section>
+
+            <section>
+                <h3>Circle on Circle</h3>
+<pre style="width: 1000px; font-size: 26px;"><code data-trim>
+// circleA and circleB both have a Vector2 position
+// object and a radius
+let collideCircles = function(circleA, circleB) {
+    let currentDistance = circleA.position - circleB.position;
+    currentDistance = currentDistance.length();
+    let collisionDistance = circleA.radius + circleB.radius;
+    return currentDistance <= collisionDistance;
+}
+</code></pre>
+            </section>
+        </section>
+
+        <!-- AABB on AABB -->
+        <section>
+            <section>
+                <h3>AABB on AABB</h3>
+                AABB: Axis Aligned Bounding Box
+                <br>
+                <img src="image/introToGame_1/physics/aabb_aabb/aabb.png" style="height:500px" />
+            </section>
+
+            <section>
+                <h3>AABB on AABB</h3>
+                <img src="image/introToGame_1/physics/aabb_aabb/aabb_aabb.png" style="height:500px" />
+            </section>
+
+            <section>
+                <h3>AABB on AABB</h3>
+                <img src="image/introToGame_1/physics/aabb_aabb/aabb_aabb_1.png" style="height:500px" />
+            </section>
+
+            <section>
+                <h3>AABB on AABB</h3>
+                <img src="image/introToGame_1/physics/aabb_aabb/aabb_aabb_2.png" style="height:500px" />
+            </section>
+
+            <section>
+                <h3>AABB on AABB</h3>
+                <img src="image/introToGame_1/physics/aabb_aabb/aabb_aabb_3.png" style="height:500px" />
+            </section>
+
+            <section>
+                <h3>AABB on AABB</h3>
+                <img src="image/introToGame_1/physics/aabb_aabb/aabb_aabb_4.png" style="height:500px" />
+            </section>
+
+            <section>
+                <h3>AABB on AABB</h3>
+<pre style="width: 1000px; font-size: 26px;"><code data-trim>
+// rectA and rectB both have an X, Y, width, and height
+let collideAABB = function(rectA, rectB) {
+    return (rectA.x < rectB.x + rectB.width &&
+    rectA.x + rectA.width > rectB.x &&
+    rectA.y < rectB.y + rectB.height &&
+    rectA.height + rectA.y > rectB.y);
+}
+</code></pre>
+            </section>
+        </section>
+
+        <!-- Circle on AABB -->
+        <section>
+            <section>
+                <h3>Circle on AABB</h3>
+                This is a bit more involved than the previous two forms of collision.
+                <br><br>
+                It can be broken up into three parts, the first two serving as a sort of
+                "definitely inside/outside the AABB" for the circle.
+            </section>
+
+            <section>
+                <h3>Circle on AABB</h3>
+                Define the circles of the AABB<br>
+                <img src="image/introToGame_1/physics/circle_aabb/circle_aabb_intro.png" style="height:500px" />
+            </section>
+
+            <section>
+                <h3>Circle on AABB</h3>
+                Pre-calculate the outer circle of the AABB<br>
+                <img src="image/introToGame_1/physics/circle_aabb/aabb_circles/circle_aabb_outer_circle.png" style="height:500px" />
+            </section>
+
+            <section>
+                <h3>Circle on AABB</h3>
+                Pre-calculate the inner circle of the AABB<br>
+                <img src="image/introToGame_1/physics/circle_aabb/aabb_circles/circle_aabb_inner_circle.png" style="height:500px" />
+            </section>
+
+
+            <section>
+                <h3>Circle on AABB</h3>
+                Test against outer circle of AABB<br>
+                <img src="image/introToGame_1/physics/circle_aabb/circle_col/circle_aabb_outer_col.png" style="height:500px" />
+            </section>
+
+            <section>
+                <h3>Circle on AABB</h3>
+                Test against outer circle of AABB<br>
+                <img src="image/introToGame_1/physics/circle_aabb/circle_col/circle_aabb_outer_col_hit.png" style="height:500px" />
+            </section>
+
+
+            <section>
+                <h3>Circle on AABB</h3>
+                Test against inner circle of AABB<br>
+                <img src="image/introToGame_1/physics/circle_aabb/circle_col/circle_aabb_inner_col.png" style="height:500px" />
+            </section>
+
+            <section>
+                <h3>Circle on AABB</h3>
+                Test against inner circle of AABB<br>
+                <img src="image/introToGame_1/physics/circle_aabb/circle_col/circle_aabb_inner_col_hit.png" style="height:500px" />
+            </section>
+
+
+            <section>
+                <h3>Circle on AABB</h3>
+                What if...<br>
+                <img src="image/introToGame_1/physics/circle_aabb/circle_col/circle_aabb_more_adv.png" style="height:500px" />
+            </section>
+
+            <section>
+                <h3>Circle on AABB</h3>
+                Get both center vectors<br>
+                <img src="image/introToGame_1/physics/circle_aabb/edge/circle_aabb_edge_1.png" style="height:500px" />
+            </section>
+
+            <section>
+                <h3>Circle on AABB</h3>
+                aabb.center - circle.center<br>
+                <img src="image/introToGame_1/physics/circle_aabb/edge/circle_aabb_edge_2.png" style="height:500px" />
+            </section>
+
+            <section>
+                <h3>Circle on AABB</h3>
+                Normalize the result<br>
+                <img src="image/introToGame_1/physics/circle_aabb/edge/circle_aabb_edge_3.png" style="height:500px" />
+            </section>
+
+            <section>
+                <h3>Circle on AABB</h3>
+                Multiply by circle.radius<br>
+                <img src="image/introToGame_1/physics/circle_aabb/edge/circle_aabb_edge_4.png" style="height:500px" />
+            </section>
+
+            <section>
+                <h3>Circle on AABB</h3>
+                Add to circle.center for circle's edge point<br>
+                <img src="image/introToGame_1/physics/circle_aabb/edge/circle_aabb_edge_5.png" style="height:500px" />
+            </section>
+
+
+            <section>
+                <h3>Circle on AABB</h3>
+<pre style="width: 1000px; font-size: 22px;"><code data-trim>
+let collideCircleAndAABB = function(circle, aabb) {
+    let distance = (circle.center - aabb.center).length();
+    
+    if (distance > (circle.radius + aabb.outerRadius)) {
+        return false;
+    }
+    else if (distance < (circle.radius + aabb.innerRadius)) {
+        return true;
+    }
+    else
+        return pointInAABB(getEdgePoint(circle, aabb), aabb);
+    }
+}
+</code></pre>
+            </section>
+
+            <section>
+                <h3>Circle on AABB</h3>
+<pre style="width: 1000px; font-size: 22px;"><code data-trim>
+let getEdgePoint = function(circle, aabb) {
+    let direction = circle.center - aabb.center;
+    direction.normalize();
+    direction *= circle.radius;
+    return direction + circle.center;
+}
+</code></pre>
+            </section>
+
+        </section>
+
+        <!-- Questions -->
+        <section>
+            <h2>Questions</h2>
+            <p>
+                <a href="https://www.linkedin.com/pub/holden-profit/42/634/a23">Holden Profit</a>
+                <br>
+                <a href="mailto:holdenprofit@gmail.com?Subject=Reaching%20Out">holdenprofit@gmail.com</a>
+                <br>
+                <a href="https://github.com/hprofit">GitHub</a>
+            </p>
+        </section>
+    </div>
+</div>
+
+<script src="./lib/js/head.min.js"></script>
+<script src="./js/reveal.min.js"></script>
+<script>
+
+    // Full list of configuration options available here:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'concave', // default/cube/page/concave/zoom/linear/fade/none
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+            {
+                src: './lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: './plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: './plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: './plugin/highlight/highlight.js', async: true, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            {
+                src: './plugin/zoom-js/zoom.js', async: true, condition: function () {
+                return !!document.body.classList;
+            }
+            },
+            {
+                src: './plugin/notes/notes.js', async: true, condition: function () {
+                return !!document.body.classList;
+            }
+            }
+        ]
+    });
+
+</script>
+</body>
+</html>

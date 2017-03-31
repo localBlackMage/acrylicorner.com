@@ -1,0 +1,550 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <title>Intro to Game Dev Part 3</title>
+
+    <meta name="description" content="Introduction to Game Development: Part 3">
+    <meta name="author" content="Holden Profit">
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="./css/reveal.min.css">
+    <link rel="stylesheet" href="./css/theme/default.css" id="theme">
+    <link rel="stylesheet" href="./css/custom.css">
+
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="./lib/css/zenburn.css">
+
+    <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+    <script>
+        if (window.location.search.match(/print-pdf/gi)) {
+            var link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = 'css/print/pdf.css';
+            document.getElementsByTagName('head')[0].appendChild(link);
+        }
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="./lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body class="intro-to-gaming">
+<div class="reveal">
+    <div class="slides">
+        <!-- Intro -->
+        <section>
+            <h1>Intro to Game Development</h1>
+            <h2>Part 3</h2>
+            <p>
+                Holden Profit <br>
+            </p>
+        </section>
+
+        <!-- Phaser Tilesprite -->
+        <section>
+            <section>
+                <h3>Phaser TileSprites</h3>
+                <p>
+                    A special form of Sprite that features a repeating texture. Typically used for
+                    backgrounds and do not come with input or physics bodies by default.
+                </p>
+            </section>
+
+            <section>
+                <h3>Phaser TileSprites</h3>
+                <p>
+<pre style="width: 1000px; font-size: 20px;"><code data-trim>
+export default class Sky {
+    constructor(game) {
+        this.bg_1 = game.add.image(0, 0, 'bg_1');
+        this.bg_2 = game.add.tileSprite(0, 0, game.world.width, game.world.height, 'bg_2');
+        this.bg_3 = game.add.tileSprite(0, 0, game.world.width, game.world.height, 'bg_3');
+        this.bg_4 = game.add.tileSprite(0, 0, game.world.width, game.world.height, 'bg_4');
+
+        let dimensionSize = 2048,
+            width = game.camera.width / dimensionSize,
+            height = game.camera.height / dimensionSize;
+        this.bg_1.scale.setTo(game.world.width, height);
+        this.bg_2.tileScale.setTo(width, height);
+        this.bg_3.tileScale.setTo(width, height);
+        this.bg_4.tileScale.setTo(width, height);
+
+        this.bg2_speed = 50; // Constantly moving image
+        this.bg3_rate = .25; // Moves at a fraction of the player's speed
+    }
+
+    static loadSkyImages(game) {
+        game.load.image('bg_1', 'assets/Background/bg_layer1.png');
+        game.load.image('bg_2', 'assets/Background/bg_layer2.png');
+        game.load.image('bg_3', 'assets/Background/bg_layer3.png');
+        game.load.image('bg_4', 'assets/Background/bg_layer4.png');
+    }
+
+    update(velocity, deltaTime) {
+        this.bg_2.tilePosition.x -= this.bg2_speed * deltaTime;
+        this.bg_3.tilePosition.x += this.bg3_rate * -velocity * deltaTime;
+    }
+}
+</code></pre>
+            </section>
+
+            <section>
+                <h3>Phaser TileSprites</h3>
+                <img src="./image/introToGame_1/render/parallax.gif"  style="height:500px" />
+            </section>
+        </section>
+
+        <!-- Phaser Texture Atlas -->
+        <section>
+            <section>
+                <h3>Phaser Texture Atlas</h3>
+                <p>
+                    A more efficient way of storing frames from a sprite sheet! Texture Atlas' will
+                    have the frames for your sprites squeezed into a large image with as little padding
+                    and alpha space as it possibly can.
+                </p>
+            </section>
+
+            <section>
+                <h3>Phaser Texture Atlas</h3>
+                <p>
+                    <!-- TODO: Fill in Links and whether or not Shoebox costs money, also possible Windows options -->
+                    There are several programs that can generate texture atlas' for you, some of the more notable ones
+                    are Texture Packer, Shoebox, and even XCode.
+                </p>
+            </section>
+
+            <section>
+                <h3>Phaser Texture Packs</h3>
+                <p>
+                    <a href="./image/introToGame_3/texturePackerExample.png" target="_blank">
+                        <img src="./image/introToGame_3/texturePackerExample.png"  style="height:500px" />
+                    </a>
+                </p>
+            </section>
+
+            <section>
+                <h3>Phaser Texture Atlas - Texture</h3>
+                <p>
+                    Texture Atlas' have two files associated with them, the first is the texture itself. This is where
+                    all of your sprites are stored.
+                </p>
+            </section>
+
+            <section>
+                <h3>Phaser Texture Atlas - Texture</h3>
+                <img src="./image/introToGame_3/BunnyJumper.png"  style="height:500px" />
+            </section>
+
+            <section>
+                <h3>Phaser Texture Atlas - Atlas</h3>
+                <p>
+                    Texture Atlas' also will have another file associated with them, the "atlas". This file contains
+                    data telling the engine where each frame is in the texture, it's dimensions, and the frame name.
+                </p>
+            </section>
+
+            <section>
+                <h3>Phaser Texture Atlas - Atlas</h3>
+                    Inside of an atlas:
+<pre style="width: 1000px; font-size: 20px;"><code data-trim>
+{"frames": {
+    "Environment/Decor/BrownGrass/00.png":
+    {
+        "frame": {"x":768,"y":826,"w":58,"h":57},
+        "rotated": false,
+        "trimmed": false,
+        "spriteSourceSize": {"x":0,"y":0,"w":58,"h":57},
+        "sourceSize": {"w":58,"h":57}
+    },
+    ...
+}
+</code></pre>
+            </section>
+
+            <section>
+                <h3>Phaser Texture Atlas</h3>
+                <p>
+                    Loading the Atlas
+<pre style="width: 1000px; font-size: 20px;"><code data-trim>
+export default function preloadImages(game) {
+    // keyName, texture URL, atlas URL
+    game.load.atlasJSONHash('bunnyJumperSheet',
+                'assets/BunnyJumper.png',
+                'assets/BunnyJumper.json');
+}
+</code></pre>
+            </section>
+
+            <section>
+                <h3>Phaser Texture Atlas</h3>
+                <p>
+                    Using the Atlas
+<pre style="width: 1000px; font-size: 20px;"><code data-trim>
+import Item from './Item.js';
+export const COIN_TYPE = {
+    BRONZE: 'bronze', SILVER: 'silver', GOLD: 'gold'
+};
+let COIN_IMAGE_URL = {
+    BRONZE: 'Items/Coins/bronze_',
+    SILVER: 'Items/Coins/silver_',
+    GOLD: 'Items/Coins/gold_'
+};
+let COIN_FRAME_RATE = 10;
+export class Coin extends Item {
+    constructor(game, x, y, coinType = COIN_TYPE.BRONZE) {
+        let coinURL = COIN_IMAGE_URL[coinType.toUpperCase()];
+        super(game, x, y, 'bunnyJumperSheet', `${coinURL}0.png`);
+
+        // Creates an array of strings mapping to the coin image names starting from and ending at
+        // the ranges you give it
+        // ['Items/Coins/bronze_0.png', ... 'Items/Coins/bronze_3.png']
+        this.forwardFrames = Phaser.Animation.generateFrameNames(`${coinURL}`, 0, 3, '.png');
+
+        // ['Items/Coins/bronze_1.png', 'Items/Coins/bronze_2.png']
+        this.backwardFrames = Phaser.Animation.generateFrameNames(`${coinURL}`, 1, 2, '.png');
+        this.backwardFrames.reverse();
+
+        // Looping of animations is disabled by default
+        this.spinForward = this.animations.add('spinForward', this.forwardFrames);
+        this.spinReverse = this.animations.add('spinReverse', this.backwardFrames);
+    }
+}
+</code></pre>
+            </section>
+        </section>
+
+        <!-- Phaser Signal -->
+        <section>
+            <section>
+                <h3>Phaser Signal</h3>
+                <p>
+                    Phaser makes use of the Observer pattern for a good deal of callback related features via Signals.
+                    A Signal is an object that Phaser uses to handle events and dispatch them.
+                </p>
+            </section>
+
+            <section>
+                <h3>Phaser Signal</h3>
+                <a href="https://en.wikipedia.org/wiki/Observer_pattern#/media/File:Observer.svg">
+                    <img src="./image/introToGame_3/Observer.png"  style="height:500px" />
+                </a>
+            </section>
+
+            <section>
+                <h3>Phaser Signal</h3>
+                Using a pre-existing Signal, using the Coin class from before:
+<pre style="width: 1000px; font-size: 20px;"><code data-trim>
+// Assume all relevant imports have been made
+export class Coin extends Item {
+    constructor(game, x, y, coinType = COIN_TYPE.BRONZE) {
+        // ...
+        this.spinForward = this.animations.add('spinForward', this.forwardFrames);
+        // Animations come with an 'onComplete' Signal that you can utilize
+        // Signals have several methods for adding and removing subscribers
+        // For this example we will use 'add' as it keeps the listener function around
+        // Until the Signal is destroyed
+        this.spinForward.onComplete.add(this._playBackward, this);
+
+        this.spinReverse = this.animations.add('spinReverse', this.backwardFrames);
+        this.spinReverse.onComplete.add(this._playForward, this);
+
+        this.spinForward.play(COIN_FRAME_RATE);
+    }
+
+    _playBackward() {
+        this.scale.x *= -1;
+        this.spinReverse.play(COIN_FRAME_RATE);
+    }
+
+    _playForward() {
+        this.scale.x *= -1;
+        this.spinForward.play(COIN_FRAME_RATE);
+    }
+}
+</code></pre>
+            </section>
+
+            <section>
+                <h3>Phaser Signal</h3>
+                Using a custom Signal, creating the signal:
+<pre style="width: 1000px; font-size: 20px;"><code data-trim>
+import MenuBase from './MenuBase';
+export default class MainMenu extends MenuBase {
+    constructor(game) {
+        super(game);
+        /**
+        * Signals - Dispatched when menu buttons are clicked
+        * @type {Phaser.Signal}
+        */
+        this.play = new Phaser.Signal();
+        this.options = new Phaser.Signal();
+    }
+
+    playGame() {
+        this.play.dispatch();
+    }
+
+    launchOptions() {
+        this.options.dispatch();
+    }
+}
+</code></pre>
+            </section>
+
+            <section>
+                <h3>Phaser Signal</h3>
+                Using a custom Signal, subscribing to the signal:
+<pre style="width: 1000px; font-size: 20px;"><code data-trim>
+import MainMenu from '../menus/MainMenu';
+
+export default class MenuGameState extends Phaser.State {
+    constructor() { super(); }
+    preload() { this.currentMenu = null; }
+    create() { this.loadMainMenu(); }
+
+    killCurrentMenu() {
+        if (this.currentMenu) {
+            this.currentMenu.kill();
+        }
+    }
+
+    startGame() { this.game.state.start('game'); }
+
+    loadMainMenu() {
+        this.killCurrentMenu();
+        this.currentMenu = new MainMenu(this.game);
+        this.currentMenu.play.add(this.startGame, this);
+        this.currentMenu.options.add(this.launchOptions, this);
+    }
+
+    launchOptions() {
+        // ... Launch Options Menu
+    }
+}
+</code></pre>
+            </section>
+        </section>
+
+
+        <!-- Phaser Button -->
+        <section>
+            <section>
+                <h3>Phaser Button</h3>
+                <p>
+                    Phaser offers a built in Button that responds to mouse over, out, down, and up events.
+                    All you need to do is supply the images for each of these four states.
+                </p>
+            </section>
+
+
+            <section>
+                <h3>Phaser Button</h3>
+                Example button (with label):
+<pre style="width: 1000px; font-size: 20px;"><code data-trim>
+export class ClickableButton extends Phaser.Button {
+    // callback is a function that will be called when this
+    // button is clicked, callbackContext is the owner of the function
+    constructor(game, x, y, label, callback, callbackContext,
+                fontOptions, type = CLICKABLE_BUTTON_TYPE.LARGE) {
+        // Assume overFrame, outFrame, downFrame, and upFrame are all declared
+        // We are using the Texture Atlas from before, bunnyJumperSheet
+        super(game, x, y, 'bunnyJumperSheet', callback, callbackContext, overFrame, outFrame, downFrame, upFrame);
+        this.anchor.setTo(0, 1);
+
+        if (label) {
+            this.label = new Phaser.Text(game, 16, -5, label, fontOptions);
+            //puts the label in the center of the button
+            this.label.anchor.setTo(0, 1);
+            this.addChild(this.label);
+            this.setLabel(label);
+
+            this.onInputDown.add(this._moveLabelDown, this);
+            this.onInputUp.add(this._moveLabelUp, this);
+        }
+        // Custom property for Phaser CE 2.7.3
+        this.noPause = true;
+    }
+
+    _moveLabelDown() { this.label.y += 5; }
+    _moveLabelUp(){ this.label.y -= 5; }
+    setLabel(label) { this.label.setText(label); }
+}
+</code></pre>
+            </section>
+        </section>
+
+
+        <!-- Phaser Tween -->
+        <section>
+            <section>
+                <h3>Phaser Tween</h3>
+                <p>
+                    Short for "inbetweening", tweening is a term borrowed from animation. Tweening is the process of
+                    creating intermediate frames between two points to give the appearance of smoothly transitioning
+                    from one point to the next.
+                    <br>
+                    <br>
+                    Phaser Tweens make use of <a href="https://phaser.io/docs/2.6.2/Phaser.Easing.html" target="_blank">Phaser.Easing</a>
+                    for all of the actual easing functionality. This supplies all the various forms of easing you can use.
+                </p>
+            </section>
+
+            <section>
+                <h3>Phaser Tween</h3>
+<pre style="width: 1000px; font-size: 20px;"><code data-trim>
+export class PowerUp extends Item {
+    constructor(game, x, y, type) {
+        super(game, x, y, 'bunnyJumperSheet', type);
+
+        // tween takes an object to actually perform tween on
+        // The returned tween can be made to go to a state or from a state
+        // In this example, we're tweening our icon to a y position that is 10 pixels
+        // higher than where it started over a period of 1000 ms, using a
+        // Quadratic InOut pattern, telling it to start automatically
+        // with 0 delay. -1 tells the tween to run forever and it will
+        // reverse it self once it completes
+        this.tween = game.add.tween(this).to( { y: y - 10 }, 1000,
+                                Phaser.Easing.Quadratic.InOut, true, 0, -1, true);
+    }
+}
+</code></pre>
+            </section>
+
+            <section>
+                <h3>Phaser Tween</h3>
+                <img src="./image/introToGame_3/iconsTweening.gif"  style="height:500px" />
+            </section>
+
+            <section>
+                <h3>Phaser Tween</h3>
+                <p>
+                    A good collection of the functions that tweening uses in action can be found here:
+                    <a href="http://easings.net/nl" target="_blank">http://easings.net/nl</a>
+                </p>
+            </section>
+        </section>
+
+
+        <!-- Phaser Sound -->
+        <section>
+            <section>
+                <h3>Phaser Sound</h3>
+                <p>
+                    What would a game be without sound?!
+                </p>
+            </section>
+
+            <section>
+                <h3>Phaser Sound</h3>
+                <p>
+                    Silent.
+                </p>
+            </section>
+
+            <section>
+                <h3>Phaser Sound</h3>
+<pre style="width: 1000px; font-size: 20px;"><code data-trim>
+// Within our Player class
+static loadSounds(game) {
+    game.load.audio('playerJump', 'assets/Player/jump.ogg');
+}
+
+constructor(game, x, y) {
+    super(game, x, y, 'player_purple');
+    // ...
+    this.jumpSound = game.add.audio('playerJump');
+    // ...
+}
+
+jump() {
+    // ...
+    this.jumpSound.play();
+}
+</code></pre>
+            </section>
+
+            <section>
+                <h3>Phaser Sound</h3>
+                <p>
+                    There are many other things you can do with audio regarding how they're played including: looping,
+                    fading, pausing, resuming, and volume control. Experiment and use what you need for your game!
+                </p>
+            </section>
+        </section>
+
+        <!-- Questions -->
+        <section>
+            <h2>Questions</h2>
+            <p>
+                <a href="https://www.linkedin.com/pub/holden-profit/42/634/a23">Holden Profit</a>
+                <br>
+                <a href="mailto:holdenprofit@gmail.com?Subject=Reaching%20Out">holdenprofit@gmail.com</a>
+                <br>
+                <a href="https://github.com/hprofit">GitHub</a>
+            </p>
+        </section>
+    </div>
+</div>
+
+<script src="./lib/js/head.min.js"></script>
+<script src="./js/reveal.min.js"></script>
+<script>
+
+    // Full list of configuration options available here:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'concave', // default/cube/page/concave/zoom/linear/fade/none
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+            {
+                src: './lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: './plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: './plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: './plugin/highlight/highlight.js', async: true, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            {
+                src: './plugin/zoom-js/zoom.js', async: true, condition: function () {
+                return !!document.body.classList;
+            }
+            },
+            {
+                src: './plugin/notes/notes.js', async: true, condition: function () {
+                return !!document.body.classList;
+            }
+            }
+        ]
+    });
+
+</script>
+</body>
+</html>

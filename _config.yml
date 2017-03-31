@@ -10,8 +10,8 @@ title: Acrylicorner
 email: holdenprofit at gmail.com
 description: The personal blogsite and portfolio of Holden Profit, game developer, web developer, hobby artist, and aspiring car enthusiast!
 baseurl: "" # the subpath of your site, e.g. /blog
-# url: http://localhost:4000 #local dev only
-url: http://acrylicorner.com # the base hostname & protocol for your site
+#url: http://acrylicorner.com # the base hostname & protocol for your site
+url: http://localhost:4000 #local dev only
 
 share:
   facebook: true
@@ -52,7 +52,10 @@ exclude: ['README.md', 'LICENSE']
 
 presentations: [
   ['swarmIntelligence.html', 'Swarm Intelligence'],
-  ['artificialIntelligence.html', 'A. I. Overview/Intro'],
   ['howToUseGit.html', 'How to Use Git'],
   ['howToUseJasmine.html', 'How to Use Jasmine'],
+  ['introToGaming_part1.html', 'Introduction to Game Development Part 1'],
+  ['introToGaming_part2.html', 'Introduction to Game Development Part 2'],
+  ['introToGaming_part3.html', 'Introduction to Game Development Part 3'],
+  ['introToGaming_part4.html', 'Introduction to Game Development Part 4']
 ]

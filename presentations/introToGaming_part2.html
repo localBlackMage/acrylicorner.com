@@ -1,0 +1,537 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <title>Intro to Game Dev Part 2</title>
+
+    <meta name="description" content="Introduction to Game Development: Part 2">
+    <meta name="author" content="Holden Profit">
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="./css/reveal.min.css">
+    <link rel="stylesheet" href="./css/theme/default.css" id="theme">
+    <link rel="stylesheet" href="./css/custom.css">
+
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="./lib/css/zenburn.css">
+
+    <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+    <script>
+        if (window.location.search.match(/print-pdf/gi)) {
+            var link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = 'css/print/pdf.css';
+            document.getElementsByTagName('head')[0].appendChild(link);
+        }
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="./lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body class="intro-to-gaming">
+<div class="reveal">
+    <div class="slides">
+        <!-- Intro -->
+        <section>
+            <h1>Intro to Game Development</h1>
+            <h2>Part 2</h2>
+            <p>
+                Holden Profit <br>
+            </p>
+        </section>
+
+        <!-- Intro to Phaser -->
+        <section>
+            <section>
+                <h3>Phaser!</h3>
+                <p>
+                    <span class="fragment fade-in">
+                        All that stuff we did in part 1? <a href="http://phaser.io/" target="_blank">Phaser</a>, a game engine built on top of
+                        a rendering engine called <a href="http://www.pixijs.com/" target="_blank">PIXI</a>, does a <i>lot</i> of that for you, leaving you to build your game!
+                    </span>
+                    <br><br>
+                    <span class="fragment fade-in">
+                        However, you still need to know <i>what</i> Phaser's doing under the hood in case you need to extend
+                        or even change that functionality.
+                    </span>
+                    <br><br>
+                    <span class="fragment fade-in">
+                        So how do we use Phaser?
+                    </span>
+                </p>
+            </section>
+
+            <section>
+                <h3>Phaser Versions</h3>
+                <p>
+                    Before we get started, know that there are currently two versions of Phaser: 2.6.2 (the main version)
+                    and the <a href="http://phaser.io/download/phaserce" target="_blank">2.7.3 - Community Edition</a>. Phaser 2 has been
+                    discontinued as Phaser 3 is undergoing active development. The CE sports several upgrades and fixes to
+                    2.6.2 but you needn't use it if you don't want to.
+                </p>
+            </section>
+        </section>
+
+        <!-- Overarching Architecture of Phaser Games -->
+        <section>
+            <section>
+                <h3>Phaser Game Structure</h3>
+                <p>
+                    Phaser supplies you with two main classes that do most of the heavy lifting:
+                    <a href="http://phaser.io/docs/2.6.2/Phaser.Game.html" target="_blank">Phaser.Game</a> and
+                    <a href="http://phaser.io/docs/2.6.2/Phaser.State.html" target="_blank">Phaser.State</a>
+                </p>
+            </section>
+
+            <section>
+                <h3>Phaser.Game</h3>
+                <p>
+                    Without regurgitating too much of what the documentation would tell you anyway, Phaser.Game is the
+                    container for your game. It provides many useful utilities for your game's needs and runs on Phaser.State
+                    objects that manage different portions of your game.
+                </p>
+            </section>
+
+            <section>
+                <h3>Phaser.State</h3>
+                <p>
+                    A Phaser game can have many states, each managing a portion of your game. For example, you might have
+                    a boot state to load all of your necessary textures, a start state to show the player the initial
+                    screen of the game and options menus, and a game state to handle the actual core gameplay.
+                </p>
+            </section>
+
+            <section>
+                <h3>Initializing Game</h3>
+<pre style="width: 1000px; font-size: 22px;"><code data-trim>
+class GameState extends Phaser.State {
+    constructor() {
+        super();
+    }
+    preload() {}
+    create() {}
+    update() {}
+}
+
+let game = new Phaser.Game(800, 600, Phaser.AUTO, 'content', new GameState());
+</code></pre>
+            </section>
+
+            <section>
+                <h3>Initializing Game - Multiple States</h3>
+<pre style="width: 1000px; font-size: 22px;"><code data-trim>
+import BootState from './BootState';
+import GameState from './GameState';
+class Game extends Phaser.Game {
+    constructor() {
+        super(800, 600, Phaser.AUTO, 'content');
+        // Phaser.Game's state property manages
+        // different Phaser.State objects
+        this.state.add('boot', new BootState());
+        this.state.add('game', new GameState());
+
+        // Start our boot state
+        this.state.start('boot');
+    }
+}
+new Game();
+</code></pre>
+            </section>
+        </section>
+
+        <!-- Phaser.State -->
+        <section>
+            <h3>Phaser.State - Structure</h3>
+            <p>
+                A State has several useful core functions, each of which are called automatically by the Game.
+                <br>
+                <br>
+                <ul>
+                    <li>preload - Called first</li>
+                    <li>create - Called after preload finishes</li>
+                    <li>update - Called every frame</li>
+                </ul>
+                <br>
+                <br>
+                You'll notice it has no explicit render function. That's because Phaser Game does that for you, under the hood!
+            </p>
+        </section>
+
+        <!-- Phaser.State Preload -->
+        <section>
+            <section>
+                <h3>Phaser.State - Preload</h3>
+                <p>
+                    Preload - Load any images you may need for your current state into memory. Do <b>not</b> instantiate
+                    anything that requires these things to be loaded already as they may not be there!
+                </p>
+            </section>
+
+            <section>
+                <h3>Phaser.State - Preload</h3>
+<pre style="width: 1000px; font-size: 22px;"><code data-trim>
+export default class BootState extends Phaser.State {
+    constructor() { super(); }
+
+    preload() {
+        this.game.load.spritesheet('player',
+            'assets/player.png', 64, 64);
+        this.game.load.image('background',
+            'assets/background.png');
+        this.game.load.image('platform',
+            'assets/platform.png');
+        this.game.physics.startSystem(Phaser.Physics.ARCADE);
+    }
+
+    create() { this.game.state.start('game'); }
+}
+</code></pre>
+            </section>
+
+            <section>
+                <h3>Phaser.Loader</h3>
+                <p>
+                    Phaser's Loader will take the asset you want to load and map it to a key name. In the example
+                    on the previous slide, you can see we're loading the player spritesheet image to the keyword 'player'.
+                    These will be used later when we go to create sprites.
+                </p>
+            </section>
+
+            <section>
+                <h3>Phaser.Loader</h3>
+                <p>
+                    It's worth mentioning that all loading is done through the Phaser.Game's
+                    <a href="http://phaser.io/docs/2.6.2/Phaser.Loader.html">Phaser.Loader</a> component. The docs spell
+                    out all the types of assets it can load in full detail.
+                </p>
+            </section>
+
+            <section>
+                <h3>Phaser.Physics</h3>
+                <p>
+                    Phaser supports 3 <a href="http://phaser.io/docs/2.6.2/Phaser.Physics.html">Physics engines</a>:
+                    Arcade, Ninja, and P2.
+                    <br>
+                    <ul>
+                        <li><b>Arcade</b> - Simplest and fastest, only offers AABB and circle collisions</li>
+                        <li><b>Ninja</b> - Ported from Flash to JS, offers more complex collisions at the cost of speed and some
+                        more basic collision types</li>
+                        <li><b>P2</b> - The most complex and slowest of the three, but offers a multitude of more advanced physics calculations</li>
+                    </ul>
+                </p>
+            </section>
+        </section>
+
+        <!-- Phaser.State Create -->
+        <section>
+            <section>
+                <h3>Phaser.State - Create</h3>
+                <p>
+                    Create - Instantiate any game objects you need here such as your player, enemies, the scene, etc.
+                    Any other game initializion logic that doesn't depend on pre-loaded dependencies should be created
+                    here as well.
+                </p>
+            </section>
+
+            <section>
+                <h3>Phaser.State - Create</h3>
+<pre style="width: 1000px; font-size: 22px;"><code data-trim>
+export default class GameState extends Phaser.State {
+    constructor() {
+        super();
+        this.background = null;
+        this.platform = null;
+        this.player = null;
+    }
+
+    create() {
+        this.background = new Phaser.Image(this.game, 0, 0, 'background');
+        this.platform = new Phaser.Image(this.game, 0, this.game.world.height - 32, 'platform');
+        this.player = new Phaser.Sprite(this.game, 100, 100, 'player');
+        // ...
+    }
+}
+</code></pre>
+            </section>
+
+            <section>
+                <h3>Phaser.State - Create</h3>
+<pre style="width: 1000px; font-size: 22px;"><code data-trim>
+export default class GameState extends Phaser.State {
+    // ...
+    create() {
+        // ...
+        // Turn physics on for the player and platform,
+        // they're disabled by default!
+        this.game.physics.enable(this.player);
+        this.game.physics.enable(this.platform);
+        // ...
+    }
+}
+</code></pre>
+            </section>
+
+            <section>
+                <h3>Phaser.State - Create</h3>
+<pre style="width: 1000px; font-size: 22px;"><code data-trim>
+export default class GameState extends Phaser.State {
+    // ...
+    create() {
+        // ...
+        // The sprites and images will not render until added to the Game
+        this.game.add.existing(this.background);
+        this.game.add.existing(this.platform);
+        this.game.add.existing(this.player);
+        // The also matters, recall z-indexing!
+    }
+}
+</code></pre>
+            </section>
+        </section>
+
+        <!-- Phaser.State Update -->
+        <section>
+            <section>
+                <h3>Phaser.State - Update</h3>
+                <p>
+                    Update - This is where the magic happens. Collisions, calculations, and input handling is dealt with here.
+                    <br>
+                    <br>
+                    The update function of a given Phaser State will be called <i>roughly</i> 60 times a second so it's
+                    important to remember that when calculating anything dependent on time.
+                </p>
+            </section>
+
+            <section>
+                <h3>Phaser.State - Update</h3>
+<pre style="width: 1000px; font-size: 22px;"><code data-trim>
+export default class GameState extends Phaser.State {
+    update() {
+        let hitPlatform = this.game.physics.arcade.collide(
+            this.player, this.platform);
+
+        let cursors = this.game.input.keyboard.createCursorKeys();
+        this.player.body.velocity = 0;
+        if (cursors.left.isDown) {
+            this.player.body.velocity.x = -150;
+        }
+        else if (cursors.right.isDown) {
+            this.player.body.velocity.x = 150;
+        }
+    }
+}
+</code></pre>
+            </section>
+        </section>
+
+        <!-- Phaser.Sprite -->
+        <section>
+            <section>
+                <h3>Phaser.Sprite</h3>
+                <p>
+                    The Phaser Sprite is base class for most interactive game objects you'll create. They come packed with
+                    a texture, an animation manager, and physics body. In contrast, a Phaser.Image does not have any physics
+                    attached to it.
+                </p>
+            </section>
+
+            <section>
+                <h3>Phaser.Sprite - How to Use</h3>
+                <p>
+                    There are a few different ways to use the Sprite object:
+                    <ul>
+                        <li>Leave it as is with a texture and configured properties</li>
+                        <li>Add to it's internal <b>data</b> object property</li>
+                        <li>Extend from it on a class</li>
+                    </ul>
+                </p>
+            </section>
+
+            <section>
+                <h3>Phaser.Sprite - Adding to Data</h3>
+<pre style="width: 1000px; font-size: 22px;"><code data-trim>
+// Recall the previous example from Phaser State's create method
+this.player.data.someUniqueProperty = 123;
+this.player.data.someUniqueMethod = function() {
+    return this.player.data.someUniqueProperty;
+};
+</code></pre>
+            </section>
+
+            <section>
+                <h3>Phaser.Sprite - Extension</h3>
+<pre style="width: 1000px; font-size: 22px;"><code data-trim>
+class Player extends Phaser.Sprite {
+    constructor(game, x, y) {
+        super(game, x, y, 'player');
+        game.add.existing(this);
+        game.physics.enable(this);
+    }
+}
+</code></pre>
+            </section>
+
+            <section>
+                <h3>Phaser.Sprite</h3>
+                <p>
+                    Which method you use is entirely up to you, but personally I prefer the Extension method. It's
+                    cleaner, easier to read, and allows for easy encapsulation of related functionality.
+                </p>
+            </section>
+        </section>
+
+        <!-- Phaser Animation -->
+        <section>
+            <section>
+                <h3>Phaser Animations</h3>
+                <p>
+                    We learned last time how animations are made, now let's put them to use!
+                    <br>
+                    Recall that each portion of your sprite sheet is a 'frame' that represents
+                    the entity at a given point in time.
+                </p>
+            </section>
+
+            <section>
+                <h3>Phaser Animations</h3>
+<pre style="width: 1000px; font-size: 22px;"><code data-trim>
+// Using our Player class from earlier
+this.jumpFrame = 4;
+// anim name, array of frames, FPS, loops
+this.animations.add('idle', [0, 1], 5, true);
+this.animations.add('walk', [2, 3], 10, true);
+
+this.animations.play('idle');
+// OR, for single frames
+this.frame = this.jumpFrame;
+</code></pre>
+            </section>
+        </section>
+
+        <!-- Phaser.Group -->
+        <section>
+            <section>
+                <h3>Phaser.Group</h3>
+                <p>
+                    The Phaser Group class is, at it's core, an array of other Phaser entities (Sprites, Images, etc.).
+                    It comes wrapped with a host of useful functionality as well as making colliding large collections
+                    of entities together much cleaner.
+                </p>
+            </section>
+
+            <section>
+                <h3>Phaser.Group - How to Use</h3>
+<pre style="width: 1000px; font-size: 22px;"><code data-trim>
+let platformGroup = new Phaser.Group();
+for(let idx=0; idx<10; idx++){
+    let platform = new Phaser.Sprite(game, 32 * idx,
+        game.world.height - 32, 'platform');
+    platformGroup.add.existing(platform);
+}
+game.add.existing(platformGroup);
+</code></pre>
+            </section>
+
+        </section>
+
+        <!-- Phaser Shorthand -->
+        <section>
+            <section>
+                <h3>Phaser - Shorthand</h3>
+                <p>
+                    Our previous examples were all using <i>game.add.existing</i> or <i>group.add.existing</i> after
+                    creating entities. That can all be condensed! Let's revisit our previous platform and group example...
+                </p>
+            </section>
+
+            <section>
+                <h3>Phaser - Shorthand</h3>
+<pre style="width: 1000px; font-size: 22px;"><code data-trim>
+// Simultaneously creates and adds the group to the game
+// then returns a reference to the group
+let platformGroup = game.add.group()
+for(let idx=0; idx<10; idx++){
+    // Creates and adds a sprite to the group then returns
+    // a reference to the sprite
+    platformGroup.add.sprite(game, 32 * idx,
+        game.world.height - 32, 'platform');
+}
+</code></pre>
+            </section>
+        </section>
+
+        <!-- Questions -->
+        <section>
+            <h2>Questions</h2>
+            <p>
+                <a href="https://www.linkedin.com/pub/holden-profit/42/634/a23">Holden Profit</a>
+                <br>
+                <a href="mailto:holdenprofit@gmail.com?Subject=Reaching%20Out">holdenprofit@gmail.com</a>
+                <br>
+                <a href="https://github.com/hprofit">GitHub</a>
+            </p>
+        </section>
+    </div>
+</div>
+
+<script src="./lib/js/head.min.js"></script>
+<script src="./js/reveal.min.js"></script>
+<script>
+
+    // Full list of configuration options available here:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'concave', // default/cube/page/concave/zoom/linear/fade/none
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+            {
+                src: './lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: './plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: './plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: './plugin/highlight/highlight.js', async: true, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            {
+                src: './plugin/zoom-js/zoom.js', async: true, condition: function () {
+                return !!document.body.classList;
+            }
+            },
+            {
+                src: './plugin/notes/notes.js', async: true, condition: function () {
+                return !!document.body.classList;
+            }
+            }
+        ]
+    });
+
+</script>
+</body>
+</html>
