@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Cucumber Java Step Generator</title>
+        <style type="text/css">
+            .template {
+                width: 400px;
+                height: 200px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <textArea id="templateInput" class="template"></textArea>
+        <button id="createTemplateButton">Create Template</button>
+        <textArea id="templateOutput" class="template"></textArea>
+    </body>
+
+    <script type="application/javascript">
+        let printOutput = function(output) {
+            let outputArea = document.getElementById('templateOutput');
+            outputArea.value = outputArea.value + output + '\n';
+            console.log(output);
+        };
+
+        let createQuotedParams = function(inputArray, startingIndex) {
+            let endOfString = new RegExp('"+$', 'g'),
+                    finalIndex = startingIndex;
+            for(let idx = startingIndex; idx < inputArray.length; idx++) {
+                finalIndex = idx;
+                if (endOfString.test(inputArray[idx])) {
+                    break;
+                }
+            }
+            let deleteAmount = finalIndex - startingIndex + 1;
+            inputArray.splice(startingIndex, deleteAmount, '" + QUOTED_PARAM + "');
+            return inputArray;
+        };
+
+        let createTemplate = function() {
+            let templateInput = document.getElementById('templateInput').value,
+                    startOfString = new RegExp('^"+', 'g'), firstWord = '', finalWord = '';
+            templateInput = templateInput.split(' ');
+            firstWord = '@' + templateInput[0] + '("^';
+            templateInput.splice(0, 1);
+
+            for(let idx = 0; idx < templateInput.length; idx++) {
+                if (startOfString.test(templateInput[idx])) {
+                    templateInput = createQuotedParams(templateInput, idx);
+                }
+            }
+            templateInput[templateInput.length - 1] = templateInput[templateInput.length - 1] + '$")';
+            finalWord = firstWord + templateInput.join(' ') + '\npublic void REPLACEME() {}';
+            printOutput(finalWord);
+        };
+
+        document.onload = () => { document.getElementById('createTemplateButton').addEventListener('click', createTemplate); }
+    </script>
+</html>

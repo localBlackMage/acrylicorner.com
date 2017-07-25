@@ -1,18 +1,19 @@
 <div class="sidebar ">
-  <h2>Projects/Neat Stuff</h2>
-  <ul>
-    <li><a class="page-link" href="{{site.url}}/demos/">A.I. Demos</a></li>
-      <li><a class="page-link" href="{{site.url}}/pmdTTRPG/">PMD TTRPG</a></li>
-  </ul>
+    <h2>Projects and Misc. Apps</h2>
+    <ul>
+        <li><a class="page-link" href="{{site.url}}/demos/">A.I. Demos</a></li>
+        <li><a class="page-link" href="{{site.url}}/apps/pmdTTRPG/">PMD TTRPG</a></li>
+        <li><a class="page-link" href="{{site.url}}/apps/cucumberNameGen/">Cucumber Name Gen</a></li>
+    </ul>
 </div>
 
 <div class="sidebar ">
-  <h2>Recent Posts</h2>
-  <ul>
-    {% for post in site.posts limit:5 %}
-    <li><a href="{{ site.baseurl}}{{ post.url }}">{{ post.title }}</a></li>
-    {% endfor %}
-  </ul>
+    <h2>Recent Posts</h2>
+    <ul>
+        {% for post in site.posts limit:5 %}
+        <li><a href="{{ site.baseurl}}{{ post.url }}">{{ post.title }}</a></li>
+        {% endfor %}
+    </ul>
 </div>
 
 <!-- <div class="sidebar">
