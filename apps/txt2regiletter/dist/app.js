@@ -79,19 +79,19 @@
 	    switch (character.charCodeAt(0)) {
 	        case 32:
 	            // space
-	            return ':black_small_square:';
+	            return '▪️';
 	        case 33:
 	            // exclamation
-	            return ':grey_exclamation:';
+	            return '❕';
 	        case 34:
 	            // double quotes
 	            return ':v:';
 	        case 63:
 	            //question mark
-	            return ':grey_question:';
+	            return '❔';
 	        case 46:
 	            // period
-	            return ':large_blue_circle:';
+	            return '🔵';
 	        case 48:
 	            return ':zero:';
 	        case 49:
@@ -112,8 +112,60 @@
 	            return ':eight:';
 	        case 57:
 	            return ':nine:';
+	        case 97:
+	            return '🇦';
+	        case 98:
+	            return '🇧';
+	        case 99:
+	            return '🇨';
+	        case 100:
+	            return '🇩';
+	        case 101:
+	            return '🇪';
+	        case 102:
+	            return '🇫';
+	        case 103:
+	            return '🇬';
+	        case 104:
+	            return '🇭';
+	        case 105:
+	            return '🇮';
+	        case 106:
+	            return '🇯';
+	        case 107:
+	            return '🇰';
+	        case 108:
+	            return '🇱';
+	        case 109:
+	            return '🇲';
+	        case 110:
+	            return '🇳';
+	        case 111:
+	            return '🇴';
+	        case 112:
+	            return '🇵';
+	        case 113:
+	            return '🇶';
+	        case 114:
+	            return '🇷';
+	        case 115:
+	            return '🇸';
+	        case 116:
+	            return '🇹';
+	        case 117:
+	            return '🇺';
+	        case 118:
+	            return '🇻';
+	        case 119:
+	            return '🇼';
+	        case 120:
+	            return '🇽';
+	        case 121:
+	            return '🇾';
+	        case 122:
+	            return '🇿';
 	        default:
-	            return ':large_blue_diamond:';
+	            return '🔷';
 	    }
 	};
 
@@ -122,11 +174,12 @@
 
 	    lowercaseStringArray.forEach(function (character, index) {
 	        var charCode = character.charCodeAt(0);
-	        if (charCode >= 97 && charCode <= 122) {
-	            lowercaseStringArray[index] = getRegionalIndicatorForCharacter(character);
-	        } else {
-	            lowercaseStringArray[index] = getEmojiForNonAlphaCharacter(character);
-	        }
+	        //if (charCode >= 97 && charCode <= 122) {
+	        //    lowercaseStringArray[index] = getRegionalIndicatorForCharacter(character);
+	        //}
+	        //else {
+	        lowercaseStringArray[index] = getEmojiForNonAlphaCharacter(character);
+	        //}
 	    });
 
 	    return lowercaseStringArray.join(' ');
