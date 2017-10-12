@@ -1,0 +1,49 @@
+---
+layout: post
+comments: true
+title: "DigiPen"
+date:   2017-10-12 00:00:00 -0800
+categories: personal life
+---
+Moving to Seattle
+-------------------------------------
+Hello all! I've been absent from here as of late, but rest assured it was because big things were happening! A few months ago, back in July, I was accepted into DigiPen's Masters of Science of Computer Science program. This was tremendously exciting news! The only hiccup: my wife and I had to leave our jobs, pack up everything we owned and move across the country. It was an intense 5 days driving cross country hauling my car behind a moving truck, but we made it to Seattle in mid-August!
+
+DigiPen Institute of Technology
+-------------------------------------
+While I was nervous about starting school again at the age of 28, I settled into things nicely once classes started up.
+However, I have never been busier in my life! Every day is filled with hours of course work that soak up just about every bit of free time I normally had and while I may miss it in the short term, I'm learning so much every day. Tons of math I'd grown rusty on over years of neglect and forced exposure and use of C/C++ have already begun to pave the path for what lies ahead in life.
+
+In fact, I took a break from course work to update this with news of what's to come! Here on my blog and on github you'll be able to see examples of my work as I go through DigiPen, including the personal projects I undertake. First and foremost: a game engine and sample game done in said engine. All the source code will be available online once the course is finished but in the mean time I'll be making posts regarding my experience in creating it.
+
+
+So, that's all for the time being as I've got course work to get back to, but look forward to regular updates in the coming weeks.
+
+See you around!
+
+-Holden
+
+{% if page.comments %}
+<div id="disqus_thread"></div>
+<script>
+/**
+* RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+* LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+
+s.src = '//acrylicorner.disqus.com/embed.js';
+
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+{% endif %}
