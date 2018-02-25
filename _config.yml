@@ -6,11 +6,11 @@
 # 'jekyll serve'. If you change this file, please restart the server process.
 
 # Site settings
-title: Acrylicorner
+title: Holden Profit
 email: holdenprofit at gmail.com
-description: The personal blogsite and portfolio of Holden Profit, game developer, web developer, hobby artist, and aspiring car enthusiast!
+description: The personal blogsite and portfolio of Holden Profit - game developer, hobby artist, and aspiring car enthusiast!
 baseurl: "" # the subpath of your site, e.g. /blog
-url: http://acrylicorner.com # the base hostname & protocol for your site
+url: http://holdenprofit.com # the base hostname & protocol for your site
 #url: http://localhost:4000 #local dev only
 
 share:
@@ -24,20 +24,20 @@ share:
 social:
   github: hprofit
   twitter: h_profit
-  linkedin: holden-profit-a2363442
+  linkedin: holden-profit
   rss: feed.xml
 
 twitter_username: h_profit
 
 # Google Analytics key, leave blank to ignore
-google_analytics_key:
+google_analytics_key: UA-113567099-1
 # Yandex metrica (https://metrica.yandex.com/) leave blank to ignore or put true to use
 yandex_metrica:
 
 # Set this to your disqus shortname to enable comments. Note that the 'comments'
 # setting below must also be true. Individual posts can override 'comments' to
 # disable on a post-by-post basis
-disqus: acrylicorner
+disqus: holdenprofit-com
 comments: true
 
 # permalink: /:year/:month/:title

@@ -1,0 +1,23 @@
+body
+{
+  background-color : rgb(30,30,30);
+}
+
+canvas
+{
+    image-rendering: optimizeSpeed;             // Older versions of FF
+    image-rendering: -moz-crisp-edges;          // FF 6.0+
+    image-rendering: -webkit-optimize-contrast; // Webkit
+                                                //  (Safari now, Chrome soon)
+    image-rendering: optimize-contrast;         // Possible future browsers.
+    -ms-interpolation-mode: nearest-neighbor;   // IE
+}
+
+.footer
+{
+  color: rgb(60, 60, 60);
+  font-size: 12;
+  right: 10px;
+  bottom: 10px;
+  position: absolute;
+}
