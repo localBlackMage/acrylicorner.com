@@ -54,12 +54,12 @@ class PointGrapher{
 	}
 
     WriteControlPoints(controlPoints) {
-		let cps = {};
+		let cps = [];
         for(let x = 0; x < controlPoints.length; x++) {
-            cps[x + ''] = {
+            cps.push({
             	x: this.ScreenToValueX(controlPoints[x].x),
 				y: this.ScreenToValueY(controlPoints[x].y)
-			};
+			});
         }
         document.getElementById('ui-textarea').value = JSON.stringify(cps);
 	}
