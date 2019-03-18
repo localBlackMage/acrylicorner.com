@@ -8,7 +8,7 @@ categories: game update
 Introducing: *Tilt-A-Ball* Demo!
 --------------------------------------
 
-**You can download it** [**here**](http://acrylicorner.com/TiltABall.zip)!
+**You can download it** [**here**](http://holdenprofit.com/TiltABall.zip)!
 ---------------------------------------------------------------------------
 
 While art is still being worked on (Wesley's getting married tomorrow, so he's a tad preoccupied!), a lot of basic game 

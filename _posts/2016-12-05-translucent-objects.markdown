@@ -27,7 +27,7 @@ to a semi-transparent state.
 The more modern iteration, Diablo 3, does things a little differently. As soon as the player would go behind something that
 would block their view, the object fades quickly from view. 
 
-[Diablo 3 wall hiding in action](http://acrylicorner.com/videos/2016_12_05/Diablo_3_hideWalls.webm "Diablo 3 Wall Hiding")
+[Diablo 3 wall hiding in action](http://holdenprofit.com/videos/2016_12_05/Diablo_3_hideWalls.webm "Diablo 3 Wall Hiding")
 
 So now we arrive at our question: how do we do that?
 
@@ -332,7 +332,7 @@ void AHideableWall::ShowWall() {
 That's all there is to the C++ of it! I'm sure there are ways to optimize this and I'd love to hear any feedback or 
 suggestions anyone might have on how to do so, but I wanted to get my process down for others to see and maybe even learn from!
 
-[The end result ends up something like this!](http://acrylicorner.com/videos/2016_12_05/hideWallsDemo.webm "Hideable Walls Demo")
+[The end result ends up something like this!](http://holdenprofit.com/videos/2016_12_05/hideWallsDemo.webm "Hideable Walls Demo")
 
 Pardon the shoddy camera work, I was using the top down template for the demo. 
 
